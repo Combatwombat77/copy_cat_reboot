@@ -1,4 +1,4 @@
-import 'package:copy_cat/inherited_widgets/strength_inherited_widget.dart';
+//import 'package:copy_cat/inherited_widgets/strength_inherited_widget.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,25 +7,18 @@ enum AddMode{
   Adding
 }
 
-class Items extends StatefulWidget{
+class Items extends StatelessWidget{
   
 
   final AddMode _addMode;
 
-  Items(this._addMode, );
-  
-   @override
-  ItemsState createState() {
-    return new ItemsState();
-  }
-}
+  Items(this._addMode);
 
-  class ItemsState extends State<Items>{
 
-    final TextEditingController _titleController = TextEditingController();
-    final TextEditingController _textController = TextEditingController();
+   // final TextEditingController _titleController = TextEditingController();
+    //final TextEditingController _textController = TextEditingController();
 
-    List<Map<String,String>>get _strengths => StrengthInheritedWidget.of(context).strengths;
+   // List<Map<String,String>>get _strengths => StrengthInheritedWidget.of(context).strengths;
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -41,7 +34,7 @@ class Items extends StatefulWidget{
           children: <Widget>[
             TextField(
               decoration: InputDecoration(
-                hintText: 'Strength'
+                hintText: 'Add your  Strength'
               ),
             ),
             Container(height:8,),
@@ -50,19 +43,21 @@ class Items extends StatefulWidget{
                 hintText: 'Add a description'
               ),
             ),
+            Container(height: 16.0,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _SwotButtons('Save', Colors.blue, (){
-                  if (widget?._addMode==AddMode.Adding){
-                    final title =_titleController.text;
-                    final text = _textController.text;
+                  //if (widget?._addMode==AddMode.Adding){
+                   // final title =_titleController.text;
+                   // final text = _textController.text;
 
-                    _strengths.add({
-                      'title': title,
-                      'text': text
-                    });
-                  }
+                   // _strengths.add
+                    //({
+                    //  'title': title,
+                   //   'text': text
+                   // });
+                //  }
                     Navigator.pop(context);
                   }),
                 Container(height: 16.0,),
@@ -70,10 +65,14 @@ class Items extends StatefulWidget{
                     Navigator.pop(context);
                   }),
                  Container(height: 16.0,),
-                 _addMode == AddMode.Editing?
-                  _SwotButtons('Delete', Colors.red, (){
+                _addMode == AddMode.Editing?
+                Padding(
+                  padding:const EdgeInsets.all(8.0),
+                  child:_SwotButtons('Delete', Colors.red, (){
                     Navigator.pop(context);
-                  }): Container( )  
+                  })
+                )
+                : Container( )  
             ],)
           ],
         )

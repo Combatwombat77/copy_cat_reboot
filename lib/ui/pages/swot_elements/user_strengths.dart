@@ -1,5 +1,5 @@
-import 'package:copy_cat/ui/pages/swot_elements/elements_page.dart';
 import 'package:copy_cat/inherited_widgets/strength_inherited_widget.dart';
+import 'package:copy_cat/ui/pages/swot_elements/elements_page.dart';
 import 'package:flutter/material.dart';
 
 class Strengths extends StatefulWidget{
@@ -17,7 +17,7 @@ class StrengthsState extends State<Strengths>{
   @override
   Widget build(BuildContext context){
     return StrengthInheritedWidget(
-    Scaffold(
+      Scaffold(
         appBar: new AppBar( 
           title: Text ('Strengths'),
           actions: <Widget>[
@@ -48,7 +48,7 @@ class StrengthsState extends State<Strengths>{
           ),
           );
           },
-          itemCount: _strengths.length,
+         itemCount: _strengths.length,
         ),      
         floatingActionButton:FloatingActionButton(
         onPressed: (){
@@ -57,7 +57,7 @@ class StrengthsState extends State<Strengths>{
         tooltip: 'Increment',
         child: Icon(Icons.add),
             ),
-    )
+      ),
     );
   }
 }
