@@ -24,7 +24,7 @@ import 'package:flutter/material.dart';
    }
    
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget) {
+  bool updateShouldNotify(StrengthInheritedWidget oldWidget) {
     return oldWidget.strengths != strengths;
   }
  }
