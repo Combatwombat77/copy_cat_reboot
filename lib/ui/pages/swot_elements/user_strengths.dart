@@ -31,8 +31,8 @@ class StrengthsState extends State<Strengths>{
           itemBuilder:(context, index){ 
           return GestureDetector(
             onTap: (){
- Navigator.push(context, MaterialPageRoute(builder: (context) => Items(AddMode.Editing)));
- },
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Items(AddMode.Editing)));
+            },
             child: Card(
             child: Padding(
               padding: const EdgeInsets.only(top: 30.0,bottom: 30.0,left:30.0,right: 22.0),
@@ -57,7 +57,7 @@ class StrengthsState extends State<Strengths>{
         tooltip: 'Increment',
         child: Icon(Icons.add),
             ),
-      ),
+      ),   
     );
   }
 }
