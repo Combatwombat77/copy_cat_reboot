@@ -1,30 +1,31 @@
+
 import 'package:flutter/material.dart';
 
- class StrengthInheritedWidget extends InheritedWidget{
+class NoteInheritedWidget extends InheritedWidget {
 
-   final strengths = [
-     {
-       'strength': 'speed',
-       'description':'swift'
-     },
-     {
-       'strength': 'strength',
-       'description':'high damage capability'
-     },
-     {
-       'strength': 'agility',
-       'description':'flexible and nimble'
-     }, 
-   ];
+  final strengths = [
+    {
+      'title': 'asdmaskldmsklasdmaskldmsklasdmaskldmsklasdmaskldmskl',
+      'text': 'asdmaskldmsklasdmaskldmsklasdmaskldmsklasdmaskldmskl'
+    },
+    {
+      'title': 'sadkaskdsadkaskdsadkaskdsadkaskd',
+      'text': 'sadkasksadkasksadkasksadkasksadkasksadkask'
+    },
+    {
+      'title': 'asafas3253asafas3253asafas3253asafas3253',
+      'text': '3asafas3253asafas3253asafa3asafas3253asafas3253asafa3asafas3253asafas3253asafa'
+    }
+  ];
 
-   StrengthInheritedWidget(Widget child): super(child: child);
+  NoteInheritedWidget(Widget child) : super(child: child);
 
-   static StrengthInheritedWidget of(BuildContext context){
-     return (context.inheritFromWidgetOfExactType(StrengthInheritedWidget)as StrengthInheritedWidget);
-   }
-   
+  static NoteInheritedWidget of(BuildContext context) {
+    return (context.inheritFromWidgetOfExactType(NoteInheritedWidget)as NoteInheritedWidget);
+  }
+
   @override
-  bool updateShouldNotify(StrengthInheritedWidget oldWidget) {
+  bool updateShouldNotify( NoteInheritedWidget oldWidget) {
     return oldWidget.strengths != strengths;
   }
- }
+}
