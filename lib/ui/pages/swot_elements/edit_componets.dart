@@ -1,8 +1,8 @@
 
+import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengths_list.dart';
 import 'package:copy_cat/ui/pages/swot_elements/user_opportunities.dart';
-import 'package:copy_cat/ui/pages/swot_elements/user_strengths.dart';
 import 'package:copy_cat/ui/pages/swot_elements/user_threats.dart';
-import 'package:copy_cat/ui/pages/swot_elements/user_weaknesses.dart';
+import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -50,7 +50,7 @@ class SwotGrid extends StatelessWidget{
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => Strengths()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList()));
                        },
                        
                        child:Column(
@@ -69,7 +69,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.yellowAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => Weak()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList()));
                },
                
                child:Column(
