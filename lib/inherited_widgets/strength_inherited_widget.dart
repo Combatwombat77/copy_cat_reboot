@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
    StrengthInheritedWidget(Widget child): super(child: child);
 
    static StrengthInheritedWidget of(BuildContext context){
-     return (context.dependOnInheritedWidgetOfExactType( aspect: StrengthInheritedWidget)as StrengthInheritedWidget);
+     return (context.inheritFromWidgetOfExactType(StrengthInheritedWidget)as StrengthInheritedWidget);
    }
    
   @override
