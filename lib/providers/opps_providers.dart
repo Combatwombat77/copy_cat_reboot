@@ -1,16 +1,16 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class StrengthProvider {
+class OppsProvider {
   static Database db;
 
   static Future open() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'Strengths.db'),
+      join(await getDatabasesPath(), 'opportunities.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         db.execute('''
-          create table Strengths(
+          create table Opps(
             id integer primary key autoincrement,
             title text not null,
             text text not null
@@ -20,28 +20,28 @@ class StrengthProvider {
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getStrengthList() async {
+  static Future<List<Map<String, dynamic>>> getOppsList() async {
     if (db == null) {
       await open();
     }
-    return await db.query('Strengths');
+    return await db.query('Opps');
   }
 
-  static Future insertNote(Map<String, dynamic> note) async {
-    await db.insert('Strengths', note);
+  static Future insertOpps(Map<String, dynamic> note) async {
+    await db.insert('Opps', note);
   }
 
-  static Future updateNote(Map<String, dynamic> note) async {
+  static Future updateOpps(Map<String, dynamic> note) async {
     await db.update(
-      'Strengths',
+      'Opps',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
   }
 
-  static Future deleteNote(int id) async {
+  static Future deleteOpps(int id) async {
     await db.delete(
-      'Strengths',
+      'Opps',
       where: 'id = ?',
       whereArgs: [id]);
   } 

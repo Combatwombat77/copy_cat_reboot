@@ -1,4 +1,4 @@
-import 'package:copy_cat/providers/strength_provider.dart';
+import 'package:copy_cat/providers/threats_providers.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,20 +7,20 @@ enum NoteMode {
   Adding
 }
 
-class Note extends StatefulWidget {
+class Threat extends StatefulWidget {
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
 
-  Note(this.noteMode, this.note);
+  Threat(this.noteMode, this.note);
 
   @override
-  NoteState createState() {
-    return new NoteState();
+  ThreatState createState() {
+    return new ThreatState();
   }
 }
 
-class NoteState extends State<Note> {
+class ThreatState extends State<Threat> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _textController = TextEditingController();
@@ -40,7 +40,7 @@ class NoteState extends State<Note> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.noteMode == NoteMode.Adding ? 'Add note' : 'Edit note'
+          widget.noteMode == NoteMode.Adding ? 'Add Threat' : 'Edit Threat'
         ),
       ),
       body: Padding(
@@ -51,14 +51,14 @@ class NoteState extends State<Note> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                hintText: 'Note title'
+                hintText: 'Threat title'
               ),
             ),
             Container(height: 8,),
             TextField(
               controller: _textController,
               decoration: InputDecoration(
-                hintText: 'Note text'
+                hintText: 'Threat description'
               ),
             ),
             Container(height: 16.0,),
@@ -70,12 +70,12 @@ class NoteState extends State<Note> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    NoteProvider.insertNote({
+                    ThreatProvider.insertThreat({
                       'title': title,
                       'text': text
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                    NoteProvider.updateNote({
+                    ThreatProvider.updateThreat({
                       'id': widget.note['id'],
                       'title': _titleController.text,
                       'text': _textController.text,
@@ -91,7 +91,7 @@ class NoteState extends State<Note> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await NoteProvider.deleteNote(widget.note['id']);
+                      await ThreatProvider.deleteThreat(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )
@@ -127,3 +127,4 @@ class _NoteButton extends StatelessWidget {
     );
   }
 }
+

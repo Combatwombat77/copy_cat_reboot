@@ -1,25 +1,25 @@
-import 'package:copy_cat/providers/strength_provider.dart';
-import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengths_input.dart';
+import 'package:copy_cat/providers/threats_providers.dart';
+import 'package:copy_cat/ui/pages/swot_elements/threats_elements/threats_input.dart';
 import 'package:flutter/material.dart';
 
-class NoteList extends StatefulWidget {
+class ThreatList extends StatefulWidget {
 
   @override
-  NoteListState createState() {
-    return new NoteListState();
+  ThreatListState createState() {
+    return new ThreatListState();
   }
 }
 
-class NoteListState extends State<NoteList> {
+class ThreatListState extends State<ThreatList> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Strengths'),
+        title: Text('Threats'),
       ),
       body: FutureBuilder(
-        future: StrengthProvider.getStrengthList(),
+        future: ThreatProvider.getThreatList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +29,7 @@ class NoteListState extends State<NoteList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Note(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) =>   Threat(NoteMode.Editing, notes[index]))
                     );
                   },
                   child: Card(
@@ -57,7 +57,7 @@ class NoteListState extends State<NoteList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Note(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Threat(NoteMode.Adding, null))
           );
         },
         child: Icon(Icons.add),

@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class NoteProvider {
+class WeakProvider {
   static Database db;
 
   static Future open() async {
@@ -20,18 +20,18 @@ class NoteProvider {
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getNoteList() async {
+  static Future<List<Map<String, dynamic>>> getWeakList() async {
     if (db == null) {
       await open();
     }
     return await db.query('Weaknesses');
   }
 
-  static Future insertNote(Map<String, dynamic> note) async {
+  static Future insertWeak(Map<String, dynamic> note) async {
     await db.insert('Weaknesses', note);
   }
 
-  static Future updateNote(Map<String, dynamic> note) async {
+  static Future updateWeak(Map<String, dynamic> note) async {
     await db.update(
       'Weaknesses',
       note,
@@ -39,7 +39,7 @@ class NoteProvider {
       whereArgs: [note['id']]);
   }
 
-  static Future deleteNote(int id) async {
+  static Future deleteWeak(int id) async {
     await db.delete(
       'Weaknesses',
       where: 'id = ?',

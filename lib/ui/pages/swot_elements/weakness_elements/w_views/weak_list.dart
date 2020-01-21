@@ -1,5 +1,5 @@
-import 'package:copy_cat/providers/strength_provider.dart';
-import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/strengths_control.dart';
+import 'package:copy_cat/providers/weakness_provider.dart';
+import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_input.dart';
 import 'package:flutter/material.dart';
 
 class WeakList extends StatefulWidget {
@@ -19,7 +19,7 @@ class WeakListState extends State<WeakList> {
         title: Text('Weaknesses'),
       ),
       body: FutureBuilder(
-        future: NoteProvider.getNoteList(),
+        future: WeakProvider.getWeakList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +29,7 @@ class WeakListState extends State<WeakList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Note(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) => Weak(NoteMode.Editing, notes[index]))
                     );
                   },
                   child: Card(
@@ -57,7 +57,7 @@ class WeakListState extends State<WeakList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Note(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Weak(NoteMode.Adding, null))
           );
         },
         child: Icon(Icons.add),
