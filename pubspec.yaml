@@ -28,7 +28,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  path_provider: ^1.5.0
+  path_provider: ^1.5.1
   # camera: ^0.5.7+2
   path: ^1.6.4
 
