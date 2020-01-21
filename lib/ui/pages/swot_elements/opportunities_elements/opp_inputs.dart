@@ -1,4 +1,5 @@
-import 'package:copy_cat/providers/strength_provider.dart';
+import 'package:copy_cat/providers/opps_providers.dart';
+import 'package:copy_cat/providers/threats_providers.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,20 +8,20 @@ enum NoteMode {
   Adding
 }
 
-class Weak extends StatefulWidget {
+class Opps extends StatefulWidget {
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
 
-  Weak(this.noteMode, this.note);
+  Opps(this.noteMode, this.note);
 
   @override
-  NoteState createState() {
-    return new NoteState();
+  OppsState createState() {
+    return new OppsState();
   }
 }
 
-class NoteState extends State<Weak> {
+class OppsState extends State<Opps> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _textController = TextEditingController();
@@ -40,7 +41,7 @@ class NoteState extends State<Weak> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.noteMode == NoteMode.Adding ? 'Add note' : 'Edit note'
+          widget.noteMode == NoteMode.Adding ? 'Add Opportunity' : 'Edit Opportunity'
         ),
       ),
       body: Padding(
@@ -51,14 +52,14 @@ class NoteState extends State<Weak> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                hintText: 'Note title'
+                hintText: 'Opportunity title'
               ),
             ),
             Container(height: 8,),
             TextField(
               controller: _textController,
               decoration: InputDecoration(
-                hintText: 'Note text'
+                hintText: 'Opportunity description'
               ),
             ),
             Container(height: 16.0,),
@@ -70,12 +71,12 @@ class NoteState extends State<Weak> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    NoteProvider.insertNote({
+                    OppsProvider.insertOpps({
                       'title': title,
                       'text': text
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                    NoteProvider.updateNote({
+                    OppsProvider.updateOpps({
                       'id': widget.note['id'],
                       'title': _titleController.text,
                       'text': _textController.text,
@@ -91,7 +92,7 @@ class NoteState extends State<Weak> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await NoteProvider.deleteNote(widget.note['id']);
+                      await OppsProvider.deleteOpps(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )
@@ -127,3 +128,4 @@ class _NoteButton extends StatelessWidget {
     );
   }
 }
+

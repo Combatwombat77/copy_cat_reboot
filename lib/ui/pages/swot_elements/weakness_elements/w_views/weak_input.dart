@@ -1,4 +1,4 @@
-import 'package:copy_cat/providers/strength_provider.dart';
+import 'package:copy_cat/providers/weakness_provider.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,12 +15,12 @@ class Weak extends StatefulWidget {
   Weak(this.noteMode, this.note);
 
   @override
-  NoteState createState() {
-    return new NoteState();
+  WeakState createState() {
+    return new WeakState();
   }
 }
 
-class NoteState extends State<Weak> {
+class WeakState extends State<Weak> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _textController = TextEditingController();
@@ -40,7 +40,7 @@ class NoteState extends State<Weak> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.noteMode == NoteMode.Adding ? 'Add Strength' : 'Edit Strength'
+          widget.noteMode == NoteMode.Adding ? 'Add Weakness' : 'Edit Weakness'
         ),
       ),
       body: Padding(
@@ -51,14 +51,14 @@ class NoteState extends State<Weak> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                hintText: 'Strength title'
+                hintText: ' Weakness '
               ),
             ),
             Container(height: 8,),
             TextField(
               controller: _textController,
               decoration: InputDecoration(
-                hintText: 'Strength description'
+                hintText: 'Weakness description'
               ),
             ),
             Container(height: 16.0,),
@@ -70,12 +70,12 @@ class NoteState extends State<Weak> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    NoteProvider.insertNote({
+                    WeakProvider.insertWeak({
                       'title': title,
                       'text': text
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                    NoteProvider.updateNote({
+                    WeakProvider.updateWeak({
                       'id': widget.note['id'],
                       'title': _titleController.text,
                       'text': _textController.text,
@@ -91,7 +91,7 @@ class NoteState extends State<Weak> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await NoteProvider.deleteNote(widget.note['id']);
+                      await WeakProvider.deleteWeak(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )

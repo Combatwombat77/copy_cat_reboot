@@ -70,12 +70,12 @@ class NoteState extends State<Note> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    NoteProvider.insertNote({
+                    StrengthProvider.insertNote({
                       'title': title,
                       'text': text
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                    NoteProvider.updateNote({
+                    StrengthProvider.updateNote({
                       'id': widget.note['id'],
                       'title': _titleController.text,
                       'text': _textController.text,
@@ -91,7 +91,7 @@ class NoteState extends State<Note> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await NoteProvider.deleteNote(widget.note['id']);
+                      await StrengthProvider.deleteNote(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )
