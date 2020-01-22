@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
+import 'package:copy_cat/models/db_manager.dart';
+
+final formkey = new GlobalKey<FormState> ();
+
 
 class ViewPost extends StatefulWidget {
   final String postName;
@@ -10,6 +14,7 @@ class ViewPost extends StatefulWidget {
 }
 
 class _ViewPostState extends State<ViewPost> {
+
 
   TextEditingController controller;
   TextEditingController _editController = new TextEditingController();
@@ -55,18 +60,46 @@ class _ViewPostState extends State<ViewPost> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          newPost("post");
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Adding, null)));
         },
         backgroundColor: Uidata.btnColor,
         child: Icon(Icons.add),
       ),
-      body: Container(
-          child: ListView.builder(
-                      itemCount: items.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return viewCard(items[index], index);
-                      }),
-        )
+      body: FutureBuilder(
+        future: DBManager.getCustSegList(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            final notes = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index]))
+                    );
+                  },
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30.0, bottom: 30, left: 13.0, right: 22.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _NoteTitle(notes[index]['title']),
+                          Container(height: 4,),
+                          _NoteDescription(notes[index]['text'])
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: notes.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 
@@ -127,18 +160,214 @@ class _ViewPostState extends State<ViewPost> {
     );
   }
 
+
+
+
 }
 
-class EditPost extends StatefulWidget {
-  @override
-  _EditPostState createState() => _EditPostState();
-}
+class _NoteTitle extends StatelessWidget {
+  final String _title;
 
-class _EditPostState extends State<EditPost> {
+  _NoteTitle(this._title);
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
+    return Text(
+      _title,
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold
+      ),
     );
   }
 }
+
+class _NoteDescription extends StatelessWidget {
+  final String description;
+
+  _NoteDescription(this.description);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      description,
+      style: TextStyle(
+          color: Colors.grey.shade600
+      ),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}
+
+
+
+
+enum NoteMode {
+  Editing,
+  Adding
+}
+
+class CanvasNote extends StatefulWidget {
+
+  final NoteMode noteMode;
+  final Map<String, dynamic> note;
+
+  CanvasNote(this.noteMode, this.note);
+
+  @override
+  CanvasNoteState createState() {
+    return new CanvasNoteState();
+  }
+}
+
+class CanvasNoteState extends State<CanvasNote> {
+
+  String title;
+  String noteDescription;
+
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+
+  final form = formkey.currentState;
+
+  bool validateForm() {
+    if(formkey.currentState.validate()){
+      formkey.currentState.save();
+      return true;
+
+    }else{
+      return false;
+    }
+  }
+  
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController.addListener(() {
+      setState(() {
+        title = _titleController.text;
+      });
+    });
+
+    _descriptionController.addListener(() {
+      setState(() {
+        title = _descriptionController.text;
+      });
+    });
+
+  }
+  
+
+  @override
+  void didChangeDependencies() {
+    if (widget.noteMode == NoteMode.Editing) {
+      _titleController.text = widget.note['title'];
+      _descriptionController.text = widget.note['text'];
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.noteMode == NoteMode.Adding ? 'Add Note' : 'Edit Note'
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Form(
+          key: formkey,
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              controller: _titleController,
+              onSaved: (value) => title = value,
+              validator: (val) =>  val.length == 0? "Please enter title" : null,
+              decoration: InputDecoration(
+                hintText: 'Note title'
+              ),
+            ),
+            Container(height: 8,),
+            TextFormField(
+              validator: (val) =>  val.length == 0? "Please enter description" : null,
+              onSaved: (value) => noteDescription = value,
+              controller: _descriptionController,
+              decoration: InputDecoration(
+                hintText: 'Note description'
+              ),
+            ),
+            Container(height: 16.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _NoteButton('Save', Colors.blue, () {
+                  if (widget?.noteMode == NoteMode.Adding) {
+                    if(validateForm()) {
+                    DBManager.insertCustSegNote({
+                      'title': title,
+                      'description': noteDescription
+                    });
+                  } else if (widget?.noteMode == NoteMode.Editing) {
+                    DBManager.updateNote({
+                      'id': widget.note['id'],
+                      'title': _titleController.text,
+                      'description': _descriptionController.text,
+                    });
+                  }
+                  Navigator.pop(context);
+                  }
+                }),
+                Container(height: 16.0,),
+                _NoteButton('Discard', Colors.grey, () {
+                  Navigator.pop(context);
+                }),
+                widget.noteMode == NoteMode.Editing ?
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: _NoteButton('Delete', Colors.red, () async {
+                      await DBManager.deleteNote(widget.note['id']);
+                      Navigator.pop(context);
+                    }),
+                  )
+                 : Container()
+              ],
+            )
+          ],
+        ),
+        )
+      ),
+    );
+  }
+}
+
+class _NoteButton extends StatelessWidget {
+
+  final String _text;
+  final Color _color;
+  final Function _onPressed;
+
+  _NoteButton(this._text, this._color, this._onPressed);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      onPressed: _onPressed,
+      child: Text(
+        _text,
+        style: TextStyle(color: Colors.white),
+      ),
+      height: 40,
+      minWidth: 100,
+      color: _color,
+    );
+  }
+}
+
+
+
+
