@@ -49,31 +49,34 @@ var items = [
         child: Icon(Icons.exit_to_app),
       ),
       body: SingleChildScrollView(
-          child: Table(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Table(
 //            defaultColumnWidth: FractionColumnWidth(0.32),
-            children: [
-              TableRow(
-                children: [
-                  cardView("Customer Segments"),
-                  cardView("Value Propositions"),
-                  cardView("Channels"),
-                ]
-              ),
-              TableRow(
+              children: [
+                TableRow(
                   children: [
-                    cardView("Customer Relationships"),
-                    cardView("Revenue Streams"),
-                    cardView("Key Resources"),
+                    cardView("Customer Segments"),
+                    cardView("Value Propositions"),
+                    cardView("Channels"),
                   ]
-              ),
-              TableRow(
-                  children: [
-                    cardView("Key Activities"),
-                    cardView("Key Partners"),
-                    cardView("Cost Structure"),
-                  ]
-              ),
-            ],
+                ),
+                TableRow(
+                    children: [
+                      cardView("Customer Relationships"),
+                      cardView("Revenue Streams"),
+                      cardView("Key Resources"),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      cardView("Key Activities"),
+                      cardView("Key Partners"),
+                      cardView("Cost Structure"),
+                    ]
+                ),
+              ],
+            ),
           ),
       ),
     );
@@ -90,15 +93,14 @@ Widget cardView(String cardName){
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.accessibility),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.accessibility),
+            ),
 //              Image(
 //                image: ,
 //              ),
-            FlatButton(
-              onPressed: (){
-
-              },
-                child: Text("$cardName", style: TextStyle(fontSize: 12),)),
+                Text("$cardName", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),)
             
           ],
         ),

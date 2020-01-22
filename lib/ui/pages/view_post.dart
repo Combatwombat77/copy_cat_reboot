@@ -4,6 +4,18 @@ import 'package:copy_cat/models/db_manager.dart';
 
 final formkey = new GlobalKey<FormState> ();
 
+enum viewMode {
+  customerSegments,
+  value_propositions,
+  Channels,
+  customer_relationships,
+  revenue_stream,
+  key_resources,
+  key_activities,
+  key_partners,
+  cost_structure
+}
+
 
 class ViewPost extends StatefulWidget {
   final String postName;
@@ -60,13 +72,13 @@ class _ViewPostState extends State<ViewPost> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Adding, null)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Adding, null, widget.postName)));
         },
         backgroundColor: Uidata.btnColor,
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-        future: DBManager.getCustSegList(),
+//        future: getAccList(widget.postName),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -74,9 +86,7 @@ class _ViewPostState extends State<ViewPost> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index]))
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName))
                     );
                   },
                   child: Card(
@@ -87,7 +97,7 @@ class _ViewPostState extends State<ViewPost> {
                         children: <Widget>[
                           _NoteTitle(notes[index]['title']),
                           Container(height: 4,),
-                          _NoteDescription(notes[index]['text'])
+                          _NoteDescription(notes[index]['description'])
                         ],
                       ),
                     ),
@@ -160,6 +170,39 @@ class _ViewPostState extends State<ViewPost> {
     );
   }
 
+  getAccList(String categoryName) {
+    var items = [
+      "Customer Segments",
+      "Value Propositions",
+      "Channels",
+      "Customer Relationships",
+      "Revenue Stream",
+      "Key Resources",
+      "Key Activities",
+      "Key Partners",
+      "Cost Structure"
+    ];
+    if(categoryName == items[0]){
+      DBManager.getCustSegList();
+    }else if(categoryName == items[1]){
+      DBManager.getValPropsList();
+    }else if(categoryName == items[2]){
+      DBManager.getChannelList();
+    }else if(categoryName == items[3]){
+      DBManager.getCustRelList();
+    }else if(categoryName == items[4]){
+      DBManager.getRevStreamList();
+    }else if(categoryName == items[5]){
+      DBManager.getKeyResList();
+    }else if(categoryName == items[6]){
+      DBManager.getKeyActList();
+    }else if(categoryName == items[7]){
+      DBManager.getKeyPartList();
+    }else if(categoryName == items[8]){
+      DBManager.getCostStructList();
+    }
+  }
+
 
 
 
@@ -183,18 +226,13 @@ class _NoteTitle extends StatelessWidget {
 }
 
 class _NoteDescription extends StatelessWidget {
-  final String description;
+  String description;
 
   _NoteDescription(this.description);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      description,
-      style: TextStyle(
-          color: Colors.grey.shade600
-      ),
-      maxLines: 2,
+    return Text(description, style: TextStyle(color: Colors.grey.shade600), maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
   }
@@ -212,8 +250,9 @@ class CanvasNote extends StatefulWidget {
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
+  final String parentPageName;
 
-  CanvasNote(this.noteMode, this.note);
+  CanvasNote(this.noteMode, this.note, this.parentPageName);
 
   @override
   CanvasNoteState createState() {
@@ -230,6 +269,18 @@ class CanvasNoteState extends State<CanvasNote> {
   TextEditingController _descriptionController = TextEditingController();
 
   final form = formkey.currentState;
+
+  var items = [
+    "Customer Segments",
+    "Value Propositions",
+    "Channels",
+    "Customer Relationships",
+    "Revenue Stream",
+    "Key Resources",
+    "Key Activities",
+    "Key Partners",
+    "Cost Structure"
+  ];
 
   bool validateForm() {
     if(formkey.currentState.validate()){
@@ -253,7 +304,7 @@ class CanvasNoteState extends State<CanvasNote> {
 
     _descriptionController.addListener(() {
       setState(() {
-        title = _descriptionController.text;
+        noteDescription = _descriptionController.text;
       });
     });
 
@@ -306,19 +357,125 @@ class CanvasNoteState extends State<CanvasNote> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
-                  if (widget?.noteMode == NoteMode.Adding) {
-                    if(validateForm()) {
-                    DBManager.insertCustSegNote({
-                      'title': title,
-                      'description': noteDescription
-                    });
-                  } else if (widget?.noteMode == NoteMode.Editing) {
-                    DBManager.updateNote({
-                      'id': widget.note['id'],
-                      'title': _titleController.text,
-                      'description': _descriptionController.text,
-                    });
-                  }
+                  if(validateForm()) {
+                    if(widget.parentPageName == items[0]) {
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertCustSegNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateCustSegNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[1]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertValPropsNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateValPropNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[2]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertChannelsNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateChannelNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[3]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertCustRelNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateCustRelNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[4]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertRevStreamNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateRevStreamNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[5]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertKeyResNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateKeyResNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[6]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertKeyActNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateKeyActNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[7]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertKeyPartNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateKeyPartNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }else if(widget.parentPageName == items[8]){
+                      if (widget?.noteMode == NoteMode.Adding) {
+                        DBManager.insertCostStructNote({
+                          'title': title,
+                          'description': noteDescription
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManager.updateCostStructNote({
+                          'id': widget.note['id'],
+                          'title': _titleController.text,
+                          'description': _descriptionController.text,
+                        });
+                      }
+                    }
                   Navigator.pop(context);
                   }
                 }),
@@ -330,7 +487,7 @@ class CanvasNoteState extends State<CanvasNote> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await DBManager.deleteNote(widget.note['id']);
+                      await DBManager.deleteCustSegNote(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )
