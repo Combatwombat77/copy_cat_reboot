@@ -35,7 +35,7 @@ class SwotDetailsState extends State<SwotDetails> {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
           },
         ),
-        title: Text("SWOT Details"),
+        title: Text("New SWOT "),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.done),

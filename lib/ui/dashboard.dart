@@ -1,7 +1,9 @@
 //import 'package:copy_cat/main.dart';
 //import 'package:copy_cat/ui/landing_page.dart';
 import 'package:copy_cat/ui/pages/new_model.dart';
+import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'swot_home.dart' as swot;
 import 'canvas_home.dart' as canvas;
 //import 'utils/drawer.dart';
@@ -36,16 +38,30 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
 //      drawer: SideDrawer(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => NewModel()));
-        },
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        children: [
+        SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "New Canvas",
+          onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewModel()));
+          }
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "New SWOT",
+          onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SwotDetails()));
+          },
+        ),
+        ]
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text("Copy Cat"),
-        bottom: TabBar(
+        bottom: 
+        TabBar(
           controller: inAppTabController,
           tabs: <Widget>[
             Tab(

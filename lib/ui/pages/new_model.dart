@@ -35,7 +35,7 @@ class _NewModelState extends State<NewModel> {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
           },
         ),
-        title: Text("New Model"),
+        title: Text("New Canvas"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.done),
