@@ -4,18 +4,6 @@ import 'package:copy_cat/models/db_manager.dart';
 
 final formkey = new GlobalKey<FormState> ();
 
-enum viewMode {
-  customerSegments,
-  value_propositions,
-  Channels,
-  customer_relationships,
-  revenue_stream,
-  key_resources,
-  key_activities,
-  key_partners,
-  cost_structure
-}
-
 
 class ViewPost extends StatefulWidget {
   final String postName;
@@ -47,13 +35,13 @@ class _ViewPostState extends State<ViewPost> {
         edit = _editController.text;
       });
     });
+    print(widget.postName);
   }
 
   void upDateList(int index, String editedPost){
     setState(() {
       items.removeAt(index);
       items.replaceRange(index, index, ["$editedPost, $index"]);
-      print(items);
     });
   }
 
@@ -78,7 +66,7 @@ class _ViewPostState extends State<ViewPost> {
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-//        future: getAccList(widget.postName),
+       future: DBManagerViews.getLists(widget.postName),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -104,7 +92,7 @@ class _ViewPostState extends State<ViewPost> {
                   ),
                 );
               },
-              itemCount: notes.length,
+              itemCount: notes == null? 0 : notes.length,
             );
           }
           return Center(child: CircularProgressIndicator());
@@ -169,42 +157,6 @@ class _ViewPostState extends State<ViewPost> {
         )
     );
   }
-
-  getAccList(String categoryName) {
-    var items = [
-      "Customer Segments",
-      "Value Propositions",
-      "Channels",
-      "Customer Relationships",
-      "Revenue Stream",
-      "Key Resources",
-      "Key Activities",
-      "Key Partners",
-      "Cost Structure"
-    ];
-    if(categoryName == items[0]){
-      DBManager.getCustSegList();
-    }else if(categoryName == items[1]){
-      DBManager.getValPropsList();
-    }else if(categoryName == items[2]){
-      DBManager.getChannelList();
-    }else if(categoryName == items[3]){
-      DBManager.getCustRelList();
-    }else if(categoryName == items[4]){
-      DBManager.getRevStreamList();
-    }else if(categoryName == items[5]){
-      DBManager.getKeyResList();
-    }else if(categoryName == items[6]){
-      DBManager.getKeyActList();
-    }else if(categoryName == items[7]){
-      DBManager.getKeyPartList();
-    }else if(categoryName == items[8]){
-      DBManager.getCostStructList();
-    }
-  }
-
-
-
 
 }
 
@@ -358,123 +310,17 @@ class CanvasNoteState extends State<CanvasNote> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   if(validateForm()) {
-                    if(widget.parentPageName == items[0]) {
                       if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertCustSegNote({
+                        DBManagerViews.insertCustSegNote({
                           'title': title,
                           'description': noteDescription
-                        });
+                        }, widget.parentPageName);
                       } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateCustSegNote({
+                        DBManagerViews.updateCustSegNote({
                           'id': widget.note['id'],
                           'title': _titleController.text,
                           'description': _descriptionController.text,
                         });
-                      }
-                    }else if(widget.parentPageName == items[1]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertValPropsNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateValPropNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[2]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertChannelsNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateChannelNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[3]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertCustRelNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateCustRelNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[4]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertRevStreamNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateRevStreamNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[5]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertKeyResNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateKeyResNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[6]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertKeyActNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateKeyActNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[7]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertKeyPartNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateKeyPartNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
-                    }else if(widget.parentPageName == items[8]){
-                      if (widget?.noteMode == NoteMode.Adding) {
-                        DBManager.insertCostStructNote({
-                          'title': title,
-                          'description': noteDescription
-                        });
-                      } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManager.updateCostStructNote({
-                          'id': widget.note['id'],
-                          'title': _titleController.text,
-                          'description': _descriptionController.text,
-                        });
-                      }
                     }
                   Navigator.pop(context);
                   }
@@ -487,7 +333,7 @@ class CanvasNoteState extends State<CanvasNote> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await DBManager.deleteCustSegNote(widget.note['id']);
+                      await DBManagerViews.deleteCustSegNote(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )

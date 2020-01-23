@@ -1,153 +1,121 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DBManager {
+class DBManagerViews {
   static Database db;
 
-  static Future open() async {
+  static Future openDB() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'canvas.db'),
+      join(await getDatabasesPath(), 'canvasAppTest.db'),
       version: 1,
       onCreate: (Database db, int version) async {
-        db.execute('''
+        await db.execute('''
           create table customer_segments(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-        db.execute('''
+          );''');
+        await db.execute('''
           create table value_propositions(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table channels(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table revenue_stream(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table customer_relationships(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table key_resources(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table key_activities(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+        await db.execute('''
           create table key_partners(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
-
-        db.execute('''
+          );''');
+          await db.execute('''
           create table cost_structure(
             id integer primary key autoincrement,
             title text not null,
             description text not null
-          );
-        ''');
+          );''');
       }
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getCustSegList() async {
+  static Future<List<Map<String, dynamic>>> getLists(String tableName) async {
     if (db == null) {
-      await open();
+      await openDB();
+    }else{
+    if(tableName == "Customer Segments") {
+      return await db.query('customer_segments');
+    }else if(tableName == "Value Propositions") {
+      return await db.query('value_propositions');
+    }else if(tableName == "Channels") {
+      return await db.query('channels');
+    }else if(tableName == "Customer Relationships") {
+      return await db.query('customer_relationships');
+    }else if(tableName =="Revenue Streams") {
+      return await db.query('revenue_stream');
+    }else if(tableName == "Key Resources") {
+      return await db.query('key_resources');
+    }else if(tableName == "Key Activities") {
+      return await db.query('key_activities');
+    }else if(tableName == "Key Partners") {
+      return await db.query('key_partners');
+    }else if(tableName == "Cost Structure") {
+      return await db.query('cost_structure');
     }
-    return await db.query('customer_segments');
+
+    }
   }
 
-  static Future<List<Map<String, dynamic>>> getValPropsList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('value_propositions');
-  }
 
-  static Future<List<Map<String, dynamic>>> getChannelList() async {
-    if (db == null) {
-      await open();
+  static Future insertCustSegNote(Map<String, dynamic> note, String tableName) async {
+    if(tableName == "Customer Segments") {
+      await db.insert('customer_segments', note);
+    }else if(tableName == "Value Propositions") {
+      await db.insert('value_propositions', note);
+    }else if(tableName == "Channels") {
+      await db.insert('channels', note);
+    }else if(tableName == "Customer Relationships") {
+      await db.insert('customer_relationships', note);
+    }else if(tableName =="Revenue Streams") {
+      await db.insert('revenue_stream', note);
+    }else if(tableName == "Key Resources") {
+      await db.insert('key_resources', note);
+    }else if(tableName == "Key Activities") {
+      await db.insert('key_activities', note);
+    }else if(tableName == "Key Partners") {
+      await db.insert('key_partners', note);
+    }else if(tableName == "Cost Structure") {
+      await db.insert('cost_structure', note);
     }
-    return await db.query('channels');
-  }
-
-  static Future<List<Map<String, dynamic>>> getCustRelList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('customer_relationships');
-  }
-
-  static Future<List<Map<String, dynamic>>> getRevStreamList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('revenue_stream');
-  }
-
-  static Future<List<Map<String, dynamic>>> getKeyResList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('key_resources');
-  }
-
-  static Future<List<Map<String, dynamic>>> getKeyActList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('key_activities');
-  }
-
-  static Future<List<Map<String, dynamic>>> getCostStructList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('cost_structure');
-  }
-
-  static Future<List<Map<String, dynamic>>> getKeyPartList() async {
-    if (db == null) {
-      await open();
-    }
-    return await db.query('key_partners');
-  }
-
-  static Future insertCustSegNote(Map<String, dynamic> note) async {
-    await db.insert('customer_segments', note);
+    
   }
 
   static Future insertValPropsNote(Map<String, dynamic> note) async {

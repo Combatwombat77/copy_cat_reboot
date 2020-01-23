@@ -1,3 +1,4 @@
+import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
@@ -10,6 +11,13 @@ class ModelDetails extends StatefulWidget {
 
 class _ModelDetailsState extends State<ModelDetails> {
 //  double height = MediaQuery.of(context).size.height;
+
+
+@override 
+void initState(){
+  super.initState();
+  DBManagerViews.openDB();
+}
 
 var items = [
   "Customer Segments",
