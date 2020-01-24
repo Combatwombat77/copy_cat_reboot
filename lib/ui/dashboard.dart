@@ -3,6 +3,7 @@
 import 'package:copy_cat/ui/pages/new_model.dart';
 import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart';
 import 'package:flutter/material.dart';
+import 'pages/new_model.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'swot_home.dart' as swot;
 import 'canvas_home.dart' as canvas;
@@ -45,19 +46,19 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
           child: Icon(Icons.note_add),
           label: "New Canvas",
           onTap: (){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewModel()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewModel(null , NoteMode.Adding)));
           }
         ),
         SpeedDialChild(
           child: Icon(Icons.note_add),
           label: "New SWOT",
           onTap: (){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SwotDetails()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails()));
           },
         ),
         ]
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text("Copy Cat"),
         bottom: 

@@ -1,6 +1,8 @@
 import 'package:copy_cat/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
+
+import '../../landing_page.dart';
 // import 'package:camera/camera.dart';
 
 
@@ -32,7 +34,8 @@ class SwotDetailsState extends State<SwotDetails> {
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
+            Navigator.pop(context);
+            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingPage()));
           },
         ),
         title: Text("New SWOT "),

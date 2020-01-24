@@ -6,7 +6,7 @@ class DBManagerViews {
 
   static Future openDB() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'canvasAppTest.db'),
+      join(await getDatabasesPath(), 'canvasAppK.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute('''
@@ -285,3 +285,102 @@ class DBManagerViews {
         whereArgs: [id]);
   }
 }
+
+
+class DBManagerModel{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'canvasAppModel.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table models(
+            id integer primary key autoincrement,
+            ModelTitle text not null,
+            ModelDescription text not null,
+            For text not null,
+            By text not null
+          );''');
+      });
+      }
+
+       static Future insertModel(Map<String, dynamic> note) async {
+    await db.insert('models', note);
+  }
+
+  static Future deleteModel(int id) async {
+    await db.delete(
+      'models',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateModel(Map<String, dynamic> note) async {
+    await db.update(
+        'models',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('models');
+    }
+
+   }
+
+}  
+
+
+
+class DBManagerSwot{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'canvasAppSwot.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table swot(
+            id integer primary key autoincrement,
+            SwotTitle text not null,
+            SwotDescription text not null,
+            For text not null,
+            By text not null
+          );''');
+      });
+      }
+
+       static Future insertModel(Map<String, dynamic> note) async {
+    await db.insert('models', note);
+  }
+
+  static Future deleteModel(int id) async {
+    await db.delete(
+      'models',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateModel(Map<String, dynamic> note) async {
+    await db.update(
+        'models',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('models');
+    }
+
+   }
+
+}  

@@ -1,6 +1,7 @@
 //import 'package:copy_cat/ui/pages/model_details.dart';
 import 'package:copy_cat/ui/pages/model_details.dart';
 import 'package:flutter/material.dart';
+import 'package:copy_cat/models/db_manager.dart';
 import 'utils/uidata.dart';
 
 
@@ -13,66 +14,160 @@ class _CanvasHomeState extends State<CanvasHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-          child: ListView(
-            children: <Widget>[
-              canvasCard(),
-            ],
-          )
+      child: FutureBuilder(
+       future: DBManagerModel.getList(),
+        builder: (context, snapshot) {
+          final notes = snapshot.data;
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return Padding(
+                      padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      ModelTitle(notes[index]['ModelTitle']),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      ModelDescription(notes[index]['ModelDescription']),
+                                      // Text(description)
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      FlatButton(
+                                        //                splashColor: Colors.grey,
+                                        color: Colors.white,
+                                        child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
+                                        onPressed: (){
+
+                                      },
+                                    ),
+                                    FlatButton(
+                                      color: Colors.white,
+                                      child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
+                                      onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails()));
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    )
+   
+                );
+              },
+              itemCount: notes == null? 0 : notes.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
+
+   
+
+
+
+
+
+
   }
 
   // This will be the card that will be generated every time the user taps the floating action button
   // and enters their canvas name.
-  Widget canvasCard(){
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child:Card(
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text("Model Title", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),)
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Text("Description of model canvas")
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        FlatButton(
-                          //                splashColor: Colors.grey,
-                          color: Colors.white,
-                          child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
-                          onPressed: (){
+  // Widget canvasCard(String title, description){
+  //   return Padding(
+  //       padding: const EdgeInsets.all(10),
+  //       child:Card(
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(15.0),
+  //             child: Container(
+  //               child: Column(
+  //                 children: <Widget>[
+  //                   Row(
+  //                     children: <Widget>[
+  //                       Text(title)
+  //                     ],
+  //                   ),
+  //                   Row(
+  //                     children: <Widget>[
+  //                       ModelDescription(notes[index]['description'])
+  //                       Text(description)
+  //                     ],
+  //                   ),
+  //                   Row(
+  //                     children: <Widget>[
+  //                       FlatButton(
+  //                         //                splashColor: Colors.grey,
+  //                         color: Colors.white,
+  //                         child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
+  //                         onPressed: (){
 
-                          },
-                        ),
-                        FlatButton(
-                          color: Colors.white,
-                          child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
-                          onPressed: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails()));
-                          },
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )
-        )
-    );
-  }
+  //                         },
+  //                       ),
+  //                       FlatButton(
+  //                         color: Colors.white,
+  //                         child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
+  //                         onPressed: (){
+  //                          Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails()));
+  //                         },
+  //                       ),
+  //                     ],
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //           )
+  //       )
+  //   );
+  // }
 
 
 }
+
+
+
+class ModelTitle extends StatelessWidget {
+  final String _title;
+
+  ModelTitle(this._title);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold
+      ),
+    );
+  }
+}
+
+class ModelDescription extends StatelessWidget {
+  String description;
+
+  ModelDescription(this.description);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(description, style: TextStyle(color: Colors.grey.shade600), maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}
+
 
 
 
