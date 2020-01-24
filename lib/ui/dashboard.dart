@@ -1,9 +1,8 @@
 //import 'package:copy_cat/main.dart';
 //import 'package:copy_cat/ui/landing_page.dart';
-import 'package:copy_cat/ui/pages/new_model.dart';
-import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart';
+import 'package:copy_cat/ui/pages/new_model.dart' as newModel;
+import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart' as swotDetail;
 import 'package:flutter/material.dart';
-import 'pages/new_model.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'swot_home.dart' as swot;
 import 'canvas_home.dart' as canvas;
@@ -46,14 +45,14 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
           child: Icon(Icons.note_add),
           label: "New Canvas",
           onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewModel(null , NoteMode.Adding)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => newModel.NewModel(null , newModel.NoteMode.Adding)));
           }
         ),
         SpeedDialChild(
           child: Icon(Icons.note_add),
           label: "New SWOT",
           onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => swotDetail.SwotDetails(swotDetail.NoteMode.Adding, null)));
           },
         ),
         ]

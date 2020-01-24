@@ -180,7 +180,7 @@ class _NewModelState extends State<NewModel> {
                       child: TextFormField(
                         controller: _modelDescriptionController,
                         onSaved: (value) => modelDescription = value,
-                        validator: (val) =>  val.length == 0? "Please enter title" : null,
+                        validator: (val) =>  val.length == 0? "Please enter description" : null,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
                           labelText: "Description",

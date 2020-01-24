@@ -348,27 +348,25 @@ class DBManagerSwot{
           create table swot(
             id integer primary key autoincrement,
             SwotTitle text not null,
-            SwotDescription text not null,
-            For text not null,
-            By text not null
+            SwotDescription text not null
           );''');
       });
       }
 
        static Future insertModel(Map<String, dynamic> note) async {
-    await db.insert('models', note);
+    await db.insert('swot', note);
   }
 
   static Future deleteModel(int id) async {
     await db.delete(
-      'models',
+      'swot',
       where: 'id = ?',
       whereArgs: [id]);
   }
 
   static Future updateModel(Map<String, dynamic> note) async {
     await db.update(
-        'models',
+        'swot',
         note,
         where: 'id = ?',
         whereArgs: [note['id']]);
@@ -378,7 +376,7 @@ class DBManagerSwot{
     if (db == null) {
       await openDB();
     }else{
-      return await db.query('models');
+      return await db.query('swot');
     }
 
    }

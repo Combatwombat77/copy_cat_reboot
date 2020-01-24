@@ -12,14 +12,12 @@ import '../../dashboard.dart';
 class SwotGrid extends StatelessWidget{
   
   Widget build(BuildContext context){
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard())
-            );
+            Navigator.pop(context);
           },
         ),
         title: Text('SWOT ANALYSIS'),
@@ -118,7 +116,6 @@ class SwotGrid extends StatelessWidget{
                ],
       );
       },
-      ),
       ),
       );
       }

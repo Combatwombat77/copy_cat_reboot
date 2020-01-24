@@ -1,18 +1,27 @@
 import 'package:copy_cat/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
-
+import 'package:copy_cat/models/db_manager.dart';
 import '../../landing_page.dart';
 // import 'package:camera/camera.dart';
 
+enum NoteMode { 
+  Editing,
+  Adding
+}
 
 
 final formkey = new GlobalKey<FormState> ();
 
 class SwotDetails extends StatefulWidget {
 
+  final NoteMode noteMode;
+  final Map<String, dynamic> note;
+
+  SwotDetails(this.noteMode, this.note);
+
   // final cameras;
-  // NewModel(this.cameras);
+  // Newswot(this.cameras);
 
 
   @override
@@ -21,10 +30,62 @@ class SwotDetails extends StatefulWidget {
 
 class SwotDetailsState extends State<SwotDetails> {
 
+  String swotTitle;
+  String swotDescription;
+  String swotFor, swotBy;
 
 
-  TextEditingController _titleController;
+
+
+  TextEditingController _swotTitleController = new TextEditingController();
+  TextEditingController _swotDescriptionController = new TextEditingController();
+  TextEditingController _swotForController = new TextEditingController();
+  TextEditingController _swotByController = new TextEditingController();
+
   Color labelColor = Colors.grey;
+
+  @override
+  void initState(){
+    super.initState();
+    _swotDescriptionController.addListener(
+      (){
+        setState(() {
+          swotDescription = _swotDescriptionController.text;
+        });
+      }
+    );
+    _swotTitleController.addListener(
+      (){
+        setState(() {
+          swotTitle = _swotTitleController.text;
+        });
+      }
+    );
+
+    _swotByController.addListener((){
+        setState(() {
+          swotBy = _swotTitleController.text;
+        });
+      }
+    );
+
+    _swotForController.addListener((){
+      setState(() {
+        swotFor = _swotForController.text;
+      });
+    });
+  }
+
+  bool validateForm() {
+    if(formkey.currentState.validate()){
+      formkey.currentState.save();
+      return true;
+
+    }else{
+      return false;
+    }
+  }
+
 
 
   @override
@@ -43,7 +104,21 @@ class SwotDetailsState extends State<SwotDetails> {
           IconButton(
             icon: Icon(Icons.done),
             onPressed: () {
-
+              if(validateForm()) {
+                      if (widget.noteMode == NoteMode.Adding) {
+                        DBManagerSwot.insertModel({
+                          'SwotTitle': swotTitle,
+                          'SwotDescription': swotDescription,
+                        });
+                      } else if (widget?.noteMode == NoteMode.Editing) {
+                        DBManagerSwot.updateModel({
+                          'id': widget.note['id'],
+                          'SwotTitle': _swotTitleController.text,
+                          'SwotDescription': _swotDescriptionController.text,
+                        });
+                    }
+                  Navigator.pop(context);
+                  }
             },
           )
         ],
@@ -78,7 +153,9 @@ class SwotDetailsState extends State<SwotDetails> {
                         onTap: (){
 
                         },
-                        controller: _titleController,
+                        controller: _swotTitleController,
+                        onSaved: (value) => swotTitle = value,
+                        validator: (val) =>  val.length == 0? "Please enter title" : null,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
                           labelText: "Title",
@@ -95,7 +172,9 @@ class SwotDetailsState extends State<SwotDetails> {
                         primaryColorDark: Uidata.primaryColor,
                       ),
                       child: TextFormField(
-                        controller: _titleController,
+                        onSaved: (value) => swotDescription = value,
+                        validator: (val) =>  val.length == 0? "Please enter description" : null,
+                        controller: _swotDescriptionController,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
                           labelText: "Description",

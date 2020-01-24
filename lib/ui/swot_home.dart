@@ -12,7 +12,7 @@ class SWOTHome extends StatelessWidget {
     return Container(
         // padding: const EdgeInsets.all(10),
         child:FutureBuilder(
-       future: DBManagerModel.getList(),
+       future: DBManagerSwot.getList(),
         builder: (context, snapshot) {
           final notes = snapshot.data;
           if (snapshot.connectionState == ConnectionState.done) {
@@ -44,14 +44,14 @@ class SWOTHome extends StatelessWidget {
                                         color: Colors.white,
                                         child: Text("EDIT COMPONENTS", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-
+                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid()));
                                       },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
                                       child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails()));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails()));
                                       },
                                     ),
                                   ],
