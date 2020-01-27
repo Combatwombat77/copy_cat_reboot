@@ -13,14 +13,18 @@ class CanvasHome extends StatefulWidget {
 class _CanvasHomeState extends State<CanvasHome> {
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       child: FutureBuilder(
        future: DBManagerModel.getList(),
         builder: (context, snapshot) {
           final notes = snapshot.data;
+          
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
               itemBuilder: (context, index) {
+                String modelTitle = notes[index]['ModelTitle'];
+                
                 return Padding(
                       padding: const EdgeInsets.all(10),
                         child: Card(
@@ -31,7 +35,7 @@ class _CanvasHomeState extends State<CanvasHome> {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                      ModelTitle(notes[index]['ModelTitle']),
+                                     ModelTitle(notes[index]['ModelTitle']),
                                     ],
                                   ),
                                   Row(
@@ -43,18 +47,18 @@ class _CanvasHomeState extends State<CanvasHome> {
                                   Row(
                                     children: <Widget>[
                                       FlatButton(
-                                        //                splashColor: Colors.grey,
                                         color: Colors.white,
                                         child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-
+                                          int hello = notes[index]['id'];
+                                          print("Hello $hello");
                                       },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
                                       child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
                                       },
                                     ),
                                   ],
@@ -84,56 +88,6 @@ class _CanvasHomeState extends State<CanvasHome> {
 
   }
 
-  // This will be the card that will be generated every time the user taps the floating action button
-  // and enters their canvas name.
-  // Widget canvasCard(String title, description){
-  //   return Padding(
-  //       padding: const EdgeInsets.all(10),
-  //       child:Card(
-  //           child: Padding(
-  //             padding: const EdgeInsets.all(15.0),
-  //             child: Container(
-  //               child: Column(
-  //                 children: <Widget>[
-  //                   Row(
-  //                     children: <Widget>[
-  //                       Text(title)
-  //                     ],
-  //                   ),
-  //                   Row(
-  //                     children: <Widget>[
-  //                       ModelDescription(notes[index]['description'])
-  //                       Text(description)
-  //                     ],
-  //                   ),
-  //                   Row(
-  //                     children: <Widget>[
-  //                       FlatButton(
-  //                         //                splashColor: Colors.grey,
-  //                         color: Colors.white,
-  //                         child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
-  //                         onPressed: (){
-
-  //                         },
-  //                       ),
-  //                       FlatButton(
-  //                         color: Colors.white,
-  //                         child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
-  //                         onPressed: (){
-  //                          Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails()));
-  //                         },
-  //                       ),
-  //                     ],
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           )
-  //       )
-  //   );
-  // }
-
-
 }
 
 
@@ -142,7 +96,7 @@ class ModelTitle extends StatelessWidget {
   final String _title;
 
   ModelTitle(this._title);
-  
+
   @override
   Widget build(BuildContext context) {
     return Text(

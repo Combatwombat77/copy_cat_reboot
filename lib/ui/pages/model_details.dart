@@ -5,12 +5,18 @@ import 'package:copy_cat/ui/utils/uidata.dart';
 
 
 class ModelDetails extends StatefulWidget {
+  final int modelId;
+  final String modelTitle;
+
+  ModelDetails(this.modelTitle, this.modelId);
+
   @override
   _ModelDetailsState createState() => _ModelDetailsState();
 }
 
 class _ModelDetailsState extends State<ModelDetails> {
 //  double height = MediaQuery.of(context).size.height;
+
 
 
 @override 
@@ -35,7 +41,7 @@ var items = [
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Model Title"),
+        title: Text(widget.modelTitle),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
@@ -94,7 +100,7 @@ Widget cardView(String cardName){
   return Card(
     child: InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewPost(cardName)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewPost(cardName, widget.modelId)));
       },
       child: Container(
         height: 120,

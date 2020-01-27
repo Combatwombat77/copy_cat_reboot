@@ -7,7 +7,8 @@ final formkey = new GlobalKey<FormState> ();
 
 class ViewPost extends StatefulWidget {
   final String postName;
-  ViewPost(this.postName);
+  final int modelId;
+  ViewPost(this.postName, this.modelId);
 
   @override
   _ViewPostState createState() => _ViewPostState();
@@ -16,40 +17,10 @@ class ViewPost extends StatefulWidget {
 class _ViewPostState extends State<ViewPost> {
 
 
-  TextEditingController controller;
-  TextEditingController _editController = new TextEditingController();
-
-  String edit;
-  List items = [
-    "Hello",
-    "World"
-  ];
-
-
-  
   @override
   void initState(){
     super.initState();
-    _editController.addListener((){
-      setState(() {
-        edit = _editController.text;
-      });
-    });
     print(widget.postName);
-  }
-
-  void upDateList(int index, String editedPost){
-    setState(() {
-      items.removeAt(index);
-      items.replaceRange(index, index, ["$editedPost, $index"]);
-    });
-  }
-
-  void newPost(String post){
-
-    setState(() {
-      items.add(post);
-    });
   }
 
   @override
@@ -60,13 +31,13 @@ class _ViewPostState extends State<ViewPost> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Adding, null, widget.postName)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Adding, null, widget.postName, widget.modelId)));
         },
         backgroundColor: Uidata.btnColor,
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-       future: DBManagerViews.getLists(widget.postName),
+       future: DBManagerViews.getLists(widget.postName, widget.modelId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -74,8 +45,8 @@ class _ViewPostState extends State<ViewPost> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName))
-                    );
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, null)));
+                    print(notes[index]['modelID']);
                   },
                   child: Card(
                     child: Padding(
@@ -101,64 +72,16 @@ class _ViewPostState extends State<ViewPost> {
     );
   }
 
-  Widget viewCard(String post, int index){
+  
 
-    FocusNode _focusNode = new FocusNode();
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child:Card(
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
+  
 
-
-                    Row(
-                      children: <Widget>[
-                        Text(post, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 240,
-                          child: EditableText(
-                            controller: _editController,
-                            focusNode: _focusNode,
-                            style: TextStyle(color:  Colors.black),
-                            cursorColor: Colors.black,
-                            backgroundCursorColor: Colors.white,
-                            forceLine: true,
-//                            onSubmitted: ,
-
-                          )
-                        )
-                      ],
-
-                    ),
-                    Row(
-                      children: <Widget>[
-                        FlatButton(
-                          //                splashColor: Colors.grey,
-                          color: Colors.white,
-                          child: Text("EDIT POST", style: TextStyle(color: Uidata.primaryColor),),
-                          onPressed: (){
-//                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditPost()));
-                          upDateList(index, edit);
-                          },
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )
-        )
-    );
-  }
+  
 
 }
+
+
+
 
 class _NoteTitle extends StatelessWidget {
   final String _title;
@@ -203,8 +126,9 @@ class CanvasNote extends StatefulWidget {
   final NoteMode noteMode;
   final Map<String, dynamic> note;
   final String parentPageName;
+  int modelId;
 
-  CanvasNote(this.noteMode, this.note, this.parentPageName);
+  CanvasNote(this.noteMode, this.note, this.parentPageName, this.modelId);
 
   @override
   CanvasNoteState createState() {
@@ -216,6 +140,7 @@ class CanvasNoteState extends State<CanvasNote> {
 
   String title;
   String noteDescription;
+  String testId;
 
   TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
@@ -254,6 +179,8 @@ class CanvasNoteState extends State<CanvasNote> {
       });
     });
 
+    testId = widget.modelId.toString();
+
     _descriptionController.addListener(() {
       setState(() {
         noteDescription = _descriptionController.text;
@@ -287,6 +214,7 @@ class CanvasNoteState extends State<CanvasNote> {
           child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text("Model Id: " + testId),
             TextFormField(
               controller: _titleController,
               onSaved: (value) => title = value,
@@ -310,10 +238,12 @@ class CanvasNoteState extends State<CanvasNote> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   if(validateForm()) {
+                    print("Testing $testId");
                       if (widget?.noteMode == NoteMode.Adding) {
                         DBManagerViews.insertCustSegNote({
                           'title': title,
-                          'description': noteDescription
+                          'description': noteDescription,
+                          'modelID': testId,
                         }, widget.parentPageName);
                       } else if (widget?.noteMode == NoteMode.Editing) {
                         DBManagerViews.updateCustSegNote({
@@ -322,6 +252,7 @@ class CanvasNoteState extends State<CanvasNote> {
                           'description': _descriptionController.text,
                         });
                     }
+                    print("$title, $noteDescription, " + widget.modelId.toString());
                   Navigator.pop(context);
                   }
                 }),

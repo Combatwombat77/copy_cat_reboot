@@ -13,66 +13,78 @@ class DBManagerViews {
           create table customer_segments(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table value_propositions(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID integer not null
           );''');
         await db.execute('''
           create table channels(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table revenue_stream(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table customer_relationships(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table key_resources(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table key_activities(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
         await db.execute('''
           create table key_partners(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
           await db.execute('''
           create table cost_structure(
             id integer primary key autoincrement,
             title text not null,
-            description text not null
+            description text not null,
+            modelID text not null
           );''');
       }
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getLists(String tableName) async {
+  static Future<List<Map<String, dynamic>>> getLists(String tableName, int modelId) async {
     if (db == null) {
       await openDB();
     }else{
     if(tableName == "Customer Segments") {
+      //  List<Map> result = await db.rawQuery('SELECT * FROM customer_segments WHERE modelID=?', ['".$modelId."']);
+      // return result;
       return await db.query('customer_segments');
+      // return await db.rawQuery('SELECT * FROM `customer_segments` WHERE `modelID` = '".$modelId."'');
     }else if(tableName == "Value Propositions") {
       return await db.query('value_propositions');
     }else if(tableName == "Channels") {
@@ -118,108 +130,12 @@ class DBManagerViews {
     
   }
 
-  static Future insertValPropsNote(Map<String, dynamic> note) async {
-    await db.insert('value_propositions', note);
-  }
-
-  static Future insertChannelsNote(Map<String, dynamic> note) async {
-    await db.insert('channels', note);
-  }
-
-  static Future insertCustRelNote(Map<String, dynamic> note) async {
-    await db.insert('customer_relationships', note);
-  }
-
-  static Future insertRevStreamNote(Map<String, dynamic> note) async {
-    await db.insert('revenue_stream', note);
-  }
-
-  static Future insertKeyResNote(Map<String, dynamic> note) async {
-    await db.insert('key_resources', note);
-  }
-
-  static Future insertKeyActNote(Map<String, dynamic> note) async {
-    await db.insert('key_activities', note);
-  }
-
-  static Future insertKeyPartNote(Map<String, dynamic> note) async {
-    await db.insert('key_partners', note);
-  }
-
-  static Future insertCostStructNote(Map<String, dynamic> note) async {
-    await db.insert('cost_structure', note);
-  }
-
   static Future updateCustSegNote(Map<String, dynamic> note) async {
     await db.update(
       'customer_segments',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-  }
-
-  static Future updateValPropNote(Map<String, dynamic> note) async {
-    await db.update(
-        'value_propositions',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateChannelNote(Map<String, dynamic> note) async {
-    await db.update(
-        'channels',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateCustRelNote(Map<String, dynamic> note) async {
-    await db.update(
-        'customer_relationships',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateRevStreamNote(Map<String, dynamic> note) async {
-    await db.update(
-        'revenue_stream',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateKeyResNote(Map<String, dynamic> note) async {
-    await db.update(
-        'key_resources',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateKeyActNote(Map<String, dynamic> note) async {
-    await db.update(
-        'key_activities',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateKeyPartNote(Map<String, dynamic> note) async {
-    await db.update(
-        'key_partners',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
-  }
-
-  static Future updateCostStructNote(Map<String, dynamic> note) async {
-    await db.update(
-        'cost_structure',
-        note,
-        where: 'id = ?',
-        whereArgs: [note['id']]);
   }
 
   static Future deleteCustSegNote(int id) async {
@@ -332,6 +248,17 @@ class DBManagerModel{
     }
 
    }
+
+  //  static Future<List<Map<String, dynamic>>> getId(String title) async {
+  //   if (db == null) {
+  //     await openDB();
+  //   }else{
+  //     // return await db.query('models');
+  //     String test = db.rawQuery('SELECT `id` FROM `models` WHERE `ModelTitle` = "Test Title"');
+  //     return await 
+  //   }
+
+  //  }
 
 }  
 
