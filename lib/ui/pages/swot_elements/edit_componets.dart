@@ -6,28 +6,20 @@ import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_l
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../../dashboard.dart';
-
-
 class SwotGrid extends StatelessWidget{
   
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.arrow_back),
           onPressed: (){
             Navigator.pop(context);
           },
         ),
         title: Text('SWOT ANALYSIS'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.done),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard()));
-              },
-          )
+          
         ],
       ),
       body: OrientationBuilder(builder: (context, orientaion){
