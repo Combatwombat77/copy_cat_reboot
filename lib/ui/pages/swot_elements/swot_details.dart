@@ -1,8 +1,6 @@
-import 'package:copy_cat/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db_manager.dart';
-import '../../landing_page.dart';
 // import 'package:camera/camera.dart';
 
 enum NoteMode { 

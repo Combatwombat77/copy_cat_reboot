@@ -1,5 +1,6 @@
 
 
+import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/ui/pages/swot_elements/edit_componets.dart';
 import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
@@ -51,8 +52,14 @@ class SWOTHome extends StatelessWidget {
                                       color: Colors.white,
                                       child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails()));
+                                       Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
+                                    ),
+                                     IconButton(
+                                       icon: Icon(Icons.delete),
+                                       onPressed: (){
+                                         
+                                     },
                                     ),
                                   ],
                                 )
