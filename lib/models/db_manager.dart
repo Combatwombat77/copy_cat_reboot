@@ -76,31 +76,123 @@ class DBManagerViews {
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getLists(String tableName, int modelId) async {
+
+  static Future<List> getCustSeg(String modelID) async {
+  List<Map> results = await db.query("customer_segments",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+  if (results.length > 0) {
+    return results;
+  }
+  return null;
+}
+
+  static Future<List> getLists(String tableName, int modelID) async {
     if (db == null) {
       await openDB();
     }else{
     if(tableName == "Customer Segments") {
-      //  List<Map> result = await db.rawQuery('SELECT * FROM customer_segments WHERE modelID=?', ['".$modelId."']);
-      // return result;
-      return await db.query('customer_segments');
-      // return await db.rawQuery('SELECT * FROM `customer_segments` WHERE `modelID` = '".$modelId."'');
+      List<Map> results = await db.query("customer_segments",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Value Propositions") {
-      return await db.query('value_propositions');
+      List<Map> results = await db.query("value_propositions",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Channels") {
-      return await db.query('channels');
+      List<Map> results = await db.query("channels",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Customer Relationships") {
-      return await db.query('customer_relationships');
+      List<Map> results = await db.query("customer_relationships",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName =="Revenue Streams") {
-      return await db.query('revenue_stream');
+      List<Map> results = await db.query("revenue_stream",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Key Resources") {
-      return await db.query('key_resources');
+      List<Map> results = await db.query("key_resources",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Key Activities") {
-      return await db.query('key_activities');
+      List<Map> results = await db.query("key_activities",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Key Partners") {
-      return await db.query('key_partners');
+      List<Map> results = await db.query("key_partners",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "Cost Structure") {
-      return await db.query('cost_structure');
+      List<Map> results = await db.query("cost_structure",
+      columns: ["id", "title", "description", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }
 
     }
@@ -309,3 +401,35 @@ class DBManagerSwot{
    }
 
 }  
+
+
+class Note {
+  int id;
+  String title;
+  String description;
+  String modelID;
+
+  Note({this.id, this.title, this.description, this.modelID});
+
+    // int get id => id;
+    // String get title => title;
+    // String get description => description;
+    // String get modelID => modelID;
+
+
+    factory Note.fromMap(Map<String, dynamic> data) => new Note(
+        id: data["id"],
+        title: data["title"],
+        description: data["description"],
+        modelID: data["modelID"],
+    );
+
+    Map<String, dynamic> toMap() => {
+        "id": id,
+        "Ttitle": title,
+        "description": description,
+        "modelID": modelID,
+    };
+
+
+}
