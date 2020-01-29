@@ -45,8 +45,7 @@ class _ViewPostState extends State<ViewPost> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, null)));
-                    print(notes[index]['modelID']);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, null)));
                   },
                   child: Card(
                     child: Padding(
@@ -250,7 +249,8 @@ class CanvasNoteState extends State<CanvasNote> {
                           'id': widget.note['id'],
                           'title': _titleController.text,
                           'description': _descriptionController.text,
-                        });
+                        }, widget.parentPageName);
+                        
                     }
                     print("$title, $noteDescription, " + widget.modelId.toString());
                   Navigator.pop(context);
@@ -264,7 +264,7 @@ class CanvasNoteState extends State<CanvasNote> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await DBManagerViews.deleteCustSegNote(widget.note['id']);
+                      await DBManagerViews.deleteNote(widget.note['id'], widget.parentPageName);
                       Navigator.pop(context);
                     }),
                   )

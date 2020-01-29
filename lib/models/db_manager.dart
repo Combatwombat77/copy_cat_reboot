@@ -77,18 +77,6 @@ class DBManagerViews {
   }
 
 
-  static Future<List> getCustSeg(String modelID) async {
-  List<Map> results = await db.query("customer_segments",
-      columns: ["id", "title", "description", "modelID"],
-      where: 'modelID = ?',
-      whereArgs: [modelID]);
-
-
-  if (results.length > 0) {
-    return results;
-  }
-  return null;
-}
 
   static Future<List> getLists(String tableName, int modelID) async {
     if (db == null) {
@@ -222,76 +210,120 @@ class DBManagerViews {
     
   }
 
-  static Future updateCustSegNote(Map<String, dynamic> note) async {
-    await db.update(
+  static Future updateCustSegNote(Map<String, dynamic> note, String tableName) async {
+    
+      if(tableName == "Customer Segments") {
+      await db.update(
       'customer_segments',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
+    }else if(tableName == "Value Propositions") {
+      await db.update(
+      'value_propositions',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Channels") {
+      await db.update(
+      'channels',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Customer Relationships") {
+      await db.update(
+      'customer_relationships',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName =="Revenue Streams") {
+      await db.update(
+      'revenue_stream',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Key Resources") {
+      await db.update(
+      'key_resources',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Key Activities") {
+      await db.update(
+      'key_activities',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Key Partners") {
+      await db.update(
+      'key_partners',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }else if(tableName == "Cost Structure") {
+      await db.update(
+      'cost_structure',
+      note,
+      where: 'id = ?',
+      whereArgs: [note['id']]);
+    }
+
+
+
   }
 
-  static Future deleteCustSegNote(int id) async {
-    await db.delete(
+  static Future deleteNote(int id, String tableName) async {
+
+      if(tableName == "Customer Segments") {
+      await db.delete(
       'customer_segments',
       where: 'id = ?',
       whereArgs: [id]);
+    }else if(tableName == "Value Propositions") {
+      await db.delete(
+      'value_propositions',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Channels") {
+      await db.delete(
+      'channels',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Customer Relationships") {
+      await db.delete(
+      'customer_relationships',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName =="Revenue Streams") {
+      await db.delete(
+      'revenue_stream',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Key Resources") {
+      await db.delete(
+      'key_resoures',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Key Activities") {
+      await db.delete(
+      'key_resources',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Key Partners") {
+      await db.delete(
+      'key_partners',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }else if(tableName == "Cost Structure") {
+      await db.delete(
+      'cost_structure',
+      where: 'id = ?',
+      whereArgs: [id]);
+    }
+
   }
 
-  static Future deleteValPropNote(int id) async {
-    await db.delete(
-        'value_propositions',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
 
-  static Future deleteChannelNote(int id) async {
-    await db.delete(
-        'channel',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteRevStreamNote(int id) async {
-    await db.delete(
-        'revenue_stream',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteKeyResNote(int id) async {
-    await db.delete(
-        'key_resources',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteKeyActNote(int id) async {
-    await db.delete(
-        'key_activities',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteKeyPartNote(int id) async {
-    await db.delete(
-        'key_partners',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteCostStructNote(int id) async {
-    await db.delete(
-        'cost_structure',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
-
-  static Future deleteCustRelNote(int id) async {
-    await db.delete(
-        'customer_relationships',
-        where: 'id = ?',
-        whereArgs: [id]);
-  }
 }
 
 
