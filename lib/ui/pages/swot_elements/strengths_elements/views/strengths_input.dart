@@ -11,8 +11,9 @@ class Note extends StatefulWidget {
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
+  final String swotID;
 
-  Note(this.noteMode, this.note);
+  Note(this.noteMode, this.note, this.swotID);
 
   @override
   NoteState createState() {
@@ -72,7 +73,8 @@ class NoteState extends State<Note> {
                   if (widget?.noteMode == NoteMode.Adding) {
                     StrengthProvider.insertNote({
                       'title': title,
-                      'text': text
+                      'text': text,
+                      'swotID': widget.swotID
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
                     StrengthProvider.updateNote({

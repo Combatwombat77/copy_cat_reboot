@@ -8,11 +8,12 @@ enum NoteMode {
 }
 
 class Weak extends StatefulWidget {
+  final String swotID;
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
 
-  Weak(this.noteMode, this.note);
+  Weak(this.noteMode, this.note, this.swotID);
 
   @override
   WeakState createState() {
@@ -72,7 +73,8 @@ class WeakState extends State<Weak> {
                   if (widget?.noteMode == NoteMode.Adding) {
                     WeakProvider.insertWeak({
                       'title': title,
-                      'text': text
+                      'text': text,
+                      'swotID': widget.swotID
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
                     WeakProvider.updateWeak({

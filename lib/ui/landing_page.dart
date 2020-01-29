@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dashboard.dart' as dash;
 import 'profile.dart' as prof;
+import 'package:copy_cat/models/db_manager.dart';
 
 class LandingPage extends StatefulWidget {
   // final cameras;
@@ -16,6 +17,11 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
   @override
   void initState(){
     super.initState();
+
+    DBManagerSwot.openDB();
+    DBManagerViews.openDB();
+    DBManagerModel.openDB();
+
     tabController = new TabController(length: 2, vsync: this);
   }
 

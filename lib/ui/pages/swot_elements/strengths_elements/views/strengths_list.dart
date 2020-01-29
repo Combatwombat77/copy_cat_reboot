@@ -3,6 +3,9 @@ import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengt
 import 'package:flutter/material.dart';
 
 class NoteList extends StatefulWidget {
+  final String swotID;
+
+  NoteList(this.swotID);
 
   @override
   NoteListState createState() {
@@ -19,7 +22,7 @@ class NoteListState extends State<NoteList> {
         title: Text('Strengths'),
       ),
       body: FutureBuilder(
-        future: StrengthProvider.getStrengthList(),
+        future: StrengthProvider.getStrengthList(widget.swotID),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +32,7 @@ class NoteListState extends State<NoteList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Note(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) => Note(NoteMode.Editing, notes[index], widget.swotID))
                     );
                   },
                   child: Card(
@@ -47,7 +50,7 @@ class NoteListState extends State<NoteList> {
                   ),
                 );
               },
-              itemCount: notes.length,
+              itemCount: notes == null? 0 : notes.length,
             );
           }
           return Center(child: CircularProgressIndicator());
@@ -57,7 +60,7 @@ class NoteListState extends State<NoteList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Note(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Note(NoteMode.Adding, null, widget.swotID))
           );
         },
         child: Icon(Icons.add),

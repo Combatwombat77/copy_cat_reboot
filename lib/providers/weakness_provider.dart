@@ -13,18 +13,31 @@ class WeakProvider {
           create table Weaknesses(
             id integer primary key autoincrement,
             title text not null,
-            text text not null
+            text text not null,
+            swotID text not null
           );
         ''');
       }
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getWeakList() async {
+  static Future<List<Map<String, dynamic>>> getWeakList(String swotID) async {
     if (db == null) {
       await open();
+    }{
+    // return await db.query('Opps');
+
+     List<Map> results = await db.query("Weaknesses",
+      columns: ["id", "title", "text", "swotID"],
+      where: 'swotID = ?',
+      whereArgs: [swotID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }
-    return await db.query('Weaknesses');
   }
 
   static Future insertWeak(Map<String, dynamic> note) async {

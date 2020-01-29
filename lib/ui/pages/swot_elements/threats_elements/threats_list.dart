@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 class ThreatList extends StatefulWidget {
 
+  final String swotID;
+
+  ThreatList(this.swotID);
+
   @override
   ThreatListState createState() {
     return new ThreatListState();
@@ -19,7 +23,7 @@ class ThreatListState extends State<ThreatList> {
         title: Text('Threats'),
       ),
       body: FutureBuilder(
-        future: ThreatProvider.getThreatList(),
+        future: ThreatProvider.getThreatList(widget.swotID),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +33,7 @@ class ThreatListState extends State<ThreatList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>   Threat(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) =>   Threat(NoteMode.Editing, notes[index], widget.swotID))
                     );
                   },
                   child: Card(
@@ -47,7 +51,7 @@ class ThreatListState extends State<ThreatList> {
                   ),
                 );
               },
-              itemCount: notes.length,
+              itemCount: notes == null? 0 : notes.length,
             );
           }
           return Center(child: CircularProgressIndicator());
@@ -57,7 +61,7 @@ class ThreatListState extends State<ThreatList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Threat(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Threat(NoteMode.Adding, null, widget.swotID))
           );
         },
         child: Icon(Icons.add),

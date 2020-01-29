@@ -94,7 +94,6 @@ class SwotDetailsState extends State<SwotDetails> {
           icon: Icon(Icons.close),
           onPressed: (){
             Navigator.pop(context);
-            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingPage()));
           },
         ),
         title: Text("New SWOT "),
@@ -104,7 +103,7 @@ class SwotDetailsState extends State<SwotDetails> {
             onPressed: () {
               if(validateForm()) {
                       if (widget.noteMode == NoteMode.Adding) {
-                        DBManagerSwot.insertModel({
+                        DBManagerSwot.insertSwot({
                           'SwotTitle': swotTitle,
                           'SwotDescription': swotDescription,
                         });
@@ -115,6 +114,7 @@ class SwotDetailsState extends State<SwotDetails> {
                           'SwotDescription': _swotDescriptionController.text,
                         });
                     }
+                    print("$swotTitle $swotDescription");
                   Navigator.pop(context);
                   }
             },

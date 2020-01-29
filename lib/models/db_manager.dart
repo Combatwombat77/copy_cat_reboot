@@ -404,7 +404,7 @@ class DBManagerSwot{
       });
       }
 
-       static Future insertModel(Map<String, dynamic> note) async {
+       static Future insertSwot(Map<String, dynamic> note) async {
     await db.insert('swot', note);
   }
 

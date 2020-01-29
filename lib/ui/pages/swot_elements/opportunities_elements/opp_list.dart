@@ -3,6 +3,10 @@ import 'package:copy_cat/ui/pages/swot_elements/opportunities_elements/opp_input
 import 'package:flutter/material.dart';
 
 class OppsList extends StatefulWidget {
+  
+  final String swotID;
+
+  OppsList(this.swotID);
 
   @override
   OppsListState createState() {
@@ -19,7 +23,7 @@ class OppsListState extends State<OppsList> {
         title: Text('Opportunities'),
       ),
       body: FutureBuilder(
-        future: OppsProvider.getOppsList(),
+        future: OppsProvider.getOppsList(widget.swotID),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +33,7 @@ class OppsListState extends State<OppsList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>   Opps(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) =>   Opps(NoteMode.Editing, notes[index], widget.swotID))
                     );
                   },
                   child: Card(
@@ -47,7 +51,7 @@ class OppsListState extends State<OppsList> {
                   ),
                 );
               },
-              itemCount: notes.length,
+              itemCount: notes == null? 0 : notes.length,
             );
           }
           return Center(child: CircularProgressIndicator());
@@ -57,7 +61,7 @@ class OppsListState extends State<OppsList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Opps(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Opps(NoteMode.Adding, null, widget.swotID))
           );
         },
         child: Icon(Icons.add),

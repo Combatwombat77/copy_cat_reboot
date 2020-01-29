@@ -8,11 +8,12 @@ enum NoteMode {
 }
 
 class Threat extends StatefulWidget {
+  final String swotID;
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
 
-  Threat(this.noteMode, this.note);
+  Threat(this.noteMode, this.note, this.swotID);
 
   @override
   ThreatState createState() {
@@ -72,7 +73,8 @@ class ThreatState extends State<Threat> {
                   if (widget?.noteMode == NoteMode.Adding) {
                     ThreatProvider.insertThreat({
                       'title': title,
-                      'text': text
+                      'text': text,
+                      'swotID': widget.swotID
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
                     ThreatProvider.updateThreat({

@@ -8,11 +8,14 @@ enum NoteMode {
 }
 
 class Opps extends StatefulWidget {
+  final String swotID;
+
+  
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
 
-  Opps(this.noteMode, this.note);
+  Opps(this.noteMode, this.note, this.swotID);
 
   @override
   OppsState createState() {
@@ -72,7 +75,8 @@ class OppsState extends State<Opps> {
                   if (widget?.noteMode == NoteMode.Adding) {
                     OppsProvider.insertOpps({
                       'title': title,
-                      'text': text
+                      'text': text,
+                      'swotID': widget.swotID
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
                     OppsProvider.updateOpps({

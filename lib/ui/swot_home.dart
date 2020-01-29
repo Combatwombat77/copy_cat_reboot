@@ -45,14 +45,15 @@ class SWOTHome extends StatelessWidget {
                                         color: Colors.white,
                                         child: Text("EDIT COMPONENTS", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid(notes[index]['id'].toString())));
                                       },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
                                       child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
+                                      //  Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
+                                      print(notes[index]['id']);
                                       },
                                     ),
                                      IconButton(

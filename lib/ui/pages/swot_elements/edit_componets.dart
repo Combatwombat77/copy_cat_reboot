@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class SwotGrid extends StatelessWidget{
+  final String swotID;
+
+  SwotGrid(this.swotID);
   
   Widget build(BuildContext context){
     return Scaffold(
@@ -40,7 +43,7 @@ class SwotGrid extends StatelessWidget{
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID)));
                        },
                        
                        child:Column(
@@ -59,7 +62,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.yellowAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList(swotID)));
                },
                
                child:Column(
@@ -77,7 +80,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.blueAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => OppsList()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => OppsList(swotID)));
                },
                
                child:Column(
@@ -95,7 +98,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.purpleAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => ThreatList()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ThreatList(swotID)));
                },
                
                child:Column(

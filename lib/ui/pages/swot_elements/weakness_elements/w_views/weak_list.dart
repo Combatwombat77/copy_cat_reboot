@@ -3,6 +3,9 @@ import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_i
 import 'package:flutter/material.dart';
 
 class WeakList extends StatefulWidget {
+  final String swotID;
+
+  WeakList(this.swotID);
 
   @override
   WeakListState createState() {
@@ -19,7 +22,7 @@ class WeakListState extends State<WeakList> {
         title: Text('Weaknesses'),
       ),
       body: FutureBuilder(
-        future: WeakProvider.getWeakList(),
+        future: WeakProvider.getWeakList(widget.swotID),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -29,7 +32,7 @@ class WeakListState extends State<WeakList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Weak(NoteMode.Editing, notes[index]))
+                      MaterialPageRoute(builder: (context) => Weak(NoteMode.Editing, notes[index], widget.swotID))
                     );
                   },
                   child: Card(
@@ -47,7 +50,7 @@ class WeakListState extends State<WeakList> {
                   ),
                 );
               },
-              itemCount: notes.length,
+              itemCount: notes == null? 0 : notes.length,
             );
           }
           return Center(child: CircularProgressIndicator());
@@ -57,7 +60,7 @@ class WeakListState extends State<WeakList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Weak(NoteMode.Adding, null))
+            MaterialPageRoute(builder: (context) => Weak(NoteMode.Adding, null, widget.swotID))
           );
         },
         child: Icon(Icons.add),

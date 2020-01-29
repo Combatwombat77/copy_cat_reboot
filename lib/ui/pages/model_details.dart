@@ -2,6 +2,7 @@ import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class ModelDetails extends StatefulWidget {
@@ -70,23 +71,23 @@ var items = [
               children: [
                 TableRow(
                   children: [
-                    cardView("Customer Segments"),
-                    cardView("Value Propositions"),
-                    cardView("Channels"),
+                    cardView("Customer Segments", Icon(Icons.bluetooth_searching)),
+                    cardView("Value Propositions", Icon(Icons.view_array)),
+                    cardView("Channels", Icon(Icons.view_array)),
                   ]
                 ),
                 TableRow(
                     children: [
-                      cardView("Customer Relationships"),
-                      cardView("Revenue Streams"),
-                      cardView("Key Resources"),
+                      cardView("Customer Relationships", Icon(Icons.view_array)),
+                      cardView("Revenue Streams", Icon(Icons.view_array)),
+                      cardView("Key Resources", Icon(Icons.view_array)),
                     ]
                 ),
                 TableRow(
                     children: [
-                      cardView("Key Activities"),
-                      cardView("Key Partners"),
-                      cardView("Cost Structure"),
+                      cardView("Key Activities", Icon(Icons.view_array)),
+                      cardView("Key Partners", Icon(Icons.view_array)),
+                      cardView("Cost Structure", Icon(Icons.view_array)),
                     ]
                 ),
               ],
@@ -96,7 +97,7 @@ var items = [
     );
   }
 
-Widget cardView(String cardName){
+Widget cardView(String cardName, Icon icon){
   return Card(
     child: InkWell(
       onTap: () {
@@ -109,7 +110,7 @@ Widget cardView(String cardName){
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.accessibility),
+              child: icon,
             ),
 //              Image(
 //                image: ,

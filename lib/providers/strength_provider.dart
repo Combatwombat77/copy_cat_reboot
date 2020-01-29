@@ -13,18 +13,34 @@ class StrengthProvider {
           create table Strengths(
             id integer primary key autoincrement,
             title text not null,
-            text text not null
+            text text not null,
+            swotID text not null
           );
         ''');
       }
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getStrengthList() async {
+  static Future<List<Map<String, dynamic>>> getStrengthList(String swotID) async {
     if (db == null) {
       await open();
+    }else{
+    // return await db.query('Strengths');
+      List<Map> results = await db.query("Strengths",
+      columns: ["id", "title", "text", "swotID"],
+      where: 'swotID = ?',
+      whereArgs: [swotID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }
-    return await db.query('Strengths');
+    
+
+
+
   }
 
   static Future insertNote(Map<String, dynamic> note) async {

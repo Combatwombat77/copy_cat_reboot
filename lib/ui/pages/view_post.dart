@@ -45,7 +45,7 @@ class _ViewPostState extends State<ViewPost> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, null)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
                   },
                   child: Card(
                     child: Padding(
@@ -193,7 +193,7 @@ class CanvasNoteState extends State<CanvasNote> {
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
       _titleController.text = widget.note['title'];
-      _descriptionController.text = widget.note['text'];
+      _descriptionController.text = widget.note['description'];
     }
     super.didChangeDependencies();
   }
