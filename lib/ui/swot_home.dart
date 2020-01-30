@@ -52,14 +52,13 @@ class SWOTHome extends StatelessWidget {
                                       color: Colors.white,
                                       child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      //  Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      print(notes[index]['id']);
+                                       Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
                                      IconButton(
                                        icon: Icon(Icons.delete),
                                        onPressed: (){
-                                         
+                                         DBManagerSwot.deleteModel(notes[index]['id']);
                                      },
                                     ),
                                   ],
