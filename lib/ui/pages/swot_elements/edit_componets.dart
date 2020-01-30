@@ -1,5 +1,5 @@
 
-import 'package:copy_cat/ui/pages/swot_elements/final_page.dart';
+import 'package:copy_cat/ui/pages/swot_elements/final_table.dart';
 import 'package:copy_cat/ui/pages/swot_elements/opportunities_elements/opp_list.dart';
 import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengths_list.dart';
 import 'package:copy_cat/ui/pages/swot_elements/threats_elements/threats_list.dart';
@@ -30,7 +30,7 @@ class SwotGrid extends StatelessWidget{
             floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
         onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => FinalSwotGrid()));
+           Navigator.push(context, MaterialPageRoute(builder: (context) => TableWidget()));
         },
         child: Icon(Icons.exit_to_app),
       ),
@@ -54,7 +54,10 @@ class SwotGrid extends StatelessWidget{
                        
                        child:Column(
                          children: <Widget>[
-                           Text('Strengths'),
+                           Text('Strengths',
+                           style: TextStyle(
+                             fontSize: 25
+                           ),),
                  ]),),),),
           Card(
             elevation: 5.0,
@@ -69,7 +72,10 @@ class SwotGrid extends StatelessWidget{
                
                child:Column(
                  children: <Widget>[
-                   Text('Weaknesses'),
+                   Text('Weaknesses',
+                           style: TextStyle(
+                             fontSize: 25
+                           ),),
 
                  ]),),),),
           Card(
@@ -85,7 +91,9 @@ class SwotGrid extends StatelessWidget{
                
                child:Column(
                  children: <Widget>[
-                   Text('Opportunities'),
+                   Text('Opportunities',
+                           style: TextStyle(
+                             fontSize: 25                           ),),
 
                  ]),),),),         
           Card(
@@ -101,7 +109,10 @@ class SwotGrid extends StatelessWidget{
                
                child:Column(
                  children: <Widget>[
-                   Text('Threats'),
+                   Text('Threats',
+                           style: TextStyle(
+                             fontSize: 25
+                           ),),
 
                  ]),),),),
                ],
