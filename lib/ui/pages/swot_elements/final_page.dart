@@ -1,17 +1,7 @@
-
-import 'package:copy_cat/ui/pages/swot_elements/final_page.dart';
-import 'package:copy_cat/ui/pages/swot_elements/opportunities_elements/opp_list.dart';
-import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengths_list.dart';
-import 'package:copy_cat/ui/pages/swot_elements/threats_elements/threats_list.dart';
-import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_list.dart';
-import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-class SwotGrid extends StatelessWidget{
-  final String swotID;
+class FinalSwotGrid extends StatelessWidget{
 
-  SwotGrid(this.swotID);
   
   Widget build(BuildContext context){
     return Scaffold(
@@ -22,34 +12,23 @@ class SwotGrid extends StatelessWidget{
             Navigator.pop(context);
           },
         ),
-        title: Text('SWOT ANALYSIS'),
+        title: Text('SWOT SUMMERY'),
         actions: <Widget>[
           
         ],
       ),
-            floatingActionButton: FloatingActionButton(
-        backgroundColor: Uidata.btnColor,
-        onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => FinalSwotGrid()));
-        },
-        child: Icon(Icons.exit_to_app),
-      ),
       body: OrientationBuilder(builder: (context, orientaion){
 
                 return GridView.count(     
-                padding: const EdgeInsets.all(20.0),
-                crossAxisSpacing: 10.0,
                 crossAxisCount: 2,
                 children: <Widget>[
                   Card(
-                    elevation: 5.0,
-                    color: Colors.green,
+                    color: Colors.white,
                     child: Container(
                       
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID)));
                        },
                        
                        child:Column(
@@ -57,14 +36,12 @@ class SwotGrid extends StatelessWidget{
                            Text('Strengths'),
                  ]),),),),
           Card(
-            elevation: 5.0,
-            color: Colors.yellow,
+            color: Colors.white,
             child: Container(
               
           child:
-               InkWell(splashColor: Colors.yellowAccent,
+               InkWell(splashColor: Colors.white,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList(swotID)));
                },
                
                child:Column(
@@ -73,14 +50,12 @@ class SwotGrid extends StatelessWidget{
 
                  ]),),),),
           Card(
-            elevation: 5.0,
-            color: Colors.blue,
+            color: Colors.white,
             child: Container(
               
           child:
                InkWell(splashColor: Colors.blueAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => OppsList(swotID)));
                },
                
                child:Column(
@@ -89,14 +64,12 @@ class SwotGrid extends StatelessWidget{
 
                  ]),),),),         
           Card(
-            elevation: 5.0,
-            color: Colors.purple,
+            color: Colors.white,
             child: Container(
               
           child:
                InkWell(splashColor: Colors.purpleAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => ThreatList(swotID)));
                },
                
                child:Column(
@@ -111,5 +84,3 @@ class SwotGrid extends StatelessWidget{
       );
       }
   }
-
- 

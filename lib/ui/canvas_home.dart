@@ -64,6 +64,8 @@ class _CanvasHomeState extends State<CanvasHome> {
                                     IconButton(
                                        icon: Icon(Icons.delete),
                                        onPressed: (){
+                                         DBManagerModel.deleteModel(notes[index]['id']);
+
                                      },
                                     ),
                                   ],
