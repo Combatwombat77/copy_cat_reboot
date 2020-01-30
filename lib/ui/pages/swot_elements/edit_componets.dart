@@ -4,6 +4,7 @@ import 'package:copy_cat/ui/pages/swot_elements/strengths_elements/views/strengt
 import 'package:copy_cat/ui/pages/swot_elements/threats_elements/threats_list.dart';
 import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_list.dart';
 import 'package:flutter/material.dart';
+import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/rendering.dart';
 
 class SwotGrid extends StatelessWidget{
@@ -25,6 +26,13 @@ class SwotGrid extends StatelessWidget{
           
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Uidata.btnColor,
+        onPressed: (){
+
+        },
+        child: Icon(Icons.exit_to_app),
+      ),
       body: OrientationBuilder(builder: (context, orientaion){
 
                 return GridView.count(     
@@ -32,13 +40,6 @@ class SwotGrid extends StatelessWidget{
                 crossAxisSpacing: 10.0,
                 crossAxisCount: 2,
                 children: <Widget>[
-                  floatingActionButton: FloatingActionButton(
-        backgroundColor: Uidata.btnColor,
-        onPressed: (){
-
-        },
-        child: Icon(Icons.exit_to_app),
-      ),
                   Card(
                     elevation: 5.0,
                     color: Colors.green,
