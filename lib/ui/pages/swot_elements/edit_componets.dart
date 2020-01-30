@@ -26,15 +26,19 @@ class SwotGrid extends StatelessWidget{
         ],
       ),
       body: OrientationBuilder(builder: (context, orientaion){
-        int _counter = 0;
-        int _counter2 = 0;
-        int _counter3 = 0;
-        int _counter4 = 0;
+
                 return GridView.count(     
                 padding: const EdgeInsets.all(20.0),
                 crossAxisSpacing: 10.0,
                 crossAxisCount: 2,
                 children: <Widget>[
+                  floatingActionButton: FloatingActionButton(
+        backgroundColor: Uidata.btnColor,
+        onPressed: (){
+
+        },
+        child: Icon(Icons.exit_to_app),
+      ),
                   Card(
                     elevation: 5.0,
                     color: Colors.green,

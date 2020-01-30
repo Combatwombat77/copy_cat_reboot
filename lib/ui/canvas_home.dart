@@ -61,6 +61,11 @@ class _CanvasHomeState extends State<CanvasHome> {
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
                                       },
                                     ),
+                                    IconButton(
+                                       icon: Icon(Icons.delete),
+                                       onPressed: (){
+                                     },
+                                    ),
                                   ],
                                 )
                               ],
