@@ -50,8 +50,7 @@ class _CanvasHomeState extends State<CanvasHome> {
                                         color: Colors.white,
                                         child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                          int hello = notes[index]['id'];
-                                          print("Hello $hello");
+                                        
                                       },
                                     ),
                                     FlatButton(
@@ -65,7 +64,6 @@ class _CanvasHomeState extends State<CanvasHome> {
                                        icon: Icon(Icons.delete),
                                        onPressed: (){
                                          DBManagerModel.deleteModel(notes[index]['id']);
-
                                      },
                                     ),
                                   ],
