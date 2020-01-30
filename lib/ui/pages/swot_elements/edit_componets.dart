@@ -6,7 +6,6 @@ import 'package:copy_cat/ui/pages/swot_elements/threats_elements/threats_list.da
 import 'package:copy_cat/ui/pages/swot_elements/weakness_elements/w_views/weak_list.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
-import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/rendering.dart';
 
 class SwotGrid extends StatelessWidget{

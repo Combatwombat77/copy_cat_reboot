@@ -1,4 +1,5 @@
 import 'package:copy_cat/models/db_manager.dart';
+import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
@@ -59,7 +60,7 @@ var items = [
       floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
         onPressed: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasModelR(widget.modelId)));
         },
         child: Icon(Icons.exit_to_app),
       ),
@@ -112,9 +113,7 @@ Widget cardView(String cardName, Icon icon){
               padding: const EdgeInsets.all(8.0),
               child: icon,
             ),
-//              Image(
-//                image: ,
-//              ),
+
                 Text("$cardName", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),)
             
           ],
