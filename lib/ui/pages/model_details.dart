@@ -44,18 +44,6 @@ var items = [
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.modelTitle),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-
-            },
-          ),
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
