@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class SwotGrid extends StatelessWidget{
-  final String swotID;
+  final int swotID;
 
   SwotGrid(this.swotID);
   
@@ -30,7 +30,7 @@ class SwotGrid extends StatelessWidget{
             floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
         onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => TableWidget()));
+           Navigator.push(context, MaterialPageRoute(builder: (context) => TableWidget(swotID)));
         },
         child: Icon(Icons.exit_to_app),
       ),
@@ -49,7 +49,7 @@ class SwotGrid extends StatelessWidget{
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID)));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID.toString())));
                        },
                        
                        child:Column(
@@ -67,7 +67,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.yellowAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList(swotID)));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => WeakList(swotID.toString())));
                },
                
                child:Column(
@@ -86,7 +86,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.blueAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => OppsList(swotID)));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => OppsList(swotID.toString())));
                },
                
                child:Column(
@@ -104,7 +104,7 @@ class SwotGrid extends StatelessWidget{
           child:
                InkWell(splashColor: Colors.purpleAccent,
                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => ThreatList(swotID)));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ThreatList(swotID.toString())));
                },
                
                child:Column(

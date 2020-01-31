@@ -44,7 +44,7 @@ class SWOTHome extends StatelessWidget {
                                         color: Colors.white,
                                         child: Text("EDIT COMPONENTS", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid(notes[index]['id'].toString())));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid(notes[index]['id'])));
                                       },
                                     ),
                                     FlatButton(
