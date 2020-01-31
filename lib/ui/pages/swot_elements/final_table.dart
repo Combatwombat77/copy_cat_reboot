@@ -34,7 +34,8 @@ class _TableWidgetState extends State<TableWidget>{
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all( 10),
-        child: Table(
+        child: Center(
+          child:Table(
           border: TableBorder.all(),
           children: <TableRow>[
             TableRow(children: <Widget> [
@@ -95,7 +96,7 @@ class _TableWidgetState extends State<TableWidget>{
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.blueGrey,
+                                                color: Colors.green,
                                                 child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: <Widget>[
@@ -269,6 +270,7 @@ class _TableWidgetState extends State<TableWidget>{
            ],
           ),
       ),
+      )
    );
   }
 }   
