@@ -344,7 +344,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
-                                  future: DBManagerViews.getLists("Key Partner", widget.modelID),
+                                  future: DBManagerViews.getLists("Key Partners", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState == ConnectionState.done) {
                                         final notes = snapshot.data;
