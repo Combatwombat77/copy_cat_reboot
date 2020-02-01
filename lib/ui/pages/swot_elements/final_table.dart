@@ -9,7 +9,8 @@ import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/providers/strength_provider.dart';
 import 'package:copy_cat/providers/threats_providers.dart';
 import 'package:copy_cat/providers/weakness_provider.dart';
-
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/widgets.dart';
 
 class TableWidget extends StatefulWidget{
@@ -284,17 +285,25 @@ class _TableWidgetState extends State<TableWidget>{
       )
    );
   }
-   TakeScreenShot() async{
-    RenderRepaintBoundary boundary = previewContainer.currentContext.findRenderObject();
-    ui.Image image = await boundary.toImage();
-    final directory = (await getApplicationDocumentsDirectory()).path;
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData.buffer.asUint8List();
-    print(pngBytes);
-    File imgFile =new File('$directory/screenshot.png');
-    imgFile.writeAsBytes(pngBytes);
+   Future<Uint8List> TakeScreenShot() async{
+      try {
+    print('inside');
+      RenderRepaintBoundary boundary =
+          previewContainer.currentContext.findRenderObject();
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData.buffer.asUint8List();
+      var bs64 = base64Encode(pngBytes);
+      print(pngBytes);
+      print(bs64);
+      setState(() {});
+      return pngBytes;
+    } catch (e) {
+      print(e);
+    }
+  }
    }
-}   
 
 class SwotTitle extends StatelessWidget {
   final String _title;
