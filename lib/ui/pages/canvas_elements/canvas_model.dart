@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:image_picker_saver/image_picker_saver.dart';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
+
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 
 class CanvasModelR extends StatefulWidget {
@@ -11,13 +18,24 @@ class CanvasModelR extends StatefulWidget {
 }
 
 class _CanvasModelRState extends State<CanvasModelR> {
+      static GlobalKey previewContainer = new GlobalKey();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Preview"),
+        actions: <Widget>[
+        IconButton(icon: Icon(Icons.save),
+        onPressed: TakeScreenShot,
       ),
-      body: Container(
+      ]
+      ),
+      body:  RepaintBoundary(
+        key: previewContainer,
+        child:Container(
+          color: Colors.white,
         child:Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -39,7 +57,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                         TableRow(
                           children: [
                             Container(
-                              
+                              color: Colors.white,
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -77,7 +95,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                                 
                             ),
                              Container(
-                              
+                              color: Colors.white,
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -117,7 +135,8 @@ class _CanvasModelRState extends State<CanvasModelR> {
                             
                       
                              Container(
-                              
+                              color: Colors.white,
+
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -170,7 +189,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                         ),
                         TableRow(children: [
                           Container(
-                              
+                              color: Colors.white,                              
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -209,7 +228,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                             ),
 
                             Container(
-                              
+                              color: Colors.white,                              
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -248,7 +267,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                             ),
 
                             Container(
-                              
+                               color: Colors.white,                             
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -301,7 +320,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
 
                         TableRow(children: [
                           Container(
-                              
+                               color: Colors.white,                             
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -379,7 +398,7 @@ class _CanvasModelRState extends State<CanvasModelR> {
                             ),
 
                             Container(
-                              
+                              color: Colors.white,                             
                               height: 150,
                               // width: ,
                               child: FutureBuilder(
@@ -426,8 +445,30 @@ class _CanvasModelRState extends State<CanvasModelR> {
             )
       ],)
       )
-    
+      )
     );
+  }
+  Future<Uint8List> TakeScreenShot() async{
+      try {
+    print('inside');
+      RenderRepaintBoundary boundary =
+          previewContainer.currentContext.findRenderObject();
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData.buffer.asUint8List();
+      var bs64 = base64Encode(pngBytes);
+
+      var filePath = await ImagePickerSaver.saveFile(
+        fileData: byteData.buffer.asUint8List(),
+      );
+      print(filePath);
+      // print(pngBytes);
+      // print(bs64);
+      setState(() {});
+      return pngBytes;
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

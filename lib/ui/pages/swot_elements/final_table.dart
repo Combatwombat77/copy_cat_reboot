@@ -48,7 +48,16 @@ class _TableWidgetState extends State<TableWidget>{
         padding: EdgeInsets.all( 10),
         child: Container(
           color: Colors.white,
-          child:Table(
+          child:Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Card(
+              child: Column(
+                children: <Widget>[
+                  Row(children: <Widget>[
+                    Text("The SWOT Analysis",  style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline))
+                  ],),
+          Table(
           border: TableBorder.all(),
           children: <TableRow>[
             TableRow(children: <Widget> [
@@ -287,9 +296,13 @@ class _TableWidgetState extends State<TableWidget>{
             ),
            ],
           ),
+                ],
+                ),
       ),
-      ),
-      )
+        ],)
+   ),
+   ),
+   ),
    );
   }
    Future<Uint8List> TakeScreenShot() async{
