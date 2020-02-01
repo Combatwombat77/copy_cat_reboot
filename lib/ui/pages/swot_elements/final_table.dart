@@ -12,6 +12,7 @@ import 'package:copy_cat/providers/weakness_provider.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker_saver/image_picker_saver.dart';
 
 class TableWidget extends StatefulWidget{
   
@@ -27,9 +28,7 @@ class _TableWidgetState extends State<TableWidget>{
   
   @override
   Widget build(BuildContext context){
-    return RepaintBoundary(
-        key: previewContainer,
-      child: new Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back),
         onPressed: (){
@@ -43,7 +42,9 @@ class _TableWidgetState extends State<TableWidget>{
         ),
         ]
       ),
-      body: SingleChildScrollView(
+      body: RepaintBoundary(
+        key: previewContainer,
+        child: SingleChildScrollView(
         padding: EdgeInsets.all( 10),
         child: Center(
           child:Table(
@@ -291,12 +292,16 @@ class _TableWidgetState extends State<TableWidget>{
       RenderRepaintBoundary boundary =
           previewContainer.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
       var bs64 = base64Encode(pngBytes);
-      print(pngBytes);
-      print(bs64);
+
+      var filePath = await ImagePickerSaver.saveFile(
+        fileData: byteData.buffer.asUint8List(),
+      );
+      print(filePath);
+      // print(pngBytes);
+      // print(bs64);
       setState(() {});
       return pngBytes;
     } catch (e) {
