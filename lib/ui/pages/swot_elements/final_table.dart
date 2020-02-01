@@ -1,11 +1,19 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/providers/strength_provider.dart';
 import 'package:copy_cat/providers/threats_providers.dart';
 import 'package:copy_cat/providers/weakness_provider.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter/widgets.dart';
 
 class TableWidget extends StatefulWidget{
+  
   final int swotID;
   TableWidget(this.swotID);
   @override 
@@ -13,10 +21,14 @@ class TableWidget extends StatefulWidget{
 }
 
 class _TableWidgetState extends State<TableWidget>{
+    static GlobalKey previewContainer = new GlobalKey();
+
   
   @override
   Widget build(BuildContext context){
-    return Scaffold(
+    return RepaintBoundary(
+        key: previewContainer,
+      child: new Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back),
         onPressed: (){
@@ -26,9 +38,7 @@ class _TableWidgetState extends State<TableWidget>{
         title: Text('SWOT SUMMARY'),
         actions: <Widget>[
         IconButton(icon: Icon(Icons.save),
-        onPressed: (){
-
-        },
+        onPressed: TakeScreenShot,
         ),
         ]
       ),
@@ -270,9 +280,20 @@ class _TableWidgetState extends State<TableWidget>{
            ],
           ),
       ),
+      ),
       )
    );
   }
+   TakeScreenShot() async{
+    RenderRepaintBoundary boundary = previewContainer.currentContext.findRenderObject();
+    ui.Image image = await boundary.toImage();
+    final directory = (await getApplicationDocumentsDirectory()).path;
+    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List pngBytes = byteData.buffer.asUint8List();
+    print(pngBytes);
+    File imgFile =new File('$directory/screenshot.png');
+    imgFile.writeAsBytes(pngBytes);
+   }
 }   
 
 class SwotTitle extends StatelessWidget {
