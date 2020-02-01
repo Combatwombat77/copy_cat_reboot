@@ -46,13 +46,15 @@ class _TableWidgetState extends State<TableWidget>{
         key: previewContainer,
         child: SingleChildScrollView(
         padding: EdgeInsets.all( 10),
-        child: Center(
+        child: Container(
+          color: Colors.white,
           child:Table(
           border: TableBorder.all(),
           children: <TableRow>[
             TableRow(children: <Widget> [
              Container(
                 margin: EdgeInsets.all(2),
+                color: Colors.white,
                 width: 50.0,
                 height: 60.0,
                 child: Column(
@@ -95,6 +97,7 @@ class _TableWidgetState extends State<TableWidget>{
               children: [
                  Container(
                    height: 150,
+                   color: Colors.white,
                    child: FutureBuilder(
                                   future: StrengthProvider.getStrengthList(widget.swotID.toString()),
                                     builder: (context, snapshot) {
@@ -130,6 +133,7 @@ class _TableWidgetState extends State<TableWidget>{
 
       Container(
           height: 150,
+          color: Colors.white,
           child: FutureBuilder(
                     future: WeakProvider.getWeakList(widget.swotID.toString()),
                       builder: (context, snapshot) {
@@ -210,6 +214,7 @@ class _TableWidgetState extends State<TableWidget>{
               children: [
                  Container(
                    height: 150,
+                   color: Colors.white,
                    child: FutureBuilder(
                                   future: OppsProvider.getOppsList(widget.swotID.toString()),
                                     builder: (context, snapshot) {
@@ -245,6 +250,7 @@ class _TableWidgetState extends State<TableWidget>{
 
       Container(
           height: 150,
+          color: Colors.white,
           child: FutureBuilder(
                     future: ThreatProvider.getThreatList(widget.swotID.toString()),
                       builder: (context, snapshot) {
