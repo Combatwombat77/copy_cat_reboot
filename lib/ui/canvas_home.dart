@@ -48,14 +48,14 @@ class _CanvasHomeState extends State<CanvasHome> {
                                     children: <Widget>[
                                       FlatButton(
                                         color: Colors.white,
-                                        child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
+                                        child: Text("MODEL DETAILS", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                        
+                                                          
                                       },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
-                                      child: Text("DETAILS", style: TextStyle(color: Uidata.primaryColor),),
+                                      child: Text("EDIT MODEL", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
                                       },
