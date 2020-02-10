@@ -1,5 +1,6 @@
 //import 'package:copy_cat/main.dart';
 //import 'package:copy_cat/ui/landing_page.dart';
+import 'package:copy_cat/ui/pages/model_details.dart';
 import 'package:copy_cat/ui/pages/new_model.dart' as newModel;
 import 'package:copy_cat/ui/pages/swot_elements/swot_details.dart' as swotDetail;
 import 'package:flutter/material.dart';
@@ -53,6 +54,13 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
           label: "New SWOT",
           onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => swotDetail.SwotDetails(swotDetail.NoteMode.Adding, null)));
+          },
+        ),
+          SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "IGC",
+          onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Pages()));
           },
         ),
         ]
