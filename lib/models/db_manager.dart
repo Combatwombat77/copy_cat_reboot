@@ -481,6 +481,98 @@ class DBManagerChallenge{
 
 }  
 
+class DBManagerImpact{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'Impact.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table Impact(
+            id integer primary key autoincrement,
+            ImpactTitle text not null,
+            ImpactDescription text not null
+          );''');
+      });
+      }
+
+       static Future insertImpact(Map<String, dynamic> note) async {
+    await db.insert('Impact', note);
+  }
+
+  static Future deleteImpact(int id) async {
+    await db.delete(
+      'Impact',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateImpact(Map<String, dynamic> note) async {
+    await db.update(
+        'Impact',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('Impact');
+    }
+
+   }
+
+} 
+
+class DBManagerSolutions{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'solutions.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table Solutions(
+            id integer primary key autoincrement,
+            solutionsTitle text not null,
+            solutionsDescription text not null
+          );''');
+      });
+      }
+
+       static Future insertSolutions(Map<String, dynamic> note) async {
+    await db.insert('Solutions', note);
+  }
+
+  static Future deleteSolutions(int id) async {
+    await db.delete(
+      'Solutions',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateSolutions(Map<String, dynamic> note) async {
+    await db.update(
+        'Solutions',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('Solutions');
+    }
+
+   }
+
+} 
+
 
 class Note {
   int id;

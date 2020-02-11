@@ -1,14 +1,12 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
+import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/solutions_mapping.dart' as solutionsDetails;
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
-import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
 
 
 class ModelDetails extends StatefulWidget {
@@ -178,7 +176,7 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
           child: Icon(Icons.note_add),
           label: "Solutions mapping",
           onTap: (){
-//Navigator.push(context, MaterialPageRoute(builder: (context) => Pages()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => solutionsDetails.SolutionsDetails( solutionsDetails.NoteMode.Adding, null)));
           },
         ),
         ]
@@ -367,14 +365,61 @@ class Solutions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-            child:Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+      child: FutureBuilder(
+       future: DBManagerChallenge.getList(),
+        builder: (context, snapshot) {
+          final notes = snapshot.data;
           
-        ],),)
-      );
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                String modelTitle = notes[index]['solutionsTitle'];
+                
+                return Padding(
+                      padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                     ModelTitle(notes[index]['solutionsTitle']),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                    FlatButton(
+                                      color: Colors.white,
+                                      child: Text("Edit solution", style: TextStyle(color: Uidata.primaryColor),),
+                                      onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
+                                      },
+                                    ),
+                                    IconButton(
+                                       icon: Icon(Icons.delete),
+                                       onPressed: (){
+                                         DBManagerSolutions.deleteSolutions(notes[index]['id']);
+                                     },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    )
+   
+                );
+              },
+              itemCount: notes == null? 0 : notes.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
   }
 }
 
