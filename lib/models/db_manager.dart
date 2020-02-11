@@ -435,6 +435,53 @@ class DBManagerSwot{
 }  
 
 
+class DBManagerChallenge{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'challenges.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table Challenge(
+            id integer primary key autoincrement,
+            challengeTitle text not null,
+            challengeDescription text not null
+          );''');
+      });
+      }
+
+       static Future insertChallenge(Map<String, dynamic> note) async {
+    await db.insert('Challenge', note);
+  }
+
+  static Future deleteChallenge(int id) async {
+    await db.delete(
+      'Challenge',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateChallenge(Map<String, dynamic> note) async {
+    await db.update(
+        'Challenge',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('Challenge');
+    }
+
+   }
+
+}  
+
+
 class Note {
   int id;
   String title;

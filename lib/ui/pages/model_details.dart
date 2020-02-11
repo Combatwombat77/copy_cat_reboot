@@ -1,9 +1,14 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
+import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
+import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
 
 
 class ModelDetails extends StatefulWidget {
@@ -152,9 +157,42 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        children: [
+        SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "Challenge Mapping",
+          onTap: (){
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => challengeDetail.ChallengeDetails( challengeDetail.NoteMode.Adding, null)));
+          }
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "Impact gaps",
+          onTap: (){
+                    //    Navigator.push(context, MaterialPageRoute(builder: (context) => swotDetail.SwotDetails(swotDetail.NoteMode.Adding, null)));
+          },
+        ),
+          SpeedDialChild(
+          child: Icon(Icons.note_add),
+          label: "Solutions mapping",
+          onTap: (){
+//Navigator.push(context, MaterialPageRoute(builder: (context) => Pages()));
+          },
+        ),
+        ]
+      ),
       appBar: AppBar(
         title: Text(""),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info),
+              onPressed: () {
+
+              }
+          )],
         bottom: 
         TabBar(
           controller: inAppTabController,
@@ -220,14 +258,108 @@ class Challenges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-            child:Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+      child: FutureBuilder(
+       future: DBManagerChallenge.getList(),
+        builder: (context, snapshot) {
+          final notes = snapshot.data;
           
-        ],),)
-      );
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                String modelTitle = notes[index]['challengeTitle'];
+                
+                return Padding(
+                      padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                     ModelTitle(notes[index]['challengeTitle']),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      ModelDescription(notes[index]['challengeDescription']),
+                                      // Text(description)
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                    FlatButton(
+                                      color: Colors.white,
+                                      child: Text("Edit Challenge", style: TextStyle(color: Uidata.primaryColor),),
+                                      onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
+                                      },
+                                    ),
+                                    IconButton(
+                                       icon: Icon(Icons.delete),
+                                       onPressed: (){
+                                         DBManagerModel.deleteModel(notes[index]['id']);
+                                     },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    )
+   
+                );
+              },
+              itemCount: notes == null? 0 : notes.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+
+   
+
+
+
+
+
+
+  }
+
+}
+
+
+
+class ModelTitle extends StatelessWidget {
+  final String _title;
+
+  ModelTitle(this._title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold
+      ),
+    );
+  }
+}
+
+class ModelDescription extends StatelessWidget {
+  String description;
+
+  ModelDescription(this.description);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(description, style: TextStyle(color: Colors.grey.shade600), maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 }
 
