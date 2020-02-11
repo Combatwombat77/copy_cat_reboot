@@ -5,8 +5,10 @@ import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:copy_cat/models/db_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'guiding.dart';
 import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
 import 'impact_gap_canvas/igc_details/challenge_mapping_details.dart';
 
@@ -49,14 +51,6 @@ var items = [
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.modelTitle),
-        actions: <Widget>[
-          IconButton(
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Pages()));
-            },
-            icon: Icon(Icons.blur_on),
-          )
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
@@ -150,10 +144,6 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,13 +174,13 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
         ]
       ),
       appBar: AppBar(
-        title: Text(""),
+        title: Text("IGC"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.info),
               onPressed: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Guiding()));
               }
           )],
         bottom: 
