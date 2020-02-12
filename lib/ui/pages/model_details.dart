@@ -242,7 +242,10 @@ class ImpactGap extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
           },
         ),
@@ -263,7 +266,10 @@ class ImpactGap extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
           },
         ),
@@ -283,7 +289,10 @@ class ImpactGap extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
           },
         ),
@@ -304,7 +313,10 @@ class ImpactGap extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
           },
         ),
@@ -365,7 +377,10 @@ class Challenges extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -385,7 +400,10 @@ class Challenges extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -404,7 +422,10 @@ class Challenges extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -424,7 +445,10 @@ class Challenges extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -518,7 +542,10 @@ class Solutions extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -541,7 +568,10 @@ class Solutions extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -560,7 +590,10 @@ class Solutions extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                                    Navigator.pop(context);
+
+                },)
               ]).show();
               },
               ),
@@ -580,7 +613,9 @@ class Solutions extends StatelessWidget {
               buttons: [
                 DialogButton(
                 child: Text('Got it'),
-                onPressed: (){},)
+                onPressed: (){
+                  Navigator.pop(context);
+                },)
               ]).show();
               },
               ),
