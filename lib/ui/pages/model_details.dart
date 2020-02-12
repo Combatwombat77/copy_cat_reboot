@@ -7,6 +7,7 @@ import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 class ModelDetails extends StatefulWidget {
   final int modelId;
   final String modelTitle;
@@ -231,25 +232,61 @@ class ImpactGap extends StatelessWidget {
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info,),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){
+             return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'Who or what is not being served and what is missing to bridge that gap? What actions can be taken to fill those gaps?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+          },
+        ),
               title: Text('Where are the gaps between the challenge and solutions?'),
               subtitle: Text('guiding questions'),
-              onTap: (){
-                
-              },
             ),
             Divider(
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){
+           return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What is missing(specific regulations, knowledge sharing, new efforts,partnership etc)that would further link up the solutions and achieve greater collective impact?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+          },
+        ),
               title: Text('What are the gaps within the solutions?'),
               subtitle: Text('guiding questions')
             ),Divider(
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){
+            return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What is being overlooked and what are the unintended negative consequences of the existing efforts? What specific key opportunities could unlock future impact?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+          },
+        ),
               title: Text('Where are the unaddressed obstacles?'),
               subtitle: Text('guiding questions')
             ),
@@ -257,8 +294,21 @@ class ImpactGap extends StatelessWidget {
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('What are the kay lessons learned?'),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){
+            return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'From yout research and interviews, what key lessons could you share with anyone who wants to impact change in this sector? What are the biggest opportunities for impact?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+          },
+        ),
+              title: Text('What are the key lessons learned?'),
               subtitle: Text('guiding questions')
             ),
             Divider(
@@ -306,25 +356,58 @@ class Challenges extends StatelessWidget {
               child: Text("What is happening, what is the impact of the challenge, and what is holding the challenge in place"),),
           ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading:  IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'How do those impacted by the challenge describe the challenge? How do they describe the effects?How is this challenge related to other challenges?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('How do you describe the challenge?'),
               subtitle: Text('guiding questions'),
-              onTap: (){
-
-              },
             ),
             Divider(
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What are the numbers? Who or what is impacted(where, how many, in what way?)What does the research say?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is the impact of the challenge?'),
               subtitle: Text('guiding questions')
             ),Divider(
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What is causing the challenge to persist? Who stands to benefit from the challenge continuing to persist?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is the cause of the cahllenge?'),
               subtitle: Text('guiding questions')
             ),
@@ -332,7 +415,19 @@ class Challenges extends StatelessWidget {
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'How has the challenge changed over time? What is the projected scope of the challenge in the future?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is the history and future of the challenge?'),
               subtitle: Text('guiding questions')
             ),
@@ -414,7 +509,19 @@ class Solutions extends StatelessWidget {
               child: Text("What models  are already being tried, what is working and what is not, and what resources are available?"),),
           ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What resources are available that can be drawn upon? What efforts are already being tried which could directly impact the callenge? what are the different models? How are they joined up, or not?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is happening locally?'),
               subtitle: Text('guiding questions'),
               onTap: (){
@@ -425,14 +532,38 @@ class Solutions extends StatelessWidget {
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What has been tried on similar or tangential challenges globally? What lessons can be learned from those efforts? How can those lessons be shared?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is happening globally?'),
               subtitle: Text('guiding questions')
             ),Divider(
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What can be learned from the successes and failures of these efforts? What do those involved attribute to the cause of their results?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('What is working, what is not?'),
               subtitle: Text('guiding questions')
             ),
@@ -440,7 +571,19 @@ class Solutions extends StatelessWidget {
               color:  Colors.black,
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: IconButton(
+          icon: Icon(Icons.info),
+          onPressed: (){return Alert(
+              context: context,
+              title: 'guiding question',
+              desc:'What parts of the challenge are focused on and what are ignored(specific populations, areas, etc)? What is on the horizon that might impact collective solutions? What fututre scenarios might play out?',
+              buttons: [
+                DialogButton(
+                child: Text('Got it'),
+                onPressed: (){},)
+              ]).show();
+              },
+              ),
               title: Text('Where is the focus and the future?'),
               subtitle: Text('guiding questions')
             ),
