@@ -1,6 +1,5 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
-import 'package:copy_cat/ui/pages/guiding.dart';
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/solutions_mapping.dart' as solutionsDetails;
 import 'package:copy_cat/ui/pages/view_post.dart';
@@ -8,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-import 'add.dart';
 
 
 import 'package:copy_cat/providers/opps_providers.dart';
@@ -187,7 +184,6 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
           IconButton(
             icon: Icon(Icons.info),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Guiding()));
               }
           )],
         bottom: 
