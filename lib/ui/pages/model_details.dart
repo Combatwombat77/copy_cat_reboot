@@ -1,5 +1,6 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
+import 'package:copy_cat/ui/pages/guiding.dart';
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/solutions_mapping.dart' as solutionsDetails;
 import 'package:copy_cat/ui/pages/view_post.dart';
@@ -173,7 +174,7 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
           IconButton(
             icon: Icon(Icons.info),
               onPressed: () {
-               // Navigator.push(context, MaterialPageRoute(builder: (context) => Guiding()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Guiding()));
               }
           )],
         bottom: 
@@ -186,11 +187,11 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
             ),
             Tab(
 //              icon: Icon(Icons.business),
-              child: Text("Impact Gaps"),
+              child: Text("solutions mapping"),
             ),
             Tab(
 //              icon: Icon(Icons.business),
-              child: Text("Solutions Mapping"),
+              child: Text("impact gaps"),
             ),
           ],
         ),
@@ -199,8 +200,9 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
         controller: inAppTabController,
         children: <Widget>[
           Challenges(),
-          ImpactGap(),
-          Solutions()
+         Solutions() ,
+         ImpactGap()
+          
         ],
       ),
     );
@@ -240,76 +242,66 @@ class ImpactGap extends StatelessWidget {
 class Challenges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder(
-       future: DBManagerChallenge.getList(),
-        builder: (context, snapshot) {
-          final notes = snapshot.data;
-          
-          if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                String modelTitle = notes[index]['challengeTitle'];
-                
-                return Padding(
-                      padding: const EdgeInsets.all(10),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     ModelTitle(notes[index]['challengeTitle']),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      ModelDescription(notes[index]['challengeDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("Edit Challenge", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
-                                      },
-                                    ),
-                                    IconButton(
-                                       icon: Icon(Icons.delete),
-                                       onPressed: (){
-                                         DBManagerModel.deleteModel(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    )
-   
-                );
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('How do you describe the challenge?'),
+              subtitle: Text('guiding questions'),
+              onTap: (){
+
               },
-              itemCount: notes == null? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
-
-   
-
-
-
-
-
-
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is the impact of the challenge?'),
+              subtitle: Text('guiding questions')
+            ),Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is the cause of the cahllenge?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is the history and future of the challenge?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+          ),
+          Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("Hints: tap on the tile to add or edit your answer"),),
+          ),
+          ],
+         ),
+       ),
+      );
   }
 
 }
@@ -349,62 +341,66 @@ class ModelDescription extends StatelessWidget {
 class Solutions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder(
-       future: DBManagerChallenge.getList(),
-        builder: (context, snapshot) {
-          final notes = snapshot.data;
-          
-          if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                String modelTitle = notes[index]['solutionsTitle'];
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is happening locally?'),
+              subtitle: Text('guiding questions'),
+              onTap: (){
                 
-                return Padding(
-                      padding: const EdgeInsets.all(10),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     ModelTitle(notes[index]['solutionsTitle']),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("Edit solution", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
-                                      },
-                                    ),
-                                    IconButton(
-                                       icon: Icon(Icons.delete),
-                                       onPressed: (){
-                                         DBManagerSolutions.deleteSolutions(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    )
-   
-                );
               },
-              itemCount: notes == null? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is happening globally?'),
+              subtitle: Text('guiding questions')
+            ),Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What is working, what is not?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('Where is the focus and the future?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+          ),
+          Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("Hints: tap on the tile to add or edit your answer"),),
+          ),
+          ],
+         ),
+       ),
+      );
   }
 }
 
