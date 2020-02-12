@@ -341,67 +341,88 @@ class ModelDescription extends StatelessWidget {
 class Solutions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+        child: Scaffold(
+      body:  ListView(
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.info),
               title: Text('What is happening locally?'),
               subtitle: Text('guiding questions'),
               onTap: (){
+                pushSolutionsPage(1, context);
+                              },
+                            ),
+                            Divider(
+                              color:  Colors.black,
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.info),
+                              title: Text('What is happening globally?'),
+                              subtitle: Text('guiding questions')
+                            ),Divider(
+                              color:  Colors.black,
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.info),
+                              title: Text('What is working, what is not?'),
+                              subtitle: Text('guiding questions')
+                            ),
+                            Divider(
+                              color:  Colors.black,
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.info),
+                              title: Text('Where is the focus and the future?'),
+                              subtitle: Text('guiding questions')
+                            ),
+                            Divider(
+                              color:  Colors.black,
+                            ),
+                            Card(
+                            // height: 200,
+                            // width: 250.0,
+                            color: Colors.blue,
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              width: MediaQuery.of(context).size.width / 1.5,
+                              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+                          ),
+                          Card(
+                            // height: 200,
+                            // width: 250.0,
+                            color: Colors.blue,
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              width: MediaQuery.of(context).size.width / 1.5,
+                              child: Text("Hints: tap on the tile to add or edit your answer"),),
+                          ),
+                          ],
+                         ),
+                       ),
+                      );
+                  }
                 
-              },
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('What is happening globally?'),
-              subtitle: Text('guiding questions')
-            ),Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('What is working, what is not?'),
-              subtitle: Text('guiding questions')
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('Where is the focus and the future?'),
-              subtitle: Text('guiding questions')
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            Card(
-            // height: 200,
-            // width: 250.0,
-            color: Colors.blue,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: Tap on the information icon for a guiding question. "),),
-          ),
-          Card(
-            // height: 200,
-            // width: 250.0,
-            color: Colors.blue,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: tap on the tile to add or edit your answer"),),
-          ),
-          ],
-         ),
-       ),
-      );
-  }
+                  void pushImpactPage(int index, BuildContext context) {
+                    Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context) => challengeDetail.ImpactDetails(challengeDetail.NoteMode.Adding, null))
+                );
+                  }
+
+                  void pushChallengePage(int index, BuildContext context) {
+                    Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context) => challengeDetail.ChallengeDetails(challengeDetail.NoteMode.Adding, null))
+                );
+                  }
+
+                  void pushSolutionsPage(int index, BuildContext context) {
+                    Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context) => solutionsDetails.SolutionsDetails(solutionsDetails.NoteMode.Adding, null))
+                );
+                  }
 }
 
 

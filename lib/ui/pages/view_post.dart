@@ -146,17 +146,7 @@ class CanvasNoteState extends State<CanvasNote> {
 
   final form = formkey.currentState;
 
-  var items = [
-    "Customer Segments",
-    "Value Propositions",
-    "Channels",
-    "Customer Relationships",
-    "Revenue Stream",
-    "Key Resources",
-    "Key Activities",
-    "Key Partners",
-    "Cost Structure"
-  ];
+
 
   bool validateForm() {
     if(formkey.currentState.validate()){
