@@ -8,6 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'add.dart';
+
+
+import 'package:copy_cat/providers/opps_providers.dart';
+
+
+
+
+
+
+
 class ModelDetails extends StatefulWidget {
   final int modelId;
   final String modelTitle;
@@ -211,22 +223,28 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
 }
 
 
+enum NoteMode { 
+  Editing,
+  Adding
+}
+
+
 
 class ImpactGap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("What is missing that could close the gap between the challenge and the current solutions, where are opportunities for greater collective impact, and what are the key lesons learned?"),),
+              child: Text("What is missing that could close the gap between the challenge and the current solutions, where are opportunities for greater collective impact, and what are the key lesons learned?", style: TextStyle(color: Colors.white),),),
           ),
           Divider(
               color:  Colors.black,
@@ -251,6 +269,9 @@ class ImpactGap extends StatelessWidget {
         ),
               title: Text('Where are the gaps between the challenge and solutions?'),
               subtitle: Text('guiding questions'),
+              onTap: (){
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ImpactNote(NoteMode.Adding, null, "Where are the gaps between the challenges and solutions?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -274,7 +295,10 @@ class ImpactGap extends StatelessWidget {
           },
         ),
               title: Text('What are the gaps within the solutions?'),
-              subtitle: Text('guiding questions')
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ImpactNote(NoteMode.Adding, null, "What are the gaps within the solutions?")));
+              },
             ),Divider(
               color:  Colors.black,
             ),
@@ -297,7 +321,10 @@ class ImpactGap extends StatelessWidget {
           },
         ),
               title: Text('Where are the unaddressed obstacles?'),
-              subtitle: Text('guiding questions')
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ImpactNote(NoteMode.Adding, null, "Where are the unaddressed obstacles?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -321,7 +348,10 @@ class ImpactGap extends StatelessWidget {
           },
         ),
               title: Text('What are the key lessons learned?'),
-              subtitle: Text('guiding questions')
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => SolutionNote(NoteMode.Adding, null, "What are the key lessons learned?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -329,20 +359,20 @@ class ImpactGap extends StatelessWidget {
             Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+              child: Text("Hints: Tap on the information icon for a guiding question. ", style: TextStyle(color: Colors.white),),),
           ),
           Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: tap on the tile to add or edit your answer"),),
+              child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
           ),
           ],
          ),
@@ -356,16 +386,16 @@ class Challenges extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("What is happening, what is the impact of the challenge, and what is holding the challenge in place"),),
+              child: Text("What is happening, what is the impact of the challenge, and what is holding the challenge in place", style: TextStyle(color: Colors.white),),),
           ),
             ListTile(
               leading:  IconButton(
@@ -386,6 +416,9 @@ class Challenges extends StatelessWidget {
               ),
               title: Text('How do you describe the challenge?'),
               subtitle: Text('guiding questions'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "How do you describe the challenge?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -408,7 +441,10 @@ class Challenges extends StatelessWidget {
               },
               ),
               title: Text('What is the impact of the challenge?'),
-              subtitle: Text('guiding questions')
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the impact of the challenge?")));
+              },
             ),Divider(
               color:  Colors.black,
             ),
@@ -429,8 +465,11 @@ class Challenges extends StatelessWidget {
               ]).show();
               },
               ),
-              title: Text('What is the cause of the cahllenge?'),
-              subtitle: Text('guiding questions')
+              title: Text('What is the cause of the challenge?'),
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the cause of the challenge?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -453,7 +492,10 @@ class Challenges extends StatelessWidget {
               },
               ),
               title: Text('What is the history and future of the challenge?'),
-              subtitle: Text('guiding questions')
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the history and future of the challenge?")));
+              },
             ),
             Divider(
               color:  Colors.black,
@@ -465,16 +507,16 @@ class Challenges extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+              child: Text("Hints: Tap on the information icon for a guiding question. ", style: TextStyle(color: Colors.white),),),
           ),
           Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: tap on the tile to add or edit your answer"),),
+              child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
           ),
           ],
          ),
@@ -503,6 +545,8 @@ class ModelTitle extends StatelessWidget {
   }
 }
 
+
+
 class ModelDescription extends StatelessWidget {
   String description;
 
@@ -526,11 +570,11 @@ class Solutions extends StatelessWidget {
             Card(
             // height: 200,
             // width: 250.0,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("What models  are already being tried, what is working and what is not, and what resources are available?"),),
+              child: Text("What models  are already being tried, what is working and what is not, and what resources are available?", style: TextStyle(color: Colors.white),),),
           ),
             ListTile(
               leading: IconButton(
@@ -552,7 +596,7 @@ class Solutions extends StatelessWidget {
               title: Text('What is happening locally?'),
               subtitle: Text('guiding questions'),
               onTap: (){
-                pushSolutionsPage(1, context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SolutionNote(NoteMode.Adding, null, "What is happening locally?")));
                               },
                             ),
                             Divider(
@@ -561,14 +605,21 @@ class Solutions extends StatelessWidget {
                             ListTile(
                               leading: Icon(Icons.info),
                               title: Text('What is happening globally?'),
-                              subtitle: Text('guiding questions')
+                              subtitle: Text('guiding questions'),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SolutionNote(NoteMode.Adding, null, "What is happening globally?")));
+                              },
                             ),Divider(
                               color:  Colors.black,
                             ),
                             ListTile(
                               leading: Icon(Icons.info),
                               title: Text('What is working, what is not?'),
-                              subtitle: Text('guiding questions')
+                              subtitle: Text('guiding questions'),
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SolutionNote(NoteMode.Adding, null, "What is working, what is not?")));
+        
+                              },
                             ),
                             Divider(
                               color:  Colors.black,
@@ -576,7 +627,10 @@ class Solutions extends StatelessWidget {
                             ListTile(
                               leading: Icon(Icons.info),
                               title: Text('Where is the focus and the future?'),
-                              subtitle: Text('guiding questions')
+                              subtitle: Text('guiding questions'),
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SolutionNote(NoteMode.Adding, null, "Where is the focus and the future?")));
+                              },
                             ),
                             Divider(
                               color:  Colors.black,
@@ -584,20 +638,20 @@ class Solutions extends StatelessWidget {
                             Card(
                             // height: 200,
                             // width: 250.0,
-                            color: Colors.blue,
+                            color: Colors.blue.shade700,
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               width: MediaQuery.of(context).size.width / 1.5,
-                              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+                              child: Text("Hints: Tap on the information icon for a guiding question.", style: TextStyle(color: Colors.white),),),
                           ),
                           Card(
                             // height: 200,
                             // width: 250.0,
-                            color: Colors.blue,
+                            color: Colors.blue.shade700,
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               width: MediaQuery.of(context).size.width / 1.5,
-                              child: Text("Hints: tap on the tile to add or edit your answer"),),
+                              child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
                           ),
                           ],
                          ),
@@ -628,4 +682,300 @@ class Solutions extends StatelessWidget {
 }
 
 
+
+
+final formkey = new GlobalKey<FormState> ();
+
+
+
+
+class SolutionNote extends StatefulWidget {
+ 
+
+  
+
+  final NoteMode noteMode;
+  final Map<String, dynamic> note;
+  final String ques;
+
+  SolutionNote(this.noteMode, this.note, this.ques);
+
+  @override
+  SolutionNoteState createState() {
+    return new SolutionNoteState();
+  }
+}
+
+class SolutionNoteState extends State<SolutionNote> {
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
+  
+
+  @override
+  void didChangeDependencies() {
+    if (widget.noteMode == NoteMode.Editing) {
+      _titleController.text = widget.note['title'];
+      _textController.text = widget.note['text'];
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.noteMode == NoteMode.Adding ? 'Add Response' : 'Edit Response'
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(widget.ques, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),),
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(
+                hintText: 'Your answer'
+              ),
+            ),
+            Container(height: 16.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _NoteButton('Save', Colors.blue, () {
+                  final title = _titleController.text;
+                  final text = _textController.text;
+
+                  if (widget?.noteMode == NoteMode.Adding) {
+                    //TODO an insert method 
+                  } else if (widget?.noteMode == NoteMode.Editing) {
+                   //TODO an update method
+                  }
+                  Navigator.pop(context);
+                }),
+                Container(height: 16.0,),
+                _NoteButton('Discard', Colors.grey, () {
+                  Navigator.pop(context);
+                }),
+                widget.noteMode == NoteMode.Editing ?
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: _NoteButton('Delete', Colors.red, () async {
+                      await OppsProvider.deleteOpps(widget.note['id']);
+                      Navigator.pop(context);
+                    }),
+                  )
+                 : Container()
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class ChallengeNote extends StatefulWidget {
+
+  final NoteMode noteMode;
+  final Map<String, dynamic> note;
+  final String ques;
+
+  ChallengeNote(this.noteMode, this.note, this.ques);
+
+  @override
+  ChallengeNoteState createState() {
+    return new ChallengeNoteState();
+  }
+}
+
+class ChallengeNoteState extends State<ChallengeNote> {
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
+  
+
+  @override
+  void didChangeDependencies() {
+    if (widget.noteMode == NoteMode.Editing) {
+      _titleController.text = widget.note['title'];
+      _textController.text = widget.note['text'];
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.noteMode == NoteMode.Adding ? 'Add Response' : 'Edit Response'
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(widget.ques, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),),
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(
+                hintText: 'Your answer'
+              ),
+            ),
+            Container(height: 16.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _NoteButton('Save', Colors.blue, () {
+                  final title = _titleController.text;
+                  final text = _textController.text;
+
+                  if (widget?.noteMode == NoteMode.Adding) {
+                    //TODO an insert method 
+                  } else if (widget?.noteMode == NoteMode.Editing) {
+                   //TODO an update method
+                  }
+                  Navigator.pop(context);
+                }),
+                Container(height: 16.0,),
+                _NoteButton('Discard', Colors.grey, () {
+                  Navigator.pop(context);
+                }),
+                widget.noteMode == NoteMode.Editing ?
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: _NoteButton('Delete', Colors.red, () async {
+                      await OppsProvider.deleteOpps(widget.note['id']);
+                      Navigator.pop(context);
+                    }),
+                  )
+                 : Container()
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class ImpactNote extends StatefulWidget {
+
+
+  final NoteMode noteMode;
+  final Map<String, dynamic> note;
+  final String ques;
+
+  ImpactNote(this.noteMode, this.note, this.ques);
+
+  @override
+  ImpactNoteState createState() {
+    return ImpactNoteState();
+  }
+}
+
+class ImpactNoteState extends State<ImpactNote> {
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
+  
+
+  @override
+  void didChangeDependencies() {
+    if (widget.noteMode == NoteMode.Editing) {
+      _titleController.text = widget.note['title'];
+      _textController.text = widget.note['text'];
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.noteMode == NoteMode.Adding ? 'Add Response' : 'Edit Response'
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(widget.ques, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),),
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(
+                hintText: 'Your answer'
+              ),
+            ),
+            Container(height: 16.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _NoteButton('Save', Colors.blue, () {
+                  final title = _titleController.text;
+                  final text = _textController.text;
+
+                  if (widget?.noteMode == NoteMode.Adding) {
+                    //TODO an insert method 
+                  } else if (widget?.noteMode == NoteMode.Editing) {
+                   //TODO an update method
+                  }
+                  Navigator.pop(context);
+                }),
+                Container(height: 16.0,),
+                _NoteButton('Discard', Colors.grey, () {
+                  Navigator.pop(context);
+                }),
+                widget.noteMode == NoteMode.Editing ?
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: _NoteButton('Delete', Colors.red, () async {
+                      await OppsProvider.deleteOpps(widget.note['id']);
+                      Navigator.pop(context);
+                    }),
+                  )
+                 : Container()
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+class _NoteButton extends StatelessWidget {
+
+  final String _text;
+  final Color _color;
+  final Function _onPressed;
+
+  _NoteButton(this._text, this._color, this._onPressed);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      onPressed: _onPressed,
+      child: Text(
+        _text,
+        style: TextStyle(color: Colors.white),
+      ),
+      height: 40,
+      minWidth: 100,
+      color: _color,
+    );
+  }
+}
 
