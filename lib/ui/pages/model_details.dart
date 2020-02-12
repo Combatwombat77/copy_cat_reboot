@@ -214,12 +214,65 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
 class ImpactGap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-            child:Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("What is missing that could close the gap between the challenge and the current solutions, where are opportunities for greater collective impact, and what are the key lesons learned?"),),
+          ),
+          Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info,),
+              title: Text('Where are the gaps between the challenge and solutions?'),
+              subtitle: Text('guiding questions'),
+              onTap: (){
+                
+              },
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What are the gaps within the solutions?'),
+              subtitle: Text('guiding questions')
+            ),Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('Where are the unaddressed obstacles?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('What are the kay lessons learned?'),
+              subtitle: Text('guiding questions')
+            ),
+            Divider(
+              color:  Colors.black,
+            ),
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("Hints: Tap on the information icon for a guiding question. "),),
+          ),
           Card(
             // height: 200,
             // width: 250.0,
@@ -227,14 +280,11 @@ class ImpactGap extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Q: What is missing that could close the gap between the challenge and the current solutions, where are opportunities for greater collective impact and what are the key lessons learned?"),),
+              child: Text("Hints: tap on the tile to add or edit your answer"),),
           ),
-          Divider(
-            color: Colors.black,
-          ),
-          Text("Guiding Questions", style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.bold, fontSize: 23.0),),
-
-        ],),)
+          ],
+         ),
+       ),
       );
   }
 }
@@ -246,6 +296,15 @@ class Challenges extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("What is happening, what is the impact of the challenge, and what is holding the challenge in place"),),
+          ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text('How do you describe the challenge?'),
@@ -345,6 +404,15 @@ class Solutions extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Card(
+            // height: 200,
+            // width: 250.0,
+            color: Colors.blue,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: Text("What models  are already being tried, what is working and what is not, and what resources are available?"),),
+          ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text('What is happening locally?'),
