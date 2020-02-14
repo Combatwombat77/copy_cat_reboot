@@ -538,7 +538,6 @@ class DBManagerSolutions{
           create table Solutions(
             id integer primary key autoincrement,
             solutionsTitle text not null,
-            solutionsDescription text not null
           );''');
       });
       }
