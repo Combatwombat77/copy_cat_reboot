@@ -388,6 +388,8 @@ class DBManagerModel{
 
 
 
+
+
 class DBManagerSwot{
   static Database db;
   static Future openDB() async {
