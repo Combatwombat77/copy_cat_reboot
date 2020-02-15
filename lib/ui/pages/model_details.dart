@@ -7,13 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-
 import 'package:copy_cat/providers/opps_providers.dart';
+import 'package:copy_cat/models/db2.dart';
 
 
-
-
+  
 
 
 
@@ -36,6 +34,7 @@ class _ModelDetailsState extends State<ModelDetails> {
 void initState(){
   super.initState();
   DBManagerViews.openDB();
+  DBManagerGuide.openDB();
 }
 
 var items = [
@@ -127,6 +126,8 @@ Widget cardView(String cardName, Icon icon){
 
 
 class Pages extends StatefulWidget {
+  
+
   @override
   _PagesState createState() => _PagesState();
 }
@@ -412,113 +413,114 @@ class Challenges extends StatelessWidget {
               ),
               title: Text('How do you describe the challenge?'),
               subtitle: Text('guiding questions'),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "How do you describe the challenge?")));
-              },
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: IconButton(
-          icon: Icon(Icons.info),
-          onPressed: (){return Alert(
-              context: context,
-              title: 'guiding question',
-              desc:'What are the numbers? Who or what is impacted(where, how many, in what way?)What does the research say?',
-              buttons: [
-                DialogButton(
-                child: Text('Got it'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();
-              },
-              ),
-              title: Text('What is the impact of the challenge?'),
-              subtitle: Text('guiding questions'),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the impact of the challenge?")));
-              },
-            ),Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: IconButton(
-          icon: Icon(Icons.info),
-          onPressed: (){return Alert(
-              context: context,
-              title: 'guiding question',
-              desc:'What is causing the challenge to persist? Who stands to benefit from the challenge continuing to persist?',
-              buttons: [
-                DialogButton(
-                child: Text('Got it'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();
-              },
-              ),
-              title: Text('What is the cause of the challenge?'),
-              subtitle: Text('guiding questions'),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the cause of the challenge?")));
-              },
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            ListTile(
-              leading: IconButton(
-          icon: Icon(Icons.info),
-          onPressed: (){return Alert(
-              context: context,
-              title: 'guiding question',
-              desc:'How has the challenge changed over time? What is the projected scope of the challenge in the future?',
-              buttons: [
-                DialogButton(
-                child: Text('Got it'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();
-              },
-              ),
-              title: Text('What is the history and future of the challenge?'),
-              subtitle: Text('guiding questions'),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the history and future of the challenge?")));
-              },
-            ),
-            Divider(
-              color:  Colors.black,
-            ),
-            Card(
-            // height: 200,
-            // width: 250.0,
-            color: Colors.blue,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: Tap on the information icon for a guiding question. ", style: TextStyle(color: Colors.white),),),
-          ),
-          Card(
-            // height: 200,
-            // width: 250.0,
-            color: Colors.blue.shade700,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
-          ),
-          ],
-         ),
-       ),
-      );
-  }
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "How do you describe the challenge?")));
+                            },
+                          ),
+                          Divider(
+                            color:  Colors.black,
+                          ),
+                          ListTile(
+                            leading: IconButton(
+                        icon: Icon(Icons.info),
+                        onPressed: (){return Alert(
+                            context: context,
+                            title: 'guiding question',
+                            desc:'What are the numbers? Who or what is impacted(where, how many, in what way?)What does the research say?',
+                            buttons: [
+                              DialogButton(
+                              child: Text('Got it'),
+                              onPressed: (){
+                                                  Navigator.pop(context);
+              
+                              },)
+                            ]).show();
+                            },
+                            ),
+                            title: Text('What is the impact of the challenge?'),
+                            subtitle: Text('guiding questions'),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the impact of the challenge?")));
+                            },
+                          ),Divider(
+                            color:  Colors.black,
+                          ),
+                          ListTile(
+                            leading: IconButton(
+                        icon: Icon(Icons.info),
+                        onPressed: (){return Alert(
+                            context: context,
+                            title: 'guiding question',
+                            desc:'What is causing the challenge to persist? Who stands to benefit from the challenge continuing to persist?',
+                            buttons: [
+                              DialogButton(
+                              child: Text('Got it'),
+                              onPressed: (){
+                                                  Navigator.pop(context);
+              
+                              },)
+                            ]).show();
+                            },
+                            ),
+                            title: Text('What is the cause of the challenge?'),
+                            subtitle: Text('guiding questions'),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the cause of the challenge?")));
+                            },
+                          ),
+                          Divider(
+                            color:  Colors.black,
+                          ),
+                          ListTile(
+                            leading: IconButton(
+                        icon: Icon(Icons.info),
+                        onPressed: (){return Alert(
+                            context: context,
+                            title: 'guiding question',
+                            desc:'How has the challenge changed over time? What is the projected scope of the challenge in the future?',
+                            buttons: [
+                              DialogButton(
+                              child: Text('Got it'),
+                              onPressed: (){
+                                                  Navigator.pop(context);
+              
+                              },)
+                            ]).show();
+                            },
+                            ),
+                            title: Text('What is the history and future of the challenge?'),
+                            subtitle: Text('guiding questions'),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the history and future of the challenge?")));
+                            },
+                          ),
+                          Divider(
+                            color:  Colors.black,
+                          ),
+                          Card(
+                          // height: 200,
+                          // width: 250.0,
+                          color: Colors.blue,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: Text("Hints: Tap on the information icon for a guiding question. ", style: TextStyle(color: Colors.white),),),
+                        ),
+                        Card(
+                          // height: 200,
+                          // width: 250.0,
+                          color: Colors.blue.shade700,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
+                        ),
+                        ],
+                       ),
+                     ),
+                    );
+                }
+             
 
 }
 
@@ -746,9 +748,14 @@ class SolutionNoteState extends State<SolutionNote> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    //TODO an insert method 
+                    DBManagerGuide.insertSolutions({
+                      'title': title,
+                    });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   //TODO an update method
+                   DBManagerGuide.updateSolutions({
+                     'id': widget.note['id'],
+                      'title': title,
+                    });
                   }
                   Navigator.pop(context);
                 }),
@@ -792,14 +799,12 @@ class ChallengeNote extends StatefulWidget {
 class ChallengeNoteState extends State<ChallengeNote> {
 
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _textController = TextEditingController();
   
 
   @override
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
       _titleController.text = widget.note['title'];
-      _textController.text = widget.note['text'];
     }
     super.didChangeDependencies();
   }
@@ -830,14 +835,20 @@ class ChallengeNoteState extends State<ChallengeNote> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   final title = _titleController.text;
-                  final text = _textController.text;
+                  print("$title");
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    //TODO an insert method 
+                    DBManagerGuide.insertChallenge({
+                      'title': title
+                    }
+                    );
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   //TODO an update method
+                   DBManagerGuide.updateChallenge({
+                     'id': widget.note['id'],
+                     'title': title,
+                   });
                   }
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 }),
                 Container(height: 16.0,),
                 _NoteButton('Discard', Colors.grey, () {
@@ -921,9 +932,16 @@ class ImpactNoteState extends State<ImpactNote> {
                   final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    //TODO an insert method 
+                    DBManagerGuide.insertImpact({
+                      'title': title
+                    }
+                    );
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   //TODO an update method
+                   DBManagerGuide.updateImpacts({
+                     'id': widget.note['id'],
+                      'title': title
+                    }
+                    );
                   }
                   Navigator.pop(context);
                 }),

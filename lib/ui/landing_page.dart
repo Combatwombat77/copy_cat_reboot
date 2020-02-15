@@ -1,3 +1,4 @@
+import 'package:copy_cat/models/db2.dart';
 import 'package:flutter/material.dart';
 import 'dashboard.dart' as dash;
 import 'profile.dart' as prof;
@@ -21,6 +22,8 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
     DBManagerSwot.openDB();
     DBManagerViews.openDB();
     DBManagerModel.openDB();
+    DBManagerGuide.openDB();
+
 
     tabController = new TabController(length: 2, vsync: this);
   }
