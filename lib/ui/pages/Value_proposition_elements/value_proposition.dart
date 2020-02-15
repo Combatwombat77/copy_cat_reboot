@@ -108,7 +108,7 @@ Widget build(BuildContext context){
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID.toString())));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => NotesList()));
                        },
                        
                        child:Column(

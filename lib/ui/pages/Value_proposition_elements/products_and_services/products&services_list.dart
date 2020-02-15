@@ -6,10 +6,10 @@ import 'package:copy_cat/ui/pages/Value_proposition_elements/products_and_servic
 class NotesList extends StatefulWidget {
 
   @override
-  NotesListState createState() {
-    return new NotesListState();
+  NotesListState  createState() => NotesListState();
+    
   }
-}
+
 
 class NotesListState extends State<NotesList> {
 
@@ -79,24 +79,6 @@ class _NoteTitle extends StatelessWidget {
         fontSize: 25,
         fontWeight: FontWeight.bold
       ),
-    );
-  }
-}
-
-class _NoteText extends StatelessWidget {
-  final String _text;
-
-  _NoteText(this._text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _text,
-      style: TextStyle(
-          color: Colors.grey.shade600
-      ),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
     );
   }
 }
