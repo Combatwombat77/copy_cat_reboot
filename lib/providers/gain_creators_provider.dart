@@ -1,48 +1,52 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ProductProvider {
+class GainsProvider {
   static Database db;
 
   static Future open() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'products.db'),
+      join(await getDatabasesPath(), 'Gains.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         db.execute('''
-          create table Products(
+          create table Gains(
             id integer primary key autoincrement,
-            title text not null
+            title text not null,
           );
         ''');
       }
     );
   }
 
-  static Future<List<Map<String, dynamic>>> getProductsList() async {
+  static Future<List<Map<String, dynamic>>> getGainsList() async {
     if (db == null) {
       await open();
     }
 
-    return await db.query('Products');
-     
+    return await db.query('Gains');
+   
+
+
+      
+    
   }
 
-  static Future insertProducts(Map<String, dynamic> note) async {
-    await db.insert('Products', note);
+  static Future insertGains(Map<String, dynamic> note) async {
+    await db.insert('Gains', note);
   }
 
-  static Future updateProducts(Map<String, dynamic> note) async {
+  static Future updateGains(Map<String, dynamic> note) async {
     await db.update(
-      'Products',
+      'Gains',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
   }
 
-  static Future deleteProducts(int id) async {
+  static Future deleteGains(int id) async {
     await db.delete(
-      'Products',
+      'Gains',
       where: 'id = ?',
       whereArgs: [id]);
   } 

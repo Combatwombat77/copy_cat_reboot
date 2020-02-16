@@ -1,4 +1,4 @@
-import 'package:copy_cat/providers/products&services_provider.dart';
+import 'package:copy_cat/providers/pain_relievers_provider.dart';
 import 'package:flutter/material.dart';
 
 enum NoteMode {
@@ -28,7 +28,7 @@ class NoteState extends State<Note> {
   @override
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
-      _titleController.text = widget.note['products'];
+      _titleController.text = widget.note['title'];
 
     }
     super.didChangeDependencies();
@@ -39,7 +39,7 @@ class NoteState extends State<Note> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.noteMode == NoteMode.Adding ? 'Add Product or Service' : 'Edit Product or Service'
+          widget.noteMode == NoteMode.Adding ? 'Add Pain Reliever' : 'Edit Pain Reliever'
         ),
       ),
       body: Padding(
@@ -50,7 +50,7 @@ class NoteState extends State<Note> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                hintText: 'Product or Service'
+                hintText: 'Pain Reliever'
               ),
             ),
             Container(height: 8,),
@@ -64,12 +64,12 @@ class NoteState extends State<Note> {
  
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    ProductProvider.insertProducts({
-                      'title': title,
+                    PainsProvider.insertPains({
+                      'products': title,
 
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                    ProductProvider.updateProducts({
+                    PainsProvider.updatePains({
                       'id': widget.note['id'],
                       'title': _titleController.text,
                     });
@@ -84,7 +84,7 @@ class NoteState extends State<Note> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await ProductProvider.deleteProducts(widget.note['id']);
+                      await PainsProvider.deletePains(widget.note['id']);
                       Navigator.pop(context);
                     }),
                   )

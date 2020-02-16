@@ -1,3 +1,5 @@
+import 'package:copy_cat/ui/pages/Value_proposition_elements/gain_creators/gain_creators_list.dart';
+import 'package:copy_cat/ui/pages/Value_proposition_elements/pain_relievers/pain_relievers_list.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -90,7 +92,7 @@ Widget build(BuildContext context){
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
                          Navigator.push(context, MaterialPageRoute(builder: (context) => NotesList()));
-                         print('hello');
+                         
                        },             
                        child:Column(
                          children: <Widget>[
@@ -110,7 +112,7 @@ Widget build(BuildContext context){
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => NotesList()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => GainsList()));
                        },
                        
                        child:Column(
@@ -131,7 +133,7 @@ Widget build(BuildContext context){
                   child:
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteList(swotID.toString())));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => PainsList()));
                        },
                        
                        child:Column(
