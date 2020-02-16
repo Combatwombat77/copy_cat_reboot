@@ -39,7 +39,7 @@ class NoteState extends State<Note> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.noteMode == NoteMode.Adding ? 'Add note' : 'Edit note'
+          widget.noteMode == NoteMode.Adding ? 'Add Product or Service' : 'Edit Product or Service'
         ),
       ),
       body: Padding(
@@ -50,7 +50,7 @@ class NoteState extends State<Note> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                hintText: 'Note title'
+                hintText: 'Product or Service'
               ),
             ),
             Container(height: 8,),

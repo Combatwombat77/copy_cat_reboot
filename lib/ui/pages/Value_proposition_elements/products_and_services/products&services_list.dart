@@ -47,8 +47,7 @@ class NotesListState extends State<NotesList> {
                   ),
                 );
               },
-              itemCount: notes.length,
-            );
+            itemCount: notes == null? 0 : notes.length,            );
           }
           return Center(child: CircularProgressIndicator());
         },

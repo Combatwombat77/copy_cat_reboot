@@ -75,13 +75,14 @@ Widget build(BuildContext context){
         },
         child: Icon(Icons.exit_to_app),
       ),
-      body: StaggeredGridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12.0,
-        mainAxisSpacing: 12.0,
-        padding: EdgeInsets.symmetric(horizontal:16.0,vertical:8.0),
-        children: <Widget>[
-          Card(
+      body: OrientationBuilder(builder: (context, orientaion){
+
+                return GridView.count(     
+                padding: const EdgeInsets.all(20.0),
+                crossAxisSpacing: 10.0,
+                crossAxisCount: 2,
+                children: <Widget>[
+                Card(
                     elevation: 5.0,
                     color: Colors.blue,
                     child: Container(               
@@ -89,6 +90,7 @@ Widget build(BuildContext context){
                        InkWell(splashColor: Colors.greenAccent,
                        onTap: (){
                          Navigator.push(context, MaterialPageRoute(builder: (context) => NotesList()));
+                         print('hello');
                        },             
                        child:Column(
                          children: <Widget>[
@@ -164,23 +166,9 @@ Widget build(BuildContext context){
                            size: 40.0,)
                  ]),),),),
                  
-                 
+        
 
-                 
-
-
-          
-        ],
-        staggeredTiles: [
-          StaggeredTile.extent(2, 120.0),
-          StaggeredTile.extent(1, 150.0),
-          StaggeredTile.extent(1, 150.0),
-          StaggeredTile.extent(2, 210.0),
-        ]
-        ,
-        ),
-
-    );
-}
+                ]);
+}));}
 
 }
