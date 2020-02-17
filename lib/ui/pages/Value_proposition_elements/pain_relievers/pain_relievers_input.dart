@@ -65,7 +65,7 @@ class NoteState extends State<Note> {
 
                   if (widget?.noteMode == NoteMode.Adding) {
                     PainsProvider.insertPains({
-                      'products': title,
+                      'title': title,
 
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
