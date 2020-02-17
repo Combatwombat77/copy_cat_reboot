@@ -28,7 +28,7 @@ class NoteState extends State<Note> {
   @override
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
-      _titleController.text = widget.note['products'];
+      _titleController.text = widget.note['title'];
 
     }
     super.didChangeDependencies();
