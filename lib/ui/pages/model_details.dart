@@ -438,7 +438,9 @@ class Challenges extends StatelessWidget {
                             },
                             ),
                             title: Text('What is the impact of the challenge?'),
-                            subtitle: Text('guiding questions'),
+                            // subtitle: Text('guiding questions'),
+                            // subtitle: listMethod(1),
+                            subtitle: Text(DBManagerGuide.getListChall(1).toString()),
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the impact of the challenge?")));
                             },
@@ -520,6 +522,14 @@ class Challenges extends StatelessWidget {
                      ),
                     );
                 }
+
+  Future<Widget> listMethod(int i, BuildContext context) async {
+    return ListView.builder(
+      itemBuilder: (context, i){
+        return Text(DBManagerGuide.getListChall(i).toString());
+      },
+    );
+  }
              
 
 }
@@ -848,7 +858,7 @@ class ChallengeNoteState extends State<ChallengeNote> {
                      'title': title,
                    });
                   }
-                  // Navigator.pop(context);
+                  Navigator.pop(context);
                 }),
                 Container(height: 16.0,),
                 _NoteButton('Discard', Colors.grey, () {
@@ -929,7 +939,6 @@ class ImpactNoteState extends State<ImpactNote> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   final title = _titleController.text;
-                  final text = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
                     DBManagerGuide.insertImpact({

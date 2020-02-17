@@ -13,19 +13,19 @@ class DBManagerGuide {
         await db.execute('''
           create table challenges(
             id integer primary key autoincrement,
-            title text not null,
+            title text not null
            
           );''');
           await db.execute('''
           create table impacts(
             id integer primary key autoincrement,
-            title text not null,
+            title text not null
    
           );''');
           await db.execute('''
           create table solutions(
             id integer primary key autoincrement,
-            title text not null,
+            title text not null
           );''');
       });
   }
@@ -51,7 +51,7 @@ class DBManagerGuide {
         whereArgs: [note['id']]);
   }
 
-   static Future<List<Map<String, dynamic>>> getListChall(int i) async {
+    static Future<List<Map<String, dynamic>>> getListChall(int i) async {
     if (db == null) {
       await openDB();
     }else{

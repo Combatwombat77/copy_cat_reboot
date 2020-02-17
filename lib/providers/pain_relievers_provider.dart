@@ -12,7 +12,7 @@ class PainsProvider {
         db.execute('''
           create table Pains(
             id integer primary key autoincrement,
-            title text not null,
+            title text not null
           );
         ''');
       }

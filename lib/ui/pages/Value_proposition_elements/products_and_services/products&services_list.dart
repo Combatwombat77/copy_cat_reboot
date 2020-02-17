@@ -39,7 +39,7 @@ class NotesListState extends State<NotesList> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          _NoteTitle(notes[index]['products']),
+                          _NoteTitle(notes[index]['title']),
                           Container(height: 4,),
                         ],
                       ),
