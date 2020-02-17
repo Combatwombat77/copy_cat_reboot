@@ -51,6 +51,15 @@ class DBManagerGuide {
         whereArgs: [note['id']]);
   }
 
+  static Future<List<Map<String, dynamic>>> getListChall2() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('solutions');
+    }
+
+   }
+
     static Future<List<Map<String, dynamic>>> getListChall(int i) async {
     if (db == null) {
       await openDB();

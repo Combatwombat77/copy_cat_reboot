@@ -2,6 +2,7 @@ import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
 import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/solutions_mapping.dart' as solutionsDetails;
+import 'package:copy_cat/ui/pages/swot_elements/final_table.dart';
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/models/db2.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
   
@@ -183,8 +185,9 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.info),
+            icon: Icon(FontAwesomeIcons.arrowRight),
               onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> IGCTableFinal()));
               }
           )],
         bottom: 
@@ -438,9 +441,7 @@ class Challenges extends StatelessWidget {
                             },
                             ),
                             title: Text('What is the impact of the challenge?'),
-                            // subtitle: Text('guiding questions'),
-                            // subtitle: listMethod(1),
-                            subtitle: Text(DBManagerGuide.getListChall(1).toString()),
+                            subtitle: Text('guiding questions'),
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=> ChallengeNote(NoteMode.Adding, null, "What is the impact of the challenge?")));
                             },
@@ -524,14 +525,32 @@ class Challenges extends StatelessWidget {
                 }
 
   Future<Widget> listMethod(int i, BuildContext context) async {
+    String test = await DBManagerGuide.getListChall(i).toString();
     return ListView.builder(
       itemBuilder: (context, i){
-        return Text(DBManagerGuide.getListChall(i).toString());
+        return Text(test);
       },
     );
   }
              
 
+}
+
+class _NoteTitle extends StatelessWidget {
+  final String _title;
+
+  _NoteTitle(this._title);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold
+      ),
+    );
+  }
 }
 
 
