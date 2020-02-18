@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/models/db2.dart';
+import 'package:copy_cat/ui/pages/swot_elements/final_table.dart';
 
 import 'igc.dart' as igc;
 
@@ -59,13 +60,22 @@ class _ViewIGCState extends State<ViewIGC> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.postName),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            color: Colors.white,
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => returnPageFunction(widget.postName, widget.question)));
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => returnPageFunction(widget.postName, widget.question)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => IGCTableFinal()));
         },
         backgroundColor: Uidata.btnColor,
-        child: Icon(Icons.add),
+        child: Icon(Icons.arrow_forward)
       ),
       body: FutureBuilder(
        future: returnFunction(widget.postName),
@@ -140,7 +150,7 @@ class _NoteDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(description, style: TextStyle(color: Colors.grey.shade600), maxLines: 2,
+    return Text("Answer: " + description, style: TextStyle(color: Colors.grey.shade600), maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
   }
