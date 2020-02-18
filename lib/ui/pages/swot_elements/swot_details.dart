@@ -30,15 +30,14 @@ class SwotDetailsState extends State<SwotDetails> {
 
   String swotTitle;
   String swotDescription;
-  String swotFor, swotBy;
+
 
 
 
 
   TextEditingController _swotTitleController = new TextEditingController();
   TextEditingController _swotDescriptionController = new TextEditingController();
-  TextEditingController _swotForController = new TextEditingController();
-  TextEditingController _swotByController = new TextEditingController();
+
 
   Color labelColor = Colors.grey;
 
@@ -60,18 +59,7 @@ class SwotDetailsState extends State<SwotDetails> {
       }
     );
 
-    _swotByController.addListener((){
-        setState(() {
-          swotBy = _swotTitleController.text;
-        });
-      }
-    );
-
-    _swotForController.addListener((){
-      setState(() {
-        swotFor = _swotForController.text;
-      });
-    });
+   
   }
 
   bool validateForm() {

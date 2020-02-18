@@ -6,13 +6,13 @@ class GainsProvider {
 
   static Future open() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'Gains.db'),
+      join(await getDatabasesPath(), 'Gain.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         db.execute('''
           create table Gains(
             id integer primary key autoincrement,
-            title text not null,
+            title text not null
           );
         ''');
       }
