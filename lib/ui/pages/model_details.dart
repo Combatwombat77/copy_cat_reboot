@@ -7,8 +7,6 @@ import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/models/db2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'igc.dart';
@@ -242,7 +240,7 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
   }
              
 
-             
+
 class _NoteTitle extends StatelessWidget {
   final String _title;
 

@@ -358,127 +358,129 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
       appBar: AppBar(
         title: Text("Final Answers"),
       ),
-      body: Container(
-        child: Table(
-          border: TableBorder.all(),
-          children: [
-            TableRow(children: [
-              Text("Challenges", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
-              Text("Impact Gap", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
-              Text("Solutions", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
-            ]),
-            TableRow(
-              children: [
-                Container(
-          height: 150,
-          color: Colors.white,
-          child: FutureBuilder(
-                    future: DBManagerGuide.getListSol(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          final notes = snapshot.data;
-                          return ListView.builder(
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                },
-                                child: Card(
-                                  elevation: 5.0,
-                                  color: Colors.green,
-                                  child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        SwotTitle(notes[index]['title']),
-                                        Container(height: 4,),
-                                        // _NoteDescription(notes[index]['description'])
-                                      ],
+      body: Center(
+        child: Container(
+          child: Table(
+            border: TableBorder.all(),
+            children: [
+              TableRow(children: [
+                Text("Challenges", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
+                Text("Impact Gap", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
+                Text("Solutions", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, )),
+              ]),
+              TableRow(
+                children: [
+                  Container(
+            height: 150,
+            color: Colors.white,
+            child: FutureBuilder(
+                      future: DBManagerGuide.getListSol(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            final notes = snapshot.data;
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                  },
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: Colors.green,
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SwotTitle(notes[index]['title']),
+                                          Container(height: 4,),
+                                          // _NoteDescription(notes[index]['description'])
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                 
-                );
-              },
-              itemCount: notes == null? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),),
+                   
+                  );
+                },
+                itemCount: notes == null? 0 : notes.length,
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),),
 
-      Container(
-          height: 150,
-          color: Colors.white,
-          child: FutureBuilder(
-                    future: DBManagerGuide.getListChall2(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          final notes = snapshot.data;
-                          return ListView.builder(
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                },
-                                child: Card(
-                                  elevation: 5.0,
-                                  color: Colors.blue,
-                                  child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        SwotTitle(notes[index]['title']),
-                                        Container(height: 4,),
-                                        // _NoteDescription(notes[index]['description'])
-                                      ],
+        Container(
+            height: 150,
+            color: Colors.white,
+            child: FutureBuilder(
+                      future: DBManagerGuide.getListChall2(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            final notes = snapshot.data;
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                  },
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: Colors.blue,
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SwotTitle(notes[index]['title']),
+                                          Container(height: 4,),
+                                          // _NoteDescription(notes[index]['description'])
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                 
-                );
-              },
-              itemCount: notes == null? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),),
+                   
+                  );
+                },
+                itemCount: notes == null? 0 : notes.length,
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),),
 
-      Container(
-          height: 150,
-          color: Colors.white,
-          child: FutureBuilder(
-                    future: DBManagerGuide.getListImp(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          final notes = snapshot.data;
-                          return ListView.builder(
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                },
-                                child: Card(
-                                  elevation: 5.0,
-                                  color: Colors.blue,
-                                  child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        SwotTitle(notes[index]['title']),
-                                        Container(height: 4,),
-                                        // _NoteDescription(notes[index]['description'])
-                                      ],
+        Container(
+            height: 150,
+            color: Colors.white,
+            child: FutureBuilder(
+                      future: DBManagerGuide.getListImp(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            final notes = snapshot.data;
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                  },
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: Colors.blue,
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SwotTitle(notes[index]['title']),
+                                          Container(height: 4,),
+                                          // _NoteDescription(notes[index]['description'])
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                 
-                );
-              },
-              itemCount: notes == null? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),),
-              ]
-            )
-          ],
+                   
+                  );
+                },
+                itemCount: notes == null? 0 : notes.length,
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),),
+                ]
+              )
+            ],
+          ),
         ),
       ),
     );
