@@ -6,7 +6,7 @@ class PainsProvider {
 
   static Future open() async {
     db = await openDatabase(
-      join(await getDatabasesPath(), 'Pains.db'),
+      join(await getDatabasesPath(), 'Pain.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         db.execute('''

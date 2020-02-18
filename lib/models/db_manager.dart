@@ -605,3 +605,49 @@ class Note {
 
 
 }
+
+class DBManagerCustomer{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'customer.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create Customer (
+            id integer primary key autoincrement,
+            customerTitle text not null
+            
+          );''');
+      });
+      }
+
+       static Future insertCustomer(Map<String, dynamic> note) async {
+    await db.insert('Customer', note);
+  }
+
+  static Future deleteCustomer(int id) async {
+    await db.delete(
+      'Customer',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
+
+  static Future updateCustomer(Map<String, dynamic> note) async {
+    await db.update(
+        'Customer',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getCustomerList() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('Customer');
+    }
+
+   }
+
+}  
