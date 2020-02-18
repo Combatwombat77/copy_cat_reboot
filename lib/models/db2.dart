@@ -13,18 +13,21 @@ class DBManagerGuide {
         await db.execute('''
           create table challenges(
             id integer primary key autoincrement,
+            question text not null,
             title text not null
            
           );''');
           await db.execute('''
           create table impacts(
             id integer primary key autoincrement,
+            question text not null,
             title text not null
    
           );''');
           await db.execute('''
           create table solutions(
             id integer primary key autoincrement,
+            question text not null,
             title text not null
           );''');
       });
@@ -50,6 +53,15 @@ class DBManagerGuide {
         where: 'id = ?',
         whereArgs: [note['id']]);
   }
+
+  static Future<List<Map<String, dynamic>>> getListChall2() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('challenges');
+    }
+
+   }
 
     static Future<List<Map<String, dynamic>>> getListChall(int i) async {
     if (db == null) {
