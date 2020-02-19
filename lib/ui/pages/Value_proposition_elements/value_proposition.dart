@@ -129,7 +129,7 @@ class ValueHome extends StatelessWidget{
         onPressed: (){
            Navigator.push(context, MaterialPageRoute(builder: (context) => customer.CustomerDetails(customer.NoteMode.Adding, null)));
         },
-        child: Icon(Icons.exit_to_app),
+        child: Icon(Icons.add),
       ),
       body:
           ValueDashboard(),
