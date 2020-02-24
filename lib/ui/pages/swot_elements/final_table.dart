@@ -31,7 +31,7 @@ class _TableWidgetState extends State<TableWidget>{
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back),
         onPressed: (){
-               Navigator.pop(context);
+        Navigator.pop(context);
         },
         ),
         title: Text('SWOT SUMMARY'),
@@ -60,7 +60,7 @@ class _TableWidgetState extends State<TableWidget>{
           border: TableBorder.all(),
           children: <TableRow>[
             TableRow(children: <Widget> [
-             Container(
+              Container(
                 margin: EdgeInsets.all(2),
                 color: Colors.white,
                 width: 50.0,
@@ -384,7 +384,7 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
                                   },
                                   child: Card(
                                     elevation: 5.0,
-                                    color: Colors.blue,
+                                    color: Colors.yellow,
                                     child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
