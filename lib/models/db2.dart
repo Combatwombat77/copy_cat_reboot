@@ -107,7 +107,7 @@ class DBManagerGuide {
       return await db.query('solutions');
     }
 
-   }
+}
 
    // IMPACT METHODS
 
