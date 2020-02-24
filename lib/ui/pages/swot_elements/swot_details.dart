@@ -209,6 +209,3 @@ class SwotDetailsState extends State<SwotDetails> {
 
 
 }
-
-
-

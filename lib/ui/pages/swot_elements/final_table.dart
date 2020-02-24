@@ -368,42 +368,6 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
               ]),
               TableRow(
                 children: [
-                  Container(
-            height: 150,
-            color: Colors.white,
-            child: FutureBuilder(
-                      future: DBManagerGuide.getListSol(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            final notes = snapshot.data;
-                            return ListView.builder(
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                  },
-                                  child: Card(
-                                    elevation: 5.0,
-                                    color: Colors.green,
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          SwotTitle(notes[index]['title']),
-                                          Container(height: 4,),
-                                          // _NoteDescription(notes[index]['description'])
-                                        ],
-                                      ),
-                                    ),
-                   
-                  );
-                },
-                itemCount: notes == null? 0 : notes.length,
-              );
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        ),),
-
         Container(
             height: 150,
             color: Colors.white,
@@ -429,8 +393,7 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
                                           // _NoteDescription(notes[index]['description'])
                                         ],
                                       ),
-                                    ),
-                   
+                                    ),                                                    
                   );
                 },
                 itemCount: notes == null? 0 : notes.length,
@@ -465,8 +428,7 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
                                           // _NoteDescription(notes[index]['description'])
                                         ],
                                       ),
-                                    ),
-                   
+                                    ),                  
                   );
                 },
                 itemCount: notes == null? 0 : notes.length,
@@ -475,6 +437,44 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
             return Center(child: CircularProgressIndicator());
           },
         ),),
+
+        Container(
+            height: 150,
+            color: Colors.white,
+            child: FutureBuilder(
+                      future: DBManagerGuide.getListSol(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            final notes = snapshot.data;
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                  },
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: Colors.green,
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SwotTitle(notes[index]['title']),
+                                          Container(height: 4,),
+                                          // _NoteDescription(notes[index]['description'])
+                                        ],
+                                      ),
+                                    ),                  
+                  );
+                },
+                itemCount: notes == null? 0 : notes.length,
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),),
+
+
+
                 ]
               )
             ],
