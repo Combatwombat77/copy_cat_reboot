@@ -45,19 +45,24 @@ class ValueDashboardState extends State<ValueDashboard> {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return  Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(0),
                       child: Card(
+                        color: Colors.grey.shade200,
                    child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                         child: Card(
+                          elevation: 5.0,
                           child: Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Container(
                               child: Column(
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     CustomerTitle(notes[index]['customerTitle']),
+                                     Padding(
+                                       padding: const EdgeInsets.only(top:5.0, left: 15.0),
+                                       child: CustomerTitle(notes[index]['customerTitle']),
+                                     ),
                                     ],
                                   ),
                                   
@@ -158,11 +163,10 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
   Widget build(BuildContext context) {
     return Scaffold(
 //      drawer: SideDrawer(),
-     
       appBar: AppBar(
         title: Text("Customer Details"),
         actions: <Widget>[
-         IconButton( icon: Icon(Icons.help),
+        IconButton( icon: Icon(Icons.help),
           onPressed: (){
 
           }),

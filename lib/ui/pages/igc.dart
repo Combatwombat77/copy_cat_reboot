@@ -157,8 +157,8 @@ class Challenges extends StatelessWidget {
                             child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
                         ),
                         ],
-                       ),
-                     ),
+                      ),
+                    ),
                     );
                 }
 
@@ -194,7 +194,7 @@ class ImpactGap extends StatelessWidget {
               leading: IconButton(
           icon: Icon(Icons.info),
           onPressed: (){
-             return Alert(
+            return Alert(
               context: context,
               title: 'guiding question',
               desc:'Who or what is not being served and what is missing to bridge that gap? What actions can be taken to fill those gaps?',
@@ -222,7 +222,7 @@ class ImpactGap extends StatelessWidget {
               leading: IconButton(
           icon: Icon(Icons.info),
           onPressed: (){
-           return Alert(
+          return Alert(
               context: context,
               title: 'guiding question',
               desc:'What is missing(specific regulations, knowledge sharing, new efforts,partnership etc)that would further link up the solutions and achieve greater collective impact?',
@@ -320,8 +320,8 @@ class ImpactGap extends StatelessWidget {
               child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
           ),
           ],
-         ),
-       ),
+        ),
+      ),
       );
   }
 
@@ -431,8 +431,8 @@ class Solutions extends StatelessWidget {
                               child: Text("Hints: tap on the tile to add or edit your answer", style: TextStyle(color: Colors.white),),),
                           ),
                           ],
-                         ),
-                       ),
+                        ),
+                      ),
                       );
                   }
                 
@@ -441,7 +441,7 @@ class Solutions extends StatelessWidget {
                   
 
                   void pushSolutionsPage(BuildContext context, String question) {
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => ViewIGC("Solutions", question)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewIGC("Solutions", question)));
                   }
 }
 
@@ -509,8 +509,8 @@ class SolutionNoteState extends State<SolutionNote> {
                       'title': title,
                     });
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   DBManagerGuide.updateSolutions({
-                     'id': widget.note['id'],
+                  DBManagerGuide.updateSolutions({
+                    'id': widget.note['id'],
                       'title': title,
                     });
                   }
@@ -528,7 +528,7 @@ class SolutionNoteState extends State<SolutionNote> {
                       Navigator.pop(context);
                     }),
                   )
-                 : Container()
+                : Container()
               ],
             )
           ],
@@ -601,10 +601,10 @@ class ChallengeNoteState extends State<ChallengeNote> {
                     }
                     );
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   DBManagerGuide.updateChallenge({
-                     'id': widget.note['id'],
-                     'title': title,
-                   });
+                  DBManagerGuide.updateChallenge({
+                    'id': widget.note['id'],
+                    'title': title,
+                  });
                   }
                   Navigator.pop(context);
                 }),
@@ -620,7 +620,7 @@ class ChallengeNoteState extends State<ChallengeNote> {
                       Navigator.pop(context);
                     }),
                   )
-                 : Container()
+                : Container()
               ],
             )
           ],
@@ -695,8 +695,8 @@ class ImpactNoteState extends State<ImpactNote> {
                     }
                     );
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                   DBManagerGuide.updateImpacts({
-                     'id': widget.note['id'],
+                  DBManagerGuide.updateImpacts({
+                    'id': widget.note['id'],
                       'title': title
                     }
                     );
@@ -715,7 +715,7 @@ class ImpactNoteState extends State<ImpactNote> {
                       Navigator.pop(context);
                     }),
                   )
-                 : Container()
+                : Container()
               ],
             )
           ],
