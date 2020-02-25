@@ -6,10 +6,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:copy_cat/providers/opps_providers.dart';
 import 'package:copy_cat/models/db2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/challenge_mapping_details.dart' as challengeDetail;
-import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/solutions_mapping.dart' as solutionsDetails;
-
-
 
 enum NoteMode { 
   Editing,

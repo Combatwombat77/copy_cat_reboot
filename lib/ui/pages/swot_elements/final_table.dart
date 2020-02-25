@@ -350,13 +350,34 @@ class IGCTableFinal extends StatefulWidget {
 }
 
 class _IGCTableFinalState extends State<IGCTableFinal> {
+      static GlobalKey previewContainer1 = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Final Answers"),
-      ),
-      body: Center(
+      
+      actions: <Widget>[
+        IconButton(icon: Icon(Icons.save),
+        onPressed: TakeScreenShot,
+        ),
+        ],),    
+      body: RepaintBoundary(
+        key: previewContainer1,
+        child: SingleChildScrollView(
+        padding: EdgeInsets.all( 10),
+        child: Container(
+          color: Colors.white,
+          child:Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Card(
+              child: Column(
+                children: <Widget>[
+                  Row(children: <Widget>[
+                    Text("The Impact Gap Canvas",  style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline))
+                  ],),Center(
         child: Container(
           child: Table(
             border: TableBorder.all(),
@@ -481,7 +502,37 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
           ),
         ),
       ),
+        ]
+        )
+        )
+        ]
+        ),
+    ),
+    ),
+    ),
     );
+  }
+  Future<Uint8List> TakeScreenShot() async{
+      try {
+    print('inside');
+      RenderRepaintBoundary boundary =
+          previewContainer1.currentContext.findRenderObject();
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData.buffer.asUint8List();
+      var bs64 = base64Encode(pngBytes);
+
+      var filePath = await ImagePickerSaver.saveFile(
+        fileData: byteData.buffer.asUint8List(),
+      );
+      print(filePath);
+      // print(pngBytes);
+      // print(bs64);
+      setState(() {});
+      return pngBytes;
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
