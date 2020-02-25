@@ -25,7 +25,7 @@ class ValueDashboardState extends State<ValueDashboard> {
     return Scaffold(
 //      drawer: SideDrawer(),
       
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+     // // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text("Value Proposition canvas"),
         

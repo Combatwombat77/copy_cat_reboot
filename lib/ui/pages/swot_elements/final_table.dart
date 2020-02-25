@@ -356,7 +356,7 @@ class _IGCTableFinalState extends State<IGCTableFinal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Final Answers"),
+        title: Text("Preview"),
       
       actions: <Widget>[
         IconButton(icon: Icon(Icons.save),
