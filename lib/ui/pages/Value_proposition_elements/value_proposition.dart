@@ -269,7 +269,7 @@ class CustomerCategory extends StatelessWidget {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What is the customer category',
+                                     Text('What is the customer category?',
                                      style: TextStyle(
                                        fontSize: 15.0),
                                      ),
@@ -288,10 +288,12 @@ class CustomerCategory extends StatelessWidget {
                                         color: Colors.white,
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
+                                          
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What is the customer category?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -366,7 +368,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What are the current negative/undesirable Experiences?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -407,7 +410,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('Unmet needs')
+                                     Text("What are the consumer's unmet needs?")
                                     ],
                                   ),
                                   Row(
@@ -426,7 +429,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: "What are the consumer's unmet needs",
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -486,7 +490,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What are the concerns about the current solutions?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -546,7 +551,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What are the Competing products?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -606,7 +612,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'How does the competing product performance compare?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -699,7 +706,8 @@ class ProductCategory extends StatelessWidget {
                                           TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'Define the product/service',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -775,7 +783,8 @@ class ProductCategory extends StatelessWidget {
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'Solutions to current negative/undesirable Experiences',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -835,7 +844,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'Solutions to the unmet needs',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -895,7 +905,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What is the response to concerns about current solutions?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -955,7 +966,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What differentiates your product/service?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
@@ -1015,7 +1027,8 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Answer',
+              title: 'What is your evidence of the product/service performance?',
+              desc: 'Answer:',
               content: TextField(
                 controller: customController,
               ),
