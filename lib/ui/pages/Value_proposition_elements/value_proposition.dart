@@ -1,12 +1,16 @@
 import 'package:copy_cat/models/db_manager.dart';
-import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart' as customer;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart' as subject;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/values_db.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 
-
+  final teFirstName = TextEditingController();
+  final teLastFirstName = TextEditingController();
+  final teDOB = TextEditingController();
+  Value value;
 
 
 class ValueDashboard extends StatefulWidget{
@@ -43,12 +47,12 @@ class ValueDashboardState extends State<ValueDashboard> {
        floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
         onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => customer.CustomerDetails(customer.NoteMode.Adding, null)));
+           Navigator.push(context, MaterialPageRoute(builder: (context) => subject.CustomerDetails(subject.NoteMode.Adding, null)));
         },
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-       future: DBManagerCustomer.getCustomerList(),
+       future: DBManagerCustomer.getSubjectList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -71,7 +75,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                     children: <Widget>[
                                      Padding(
                                        padding: const EdgeInsets.only(top:5.0, left: 15.0),
-                                       child: CustomerTitle(notes[index]['customerTitle']),
+                                       child: CustomerTitle(notes[index]['SubjectTitle']),
                                      ),
                                     ],
                                   ),
@@ -96,7 +100,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                     IconButton(
                                        icon: Icon(Icons.delete),
                                        onPressed: (){
-                                         DBManagerCustomer.deleteCustomer(notes[index]['id']);
+                                         DBManagerCustomer.deleteSubject(notes[index]['id']);
                                      },
                                     ),
                                   ],
@@ -657,6 +661,13 @@ TextEditingController customController;
 
 
 class ProductCategory extends StatelessWidget {
+
+   Widget buildAboutDialog(
+      BuildContext context, _myHomePageState, bool isEdit, Value value) {
+    if (user != null) {
+      this.Value=value;
+      teFirstName.text = user.firstName;
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1027,7 +1038,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What is your evidence of the product/service performance?',
+              title: new Text(isEdit ? 'Edit' : 'Add new User'),
               desc: 'Answer:',
               content: TextField(
                 controller: customController,
@@ -1036,8 +1047,8 @@ TextEditingController customController;
                 DialogButton(
                 child: Text('Done'),
                 onPressed: (){
-                                    Navigator.pop(context);
-
+                  addRecord(isEdit);
+                Navigator.of(context).pop();
                 },)
               ]).show();                                      },
                                     ),
@@ -1191,7 +1202,14 @@ class Questions extends StatelessWidget{
       ),
       );
   }
+    Future addRecord(bool isEdit) async {
+    var db = new DatabaseHelper();
+    var user = new Value(teFirstName.text);
+    if (isEdit) {
+      user.setValueId(this.value.id);
+      await db.update(value);
+    } else {
+      await db.saveValue(value);
+    }
+  }
 }
-
-
- 
