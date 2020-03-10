@@ -193,12 +193,12 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
         actions: <Widget>[
         IconButton( icon: Icon(Icons.help),
           onPressed: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
+            //                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
 
           }),
           IconButton( icon: Icon(Icons.input),
           onPressed: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
+           //                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
 
           }),
         ],
@@ -273,10 +273,10 @@ class CustomerCategory extends StatelessWidget {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What is the customer category?',
-                                     style: TextStyle(
-                                       fontSize: 15.0),
-                                     ),
+                                    Text('What is the customer category',
+                                    style: TextStyle(
+                                      fontSize: 15.0),
+                                    ),
                                     ],
                                   ),
                                   Row(
@@ -292,12 +292,10 @@ class CustomerCategory extends StatelessWidget {
                                         color: Colors.white,
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                          
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What is the customer category?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -305,8 +303,7 @@ TextEditingController customController;
                 DialogButton(
                 child: Text('Done'),
                 onPressed: (){
-                                    Navigator.pop(context);
-
+                  Navigator.pop(context);
                 },)
               ]).show();                                      },
                                     ),
@@ -317,9 +314,9 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
                                         return Alert(
               context: context,
               title: 'B1',
@@ -332,8 +329,7 @@ TextEditingController customController;
 
                 },)
               ]).show();
-              
-                                     },
+        },
                                     ),
                                   ],
                                 )
@@ -350,10 +346,10 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What are the current negative/undesirable Experiences',
-                                     style: TextStyle(
-                                       fontSize: 14.0
-                                       ),)
+                                    Text('What are the current negative/undesirable Experiences',
+                                    style: TextStyle(
+                                      fontSize: 14.0
+                                      ),)
                                     ],
                                   ),
                                   Row(
@@ -372,8 +368,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What are the current negative/undesirable Experiences?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -393,11 +388,11 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                      // DBManagerSwot.deleteModel(notes[index]['id']);
+                                    },
                                     ),
                                   ],
                                 )
@@ -414,7 +409,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text("What are the consumer's unmet needs?")
+                                    Text('Unmet needs')
                                     ],
                                   ),
                                   Row(
@@ -433,8 +428,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: "What are the consumer's unmet needs",
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -454,11 +448,11 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                      // DBManagerSwot.deleteModel(notes[index]['id']);
+                                    },
                                     ),
                                   ],
                                 )
@@ -475,7 +469,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What are the concerns about the current solutions?')
+                                    Text('What are the concerns about the current solutions?')
                                     ],
                                   ),
                                   Row(
@@ -492,10 +486,9 @@ TextEditingController customController;
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
 TextEditingController customController;
- return Alert(
+return Alert(
               context: context,
-              title: 'What are the concerns about the current solutions?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -515,11 +508,11 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                      // DBManagerSwot.deleteModel(notes[index]['id']);
+                                    },
                                     ),
                                   ],
                                 )
@@ -536,7 +529,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What are the Competing products?')
+                                    Text('What are the Competing products?')
                                     ],
                                   ),
                                   Row(
@@ -555,8 +548,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What are the Competing products?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -576,11 +568,11 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                  IconButton(
+                                    icon: Icon(Icons.info),
+                                    onPressed: (){
+                                    // DBManagerSwot.deleteModel(notes[index]['id']);
+                                  },
                                     ),
                                   ],
                                 )
@@ -597,7 +589,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('How does the competing product performance compare?')
+                                    Text('How does the competing product performance compare?')
                                     ],
                                   ),
                                   Row(
@@ -616,8 +608,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'How does the competing product performance compare?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -637,11 +628,10 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                  },
                                     ),
                                   ],
                                 )
@@ -651,8 +641,8 @@ TextEditingController customController;
                         )
                     ),  
                         ],
-                       ),
-                     ),
+                      ),
+                    ),
       ]),
     );
                 }
@@ -662,12 +652,7 @@ TextEditingController customController;
 
 class ProductCategory extends StatelessWidget {
 
-   Widget buildAboutDialog(
-      BuildContext context, _myHomePageState, bool isEdit, Value value) {
-    if (user != null) {
-      this.Value=value;
-      teFirstName.text = user.firstName;
-    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -717,8 +702,7 @@ class ProductCategory extends StatelessWidget {
                                           TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Define the product/service',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -739,9 +723,9 @@ class ProductCategory extends StatelessWidget {
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
                                         return Alert(
               context: context,
               title: 'B1',
@@ -754,8 +738,7 @@ class ProductCategory extends StatelessWidget {
 
                 },)
               ]).show();
-              
-                                     },
+            },
                                     ),
                                   ],
                                 )
@@ -772,10 +755,10 @@ class ProductCategory extends StatelessWidget {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('Solutions to current negative/undesirable Experiences',
-                                     style: TextStyle(
-                                       fontSize: 14.0
-                                       ),)
+                                  Text('Solutions to current negative/undesirable Experiences',
+                                  style: TextStyle(
+                                    fontSize: 14.0
+                                    ),)
                                     ],
                                   ),
                                   Row(
@@ -794,8 +777,7 @@ class ProductCategory extends StatelessWidget {
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Solutions to current negative/undesirable Experiences',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -855,8 +837,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'Solutions to the unmet needs',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -876,11 +857,10 @@ TextEditingController customController;
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
                                       },
                                     ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                  },
                                     ),
                                   ],
                                 )
@@ -897,7 +877,7 @@ TextEditingController customController;
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                     Text('What is the response to concerns about current solutions?')
+                                    Text('What is the response to concerns about current solutions?')
                                     ],
                                   ),
                                   Row(
@@ -916,8 +896,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What is the response to concerns about current solutions?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -977,8 +956,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: 'What differentiates your product/service?',
-              desc: 'Answer:',
+              title: 'Answer',
               content: TextField(
                 controller: customController,
               ),
@@ -1038,7 +1016,7 @@ TextEditingController customController;
 TextEditingController customController;
  return Alert(
               context: context,
-              title: new Text(isEdit ? 'Edit' : 'Add new User'),
+              title:  ('Add new User'),
               desc: 'Answer:',
               content: TextField(
                 controller: customController,
@@ -1047,7 +1025,7 @@ TextEditingController customController;
                 DialogButton(
                 child: Text('Done'),
                 onPressed: (){
-                  addRecord(isEdit);
+                 // addRecord(isEdit);
                 Navigator.of(context).pop();
                 },)
               ]).show();                                      },
@@ -1206,7 +1184,7 @@ class Questions extends StatelessWidget{
     var db = new DatabaseHelper();
     var user = new Value(teFirstName.text);
     if (isEdit) {
-      user.setValueId(this.value.id);
+     // user.setValueId(this.value.id);
       await db.update(value);
     } else {
       await db.saveValue(value);
