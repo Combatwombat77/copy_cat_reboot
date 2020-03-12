@@ -304,11 +304,11 @@ TextEditingController customController;
                 DialogButton(
                 child: Text('Done'),
                 onPressed: (){
-                 { final answer = customController.text;
+                final answer = customController.text;
                   DBManagerAnswer1.insertAnswer1({
                       'answer': answer
                       }
-                    );}
+                    );
                   Navigator.pop(context);
                 },)
               ]).show();                                      },
