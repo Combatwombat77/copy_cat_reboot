@@ -1,96 +1,49 @@
 import 'dart:async';
-import 'dart:io' as io;
 
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = new DatabaseHelper.internal();
-  factory DatabaseHelper() => _instance;
-  static Database _db;
+class DBManagerAnswer1{
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'answer1.db'),
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute('''
+          create table Answer1(
+            id integer primary key autoincrement,
+            answer text not null,
+          );''');
+      });
+      }
 
-  Future<Database> get db async {
-    if (_db != null) return _db;
-    _db = await initDb();
-    return _db;
+       static Future insertAnswer1(Map<String, dynamic> note) async {
+    await db.insert('Answer1', note);
   }
 
-  DatabaseHelper.internal();
+  static Future deleteAnswer1(int id) async {
+    await db.delete(
+      'Answer1',
+      where: 'id = ?',
+      whereArgs: [id]);
+  }
 
-  initDb() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-        String path = join(documentsDirectory.path, "main.db");
-        var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
-        return theDb;
-      }
-    
-      void _onCreate(Database db, int version) async {
-        // When creating the db, create the table
-        await db.execute(
-            "CREATE TABLE Value(id INTEGER PRIMARY KEY, firstname TEXT, )");
-      }
-    
-      Future<int> saveValue(Value value) async {
-        var dbClient = await db;
-        int res = await dbClient.insert("Value", value.toMap());
-        return res;
-      }
-    
-      Future<List<Value>> getValue() async {
-        var dbClient = await db;
-        List<Map> list = await dbClient.rawQuery('SELECT * FROM Value');
-        List<Value> employees = new List();
-        for (int i = 0; i < list.length; i++) {
-          var value =
-              new Value(list[i]["firstname"]);
-          value.setValueId(list[i]["id"]);
-          employees.add(value);
-        }
-        print(employees.length);
-        return employees;
-      }
-    
-      Future<int> deleteUsers(Value value) async {
-        var dbClient = await db;
-    
-        int res =
-            await dbClient.rawDelete('DELETE FROM User WHERE id = ?', [value.id]);
-        return res;
-      }
-    
-      Future<bool> update(Value value) async {
-        var dbClient = await db;
-        int res =   await dbClient.update("value", value.toMap(),
-            where: "id = ?", whereArgs: <int>[value.id]);
-        return res > 0 ? true : false;
-      }
+  static Future updateAnswer1(Map<String, dynamic> note) async {
+    await db.update(
+        'Answer1',
+        note,
+        where: 'id = ?',
+        whereArgs: [note['id']]);
+  }
+
+   static Future<List<Map<String, dynamic>>> getAnswer1List() async {
+    if (db == null) {
+      await openDB();
+    }else{
+      return await db.query('Answer1');
     }
 
+   }
 
-
-    class Value {
-
-  int id;
-  String _firstName;
-
-
-  Value(this._firstName);
-
-  Value.map(dynamic obj) {
-    this._firstName = obj["firstname"];
-
-  }
-
-  String get firstName => _firstName;
-
-  Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map["firstname"] = _firstName;
-
-    return map;
-  }
-  void setValueId(int id) {
-    this.id = id;
-  }
-}
+} 
