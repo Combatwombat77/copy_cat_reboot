@@ -19,7 +19,18 @@ class NoteListState extends State<Answer1List> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Strengths'),
+        title: Text('        Customer Category'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.black,
+              Colors.blue
+            ])
+          ),
+        ),
       ),
       body: FutureBuilder(
         future: DBManagerAnswer1.getAnswer1List(),
@@ -54,14 +65,6 @@ class NoteListState extends State<Answer1List> {
           }
           return Center(child: CircularProgressIndicator());
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Answers1(NoteMode.Adding, null)));
-        },
-        child: Icon(Icons.add),
       ),
     );
   }

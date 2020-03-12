@@ -13,7 +13,7 @@ class DBManagerAnswer1{
         await db.execute('''
           create table Answer1(
             id integer primary key autoincrement,
-            answer text not null,
+            answer text not null
           );''');
       });
       }
