@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 class Answer1List extends StatefulWidget {
 
+final String question;
 
+Answer1List(this.question);
   @override
   NoteListState createState() {
     return new NoteListState();
@@ -15,14 +17,43 @@ class Answer1List extends StatefulWidget {
 
 class NoteListState extends State<Answer1List> {
 
+ @override
+  void initState(){
+    super.initState();
+    print(widget.question);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Answers'),
+        title: Text('Customer Category'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.black,
+              Colors.blue
+            ])
+          ),
+        ),
       ),
-      body: FutureBuilder(
-        future: DBManagerCustAnswers.getAnswer1List(),
+      body: Stack(fit: StackFit.expand,
+      children: <Widget>[
+        Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin:Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors:[
+              Colors.blue,
+              Colors.black
+            ]
+          )
+        ),
+      ),FutureBuilder(
+        future: DBManagerAnswers.getLists(widget.question),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -37,11 +68,15 @@ class NoteListState extends State<Answer1List> {
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30.0, bottom: 30, left: 13.0, right: 22.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           _NoteTitle(notes[index]['answer']),
                           Container(height: 4,),
+                          IconButton(icon: Icon(Icons.edit),
+                           onPressed: (
+
+                           ) {},),
                         ],
                       ),
                     ),
@@ -54,15 +89,9 @@ class NoteListState extends State<Answer1List> {
           return Center(child: CircularProgressIndicator());
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Answers1(NoteMode.Adding, null)));
-        },
-        child: Icon(Icons.add),
+      ],
       ),
-    );
+      );
   }
 }
 

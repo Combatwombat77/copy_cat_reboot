@@ -247,6 +247,9 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
 }
 
 class CustomerCategory extends StatefulWidget {
+
+     CustomerCategory();
+
   @override
   _CustomerCategoryState createState() => _CustomerCategoryState();
 }
@@ -255,6 +258,7 @@ class _CustomerCategoryState extends State<CustomerCategory> {
 
   TextEditingController customController = new TextEditingController();
   String testAnswer;
+  
 
   @override
   void initState(){
@@ -268,6 +272,16 @@ class _CustomerCategoryState extends State<CustomerCategory> {
       }
     );
   }
+
+  var items = [
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+
+];
 
 
   @override
@@ -287,9 +301,25 @@ class _CustomerCategoryState extends State<CustomerCategory> {
           )
         ),
       ),SafeArea(
-        child: ListView(
+       
+            child: ListView(
           children: <Widget>[
-            Card(
+            cardView("What is the customer category?",items[0]),
+            cardView("What are the current negative/undesirable Experiences",items[1]),
+            cardView("What are the concerns about the current solutions",items[2]),
+            cardView("Unmet needs",items[3]),
+            cardView("What are the Competing products?",items[4]),
+            cardView("How does the competing product performance compare?",items[5]),
+  
+                        ],
+            )
+            )
+            ]
+      )
+      );
+  }
+  Widget cardView(String cardName, String answerName){
+  return Card(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
@@ -297,10 +327,7 @@ class _CustomerCategoryState extends State<CustomerCategory> {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                    Text('What is the customer category',
-                                    style: TextStyle(
-                                      fontSize: 15.0),
-                                    ),
+                                    Text("$cardName")
                                     ],
                                   ),
                                   Row(
@@ -316,7 +343,7 @@ class _CustomerCategoryState extends State<CustomerCategory> {
                                         color: Colors.white,
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
- return Alert(
+return Alert(             
               context: context,
               title: 'Answer',
               content: TextField(
@@ -336,93 +363,19 @@ class _CustomerCategoryState extends State<CustomerCategory> {
                       customController.clear();
                   
                 },)
-              ]).show();                                      },
+              ]).show();                    
+                },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List()));
+                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName))); 
                                       },
                                     ),
                                     IconButton(
                                       icon: Icon(Icons.info),
                                       onPressed: (){
-                                        return Alert(
-              context: context,
-              title: 'B1',
-              desc:'How do those impacted by the challenge describe the challenge? How do they describe the effects?How is this challenge related to other challenges?',
-              buttons: [
-                DialogButton(
-                child: Text('Got it'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();
-        },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('What are the current negative/undesirable Experiences',
-                                    style: TextStyle(
-                                      fontSize: 14.0
-                                      ),)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                      // DBManagerSwot.deleteModel(notes[index]['id']);
                                     },
                                     ),
                                   ],
@@ -431,261 +384,48 @@ class _CustomerCategoryState extends State<CustomerCategory> {
                             ),
                           ),
                         )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('Unmet needs')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                      // DBManagerSwot.deleteModel(notes[index]['id']);
-                                    },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('What are the concerns about the current solutions?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                      // DBManagerSwot.deleteModel(notes[index]['id']);
-                                    },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('What are the Competing products?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                  IconButton(
-                                    icon: Icon(Icons.info),
-                                    onPressed: (){
-                                    // DBManagerSwot.deleteModel(notes[index]['id']);
-                                  },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('How does the competing product performance compare?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                  },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),  
-                        ],
-                      ),
-                    ),
-      ]),
-    );
+                    );
   }
 }
 
-// class CustomerCategory extends StatelessWidget  {
 
-//   TextEditingController customController = new TextEditingController();
+class ProductCategory extends StatefulWidget {
 
+
+     ProductCategory();
+
+  @override
+  ProductCategoryState createState() => ProductCategoryState();
+}
+
+class ProductCategoryState extends State<ProductCategory> {
+
+  TextEditingController customController = new TextEditingController();
+  String testAnswer;
   
-//                 }
-//             }
 
+  @override
+  void initState(){
+    super.initState();
 
+    customController.addListener(
+      (){
+        setState(() {
+          testAnswer = customController.text;
+        });
+      }
+    );
+  }
 
-class ProductCategory extends StatelessWidget {
+  var items = [
+  "Answer1",
+  "Answer2",
+  "Answer3",
+  "Answer4",
+  "Answer5",
+  "Answer6",
+
+];
 
 
   @override
@@ -707,390 +447,87 @@ class ProductCategory extends StatelessWidget {
       ),SafeArea(
         child: ListView(
           children: <Widget>[
-            Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     Text('Define the product/service',
-                                     style: TextStyle(
-                                       fontSize: 15.0),
-                                     ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-                                          TextEditingController customController;
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show(); 
-              },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                        return Alert(
-              context: context,
-              title: 'B1',
-              desc:'How do those impacted by the challenge describe the challenge? How do they describe the effects?How is this challenge related to other challenges?',
-              buttons: [
-                DialogButton(
-                child: Text('Got it'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();
-            },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                  Text('Solutions to current negative/undesirable Experiences',
-                                  style: TextStyle(
-                                    fontSize: 14.0
-                                    ),)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-TextEditingController customController;
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     Text('Solutions to the unmet needs')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-TextEditingController customController;
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.info),
-                                      onPressed: (){
-                                  },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                    Text('What is the response to concerns about current solutions?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-TextEditingController customController;
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     Text('What differentiates your product/service?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-TextEditingController customController;
- return Alert(
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                                    Navigator.pop(context);
-
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                    Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                     Text('What is your evidence of the product/service performance?')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                     // SwotDescription(notes[index]['SwotDescription']),
-                                      // Text(description)
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      FlatButton(
-                                        //                splashColor: Colors.grey,
-                                        color: Colors.white,
-                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
-                                        onPressed: (){
-TextEditingController customController;
- return Alert(
-              context: context,
-              title:  ('Add new User'),
-              desc: 'Answer:',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                 // addRecord(isEdit);
-                Navigator.of(context).pop();
-                },)
-              ]).show();                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.white,
-                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
-                                      onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SwotDetails(NoteMode.Editing,notes)));
-                                      },
-                                    ),
-                                     IconButton(
-                                       icon: Icon(Icons.info),
-                                       onPressed: (){
-                                        // DBManagerSwot.deleteModel(notes[index]['id']);
-                                     },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    ),  
+            cardView("What is the customer category?",items[0]),
+            cardView("What is the customer category?",items[0]),
+            cardView("What is the customer category?",items[0]),
+            cardView("What is the customer category?",items[0]),
+            cardView("What is the customer category?",items[0]),
+            cardView("What is the customer category?",items[0]),
+              
                         ],
                        ),
                      ),
       ]),
     );
                 }
+    Widget cardView(String cardName, String answerName){
+  return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                    Text("$cardName")
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                     // SwotDescription(notes[index]['SwotDescription']),
+                                      // Text(description)
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      FlatButton(
+                                        //                splashColor: Colors.grey,
+                                        color: Colors.white,
+                                        child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
+                                        onPressed: (){
+return Alert(             
+              context: context,
+              title: 'Answer',
+              content: TextField(
+                controller: customController,
+              ),
+              buttons: [
+                DialogButton(
+                child: Text('Done'),
+                onPressed: (){
+                  Navigator.pop(context);
+                  final answer = customController.text;
+                  print(answer);
+                    DBManagerAnswers.insertCustSegNote({
+                        'answer': answer.toString()
+                        }
+                      );
+                      customController.clear();
+                  
+                },)
+              ]).show();                    
+                },
+                                    ),
+                                    FlatButton(
+                                      color: Colors.white,
+                                      child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
+                                      onPressed: (){
+                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,))); 
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: (){
+                                    },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    );
+  }             
             }
 
 
