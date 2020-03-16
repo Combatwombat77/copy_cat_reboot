@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class Answer1List extends StatefulWidget {
 
 final String question;
+  final int modelId;
 
-Answer1List(this.question);
+Answer1List(this.question, this.modelId);
   @override
   NoteListState createState() {
     return new NoteListState();
@@ -62,7 +63,7 @@ class NoteListState extends State<Answer1List> {
           )
         ),
       ),FutureBuilder(
-        future: DBManagerAnswers.getLists(widget.question),
+        future: DBManagerAnswers.getLists(widget.question,widget.modelId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;

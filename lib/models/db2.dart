@@ -201,37 +201,43 @@ class DBManagerAnswers {
         await db.execute('''
           create table Answers1(
             id integer primary key autoincrement,
-            answer text not null
+            answer text not null,
+            modelID text not null
 
           );''');
         await db.execute('''
           create table Answers2(
             id integer primary key autoincrement,
             answer text not null
+            modelID text not null
 
           );''');
         await db.execute('''
           create table Answers3(
             id integer primary key autoincrement,
             answer text not null
+            modelID text not null
 
           );''');
         await db.execute('''
           create table Answers4(
             id integer primary key autoincrement,
             answer text not null
+            modelID text not null
 
           );''');
         await db.execute('''
           create table Answers5(
             id integer primary key autoincrement,
             answer text not null
+            modelID text not null
 
           );''');
         await db.execute('''
           create table Answers6(
             id integer primary key autoincrement,
             answer text not null
+            modelID text not null
 
           );''');
 
@@ -241,34 +247,79 @@ class DBManagerAnswers {
 
 
 
-  static Future<List> getLists(String tableName) async {
+  static Future<List> getLists(String tableName, int modelID) async {
     if (db == null) {
       await openDB();
     }else{
     if(tableName == "one") {
-      return await db.query("Answers1");
+      List<Map> results = await db.query("Answers1",
+      columns: ["id", "answer", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
+
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
 
 
     }else if(tableName == "two") {
-      return await db.query("Answers2");
+      List<Map> results = await db.query("Answers2",
+      columns: ["id","answer","modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
 
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
 
     }else if(tableName == "three") {
-      return await db.query("Answers3");
+      List<Map> results = await db.query("Answers3",
+      columns: ["id", "answer", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
 
 
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }else if(tableName == "four") {
-      return await db.query("Answers4");
+      List<Map> results = await db.query("Answers4",
+      columns: ["id", "answer","modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
 
 
-    }else if(tableName =="five") {
-      return await db.query("Answers5");
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
+    }else if(tableName == "five") {
+      List<Map> results = await db.query("Answers5",
+      columns: ["id", "answer", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
 
- 
-    }else if(tableName == "six") {
-      return await db.query("Answers6");
+
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
+    }else if(tableName =="six") {
+      List<Map> results = await db.query("Answers6",
+      columns: ["id", "answer", "modelID"],
+      where: 'modelID = ?',
+      whereArgs: [modelID]);
 
 
+      if (results.length > 0) {
+        return results;
+      }
+      return null;
     }
     
     }

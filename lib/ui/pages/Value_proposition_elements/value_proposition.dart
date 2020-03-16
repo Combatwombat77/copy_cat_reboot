@@ -15,6 +15,10 @@ enum NoteMode {
 
 
 class ValueDashboard extends StatefulWidget{
+
+  final int modelId;
+  ValueDashboard(this.modelId);
+
  @override 
 
    ValueDashboardState createState() => ValueDashboardState();
@@ -87,7 +91,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                         color: Colors.white,
                                         child: Text("Customer details", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements(widget.modelId)));
                                                           
                                       },
                                     ),
@@ -152,6 +156,9 @@ class CustomerTitle extends StatelessWidget {
 class CustomerElements extends StatefulWidget {
   // final cameras;
   // Dashboard(this.cameras);
+
+   final int modelId;
+   CustomerElements(this.modelId);
   @override
   CustomerElementsState createState() => CustomerElementsState();
 }
@@ -236,7 +243,7 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
         
         controller: inAppTabController,
         children: <Widget>[
-          CustomerCategory(),
+          CustomerCategory(widget.modelId),
           ProductCategory(),
         ],
       ),
@@ -248,7 +255,8 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
 
 class CustomerCategory extends StatefulWidget {
 
-     CustomerCategory();
+ final int modelId;
+     CustomerCategory(this.modelId);
 
   @override
   _CustomerCategoryState createState() => _CustomerCategoryState();
@@ -258,11 +266,16 @@ class _CustomerCategoryState extends State<CustomerCategory> {
 
   TextEditingController customController = new TextEditingController();
   String testAnswer;
+
+
+
   
 
   @override
   void initState(){
     super.initState();
+      DBManagerAnswers.openDB();
+
 
     customController.addListener(
       (){
@@ -370,7 +383,7 @@ return Alert(
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName))); 
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,modelId))); 
                                       },
                                     ),
                                     IconButton(
