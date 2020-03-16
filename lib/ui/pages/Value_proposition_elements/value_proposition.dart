@@ -356,7 +356,7 @@ return Alert(
                   Navigator.pop(context);
                   final answer = customController.text;
                   print(answer);
-                    DBManagerCustAnswers.insertAnswer1({
+                    DBManagerAnswers.insertCustSegNote({
                         'answer': answer.toString()
                         }
                       );
