@@ -75,9 +75,9 @@ class NoteListState extends State<Answer1List> {
                           _NoteTitle(notes[index]['answer']),
                           Container(height: 4,),
                           IconButton(icon: Icon(Icons.edit),
-                           onPressed: (
+                          onPressed: (
 
-                           ) {},),
+                          ) {},),
                         ],
                       ),
                     ),

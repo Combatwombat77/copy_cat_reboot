@@ -301,8 +301,7 @@ class _CustomerCategoryState extends State<CustomerCategory> {
           )
         ),
       ),SafeArea(
-       
-            child: ListView(
+        child: ListView(
           children: <Widget>[
             cardView("What is the customer category?",items[0]),
             cardView("What are the current negative/undesirable Experiences",items[1]),
@@ -356,10 +355,11 @@ return Alert(
                   Navigator.pop(context);
                   final answer = customController.text;
                   print(answer);
-                    DBManagerCustAnswers.insertAnswer1({
-                        'answer': answer.toString()
-                        }
-                      );
+                    DBManagerAnswers.insertCustSegNote({
+                        'answer': answer.toString(),
+                    },
+                    answerName 
+                    );
                       customController.clear();
                   
                 },)
@@ -370,7 +370,7 @@ return Alert(
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName))); 
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName))); 
                                       },
                                     ),
                                     IconButton(
@@ -455,8 +455,8 @@ class ProductCategoryState extends State<ProductCategory> {
             cardView("What is the customer category?",items[0]),
               
                         ],
-                       ),
-                     ),
+                      ),
+                    ),
       ]),
     );
                 }
@@ -485,14 +485,13 @@ class ProductCategoryState extends State<ProductCategory> {
                                         color: Colors.white,
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-               
                 },
                                     ),
                                     FlatButton(
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,))); 
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,))); 
                                       },
                                     ),
                                     IconButton(
@@ -502,7 +501,6 @@ class ProductCategoryState extends State<ProductCategory> {
                                     ),
                                   ],
                                 )]))));
-                                     
                             
                           
                         
@@ -639,9 +637,10 @@ class Questions extends StatelessWidget{
 
   final NoteMode noteMode;
   final Map<String, dynamic> note;
+  final String answerName;
 
 
-  Answers1(this.noteMode, this.note);
+  Answers1(this.noteMode, this.note, this.answerName);
 
   @override
   Answers1State createState() {
@@ -653,6 +652,7 @@ class Answers1State extends State<Answers1> {
 
 
   final TextEditingController _textController = TextEditingController();
+  
   
 
   @override
@@ -690,16 +690,18 @@ class Answers1State extends State<Answers1> {
                   final answer = _textController.text;
 
                   if (widget?.noteMode == NoteMode.Adding) {
-                    DBManagerCustAnswers.insertAnswer1({
+                    DBManagerAnswers.insertCustSegNote ({
 
                       'answer': answer
-                    }
+                    }, 
+                    widget.answerName
                     );
                   } else if (widget?.noteMode == NoteMode.Editing) {
-                  DBManagerCustAnswers.updateAnswer1({
+                  DBManagerAnswers.updateCustSegNote ({
                     'id': widget.note['id'],
                       'answer': answer
-                    }
+                    },
+                    widget.answerName
                     );
                   }
                   Navigator.pop(context);
@@ -712,7 +714,7 @@ class Answers1State extends State<Answers1> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: _NoteButton('Delete', Colors.red, () async {
-                      await DBManagerCustAnswers.deleteAnswer1(widget.note['id']);
+                      await DBManagerAnswers.deleteNote(widget.note['id'], widget.answerName);
                       Navigator.pop(context);
                     }),
                   )
