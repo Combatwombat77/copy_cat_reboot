@@ -485,27 +485,7 @@ class ProductCategoryState extends State<ProductCategory> {
                                         color: Colors.white,
                                         child: Text("Add New Answer", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-return Alert(             
-              context: context,
-              title: 'Answer',
-              content: TextField(
-                controller: customController,
-              ),
-              buttons: [
-                DialogButton(
-                child: Text('Done'),
-                onPressed: (){
-                  Navigator.pop(context);
-                  final answer = customController.text;
-                  print(answer);
-                    DBManagerAnswers.insertCustSegNote({
-                        'answer': answer.toString()
-                        }
-                      );
-                      customController.clear();
-                  
-                },)
-              ]).show();                    
+               
                 },
                                     ),
                                     FlatButton(
@@ -521,12 +501,12 @@ return Alert(
                                     },
                                     ),
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    );
+                                )]))));
+                                     
+                            
+                          
+                        
+                          
   }             
             }
 
@@ -549,10 +529,8 @@ class Questions extends StatelessWidget{
               Colors.blue
             ])
           ),
-        ),
-        
-      ),
-       
+        ),       
+      ),     
       body: Stack(fit: StackFit.expand,
       children: <Widget>[
         Container(

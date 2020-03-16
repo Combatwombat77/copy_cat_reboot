@@ -57,6 +57,7 @@ class NoteListState extends State<Answer1List> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
+            print(notes);
             return ListView.builder(
               itemBuilder: (context, index) {
                 return GestureDetector(

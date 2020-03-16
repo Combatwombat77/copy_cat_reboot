@@ -201,37 +201,37 @@ class DBManagerAnswers {
         await db.execute('''
           create table Answers1(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
         await db.execute('''
           create table Answers2(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
         await db.execute('''
           create table Answers3(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
         await db.execute('''
           create table Answers4(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
         await db.execute('''
           create table Answers5(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
         await db.execute('''
           create table Answers6(
             id integer primary key autoincrement,
-            title text not null
+            answer text not null
 
           );''');
 
@@ -245,27 +245,27 @@ class DBManagerAnswers {
     if (db == null) {
       await openDB();
     }else{
-    if(tableName == "Customer Segments") {
+    if(tableName == "one") {
       return await db.query("Answers1");
 
 
-    }else if(tableName == "Value Propositions") {
+    }else if(tableName == "two") {
       return await db.query("Answers2");
 
 
-    }else if(tableName == "Channels") {
+    }else if(tableName == "three") {
       return await db.query("Answers3");
 
 
-    }else if(tableName == "Customer Relationships") {
+    }else if(tableName == "four") {
       return await db.query("Answers4");
 
 
-    }else if(tableName =="Revenue Streams") {
+    }else if(tableName =="five") {
       return await db.query("Answers5");
 
  
-    }else if(tableName == "Key Resources") {
+    }else if(tableName == "six") {
       return await db.query("Answers6");
 
 
@@ -294,37 +294,37 @@ class DBManagerAnswers {
 
   static Future updateCustSegNote(Map<String, dynamic> note, String tableName) async {
     
-      if(tableName == "Customer Segments") {
+      if(tableName == "two") {
       await db.update(
       'Answers',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-    }else if(tableName == "Value Propositions") {
+    }else if(tableName == "two") {
       await db.update(
       'Answers',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-    }else if(tableName == "Channels") {
+    }else if(tableName == "three") {
       await db.update(
       'Answers',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-    }else if(tableName == "Customer Relationships") {
+    }else if(tableName == "four") {
       await db.update(
       'Answers',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-    }else if(tableName =="Revenue Streams") {
+    }else if(tableName =="five") {
       await db.update(
       'Answers',
       note,
       where: 'id = ?',
       whereArgs: [note['id']]);
-    }else if(tableName == "Key Resources") {
+    }else if(tableName == "six") {
       await db.update(
       'Answers',
       note,
