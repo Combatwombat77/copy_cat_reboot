@@ -16,12 +16,9 @@ enum NoteMode {
 
 class ValueDashboard extends StatefulWidget{
 
-  final int modelId;
-  ValueDashboard(this.modelId);
-
- @override 
-
-   ValueDashboardState createState() => ValueDashboardState();
+  
+  @override 
+  ValueDashboardState createState() => ValueDashboardState();
 
 
 }
@@ -49,15 +46,15 @@ class ValueDashboardState extends State<ValueDashboard> {
           ),
         ),  
       ),
-       floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
         onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => subject.CustomerDetails(subject.NoteMode.Adding, null)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => subject.CustomerDetails(subject.NoteMode.Adding, null)));
         },
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-       future: DBManagerCustomer.getSubjectList(),
+        future: DBManagerCustomer.getSubjectList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
@@ -67,7 +64,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                       padding: const EdgeInsets.all(0),
                       child: Card(
                         color: Colors.grey.shade200,
-                   child: Padding(
+                  child: Padding(
                       padding: const EdgeInsets.all(5),
                         child: Card(
                           elevation: 5.0,
@@ -91,7 +88,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                         color: Colors.white,
                                         child: Text("Customer details", style: TextStyle(color: Uidata.primaryColor),),
                                         onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements(widget.modelId)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements(notes[index]['id'])));
                                                           
                                       },
                                     ),
@@ -244,7 +241,7 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
         controller: inAppTabController,
         children: <Widget>[
           CustomerCategory(widget.modelId),
-          ProductCategory(),
+          ProductCategory(widget.modelId),
         ],
       ),
       ]
@@ -256,7 +253,7 @@ class CustomerElementsState extends State<CustomerElements> with SingleTickerPro
 class CustomerCategory extends StatefulWidget {
 
  final int modelId;
-     CustomerCategory(this.modelId);
+  CustomerCategory(this.modelId);
 
   @override
   _CustomerCategoryState createState() => _CustomerCategoryState();
@@ -383,7 +380,7 @@ return Alert(
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,modelId))); 
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName, widget.modelId ))); 
                                       },
                                     ),
                                     IconButton(
@@ -404,8 +401,9 @@ return Alert(
 
 class ProductCategory extends StatefulWidget {
 
+  final int modelID;
 
-     ProductCategory();
+  ProductCategory(this.modelID);
 
   @override
   ProductCategoryState createState() => ProductCategoryState();
@@ -504,7 +502,7 @@ class ProductCategoryState extends State<ProductCategory> {
                                       color: Colors.white,
                                       child: Text("View Exising answers", style: TextStyle(color: Uidata.primaryColor),),
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName,))); 
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Answer1List(answerName, widget.modelID ))); 
                                       },
                                     ),
                                     IconButton(

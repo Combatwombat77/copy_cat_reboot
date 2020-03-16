@@ -63,7 +63,7 @@ class NoteListState extends State<Answer1List> {
           )
         ),
       ),FutureBuilder(
-        future: DBManagerAnswers.getLists(widget.question,widget.modelId),
+        future: DBManagerAnswers.getLists(widget.question, widget.modelId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final notes = snapshot.data;
