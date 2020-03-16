@@ -17,6 +17,15 @@ Answer1List(this.question);
 
 class NoteListState extends State<Answer1List> {
 
+  var list = [
+    "What is the customer category?",
+    "What are the current negative/undesirable Experiences",
+    "What are the concerns about the current solutions",
+    "Unmet needs",
+    "What are the Competing products?",
+    "How does the competing product performance compare?"
+  ];
+
  @override
   void initState(){
     super.initState();
@@ -62,9 +71,13 @@ class NoteListState extends State<Answer1List> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
+                    for(int i ; i < list.length + 1; i++){
+                    if(widget.question == list[i]){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Answers1(NoteMode.Editing,notes[index])));
+                      MaterialPageRoute(builder: (context) => Answers1(NoteMode.Editing, notes[index], list[i])));
+                    }
+                  }
                   },
                   child: Card(
                     child: Padding(
