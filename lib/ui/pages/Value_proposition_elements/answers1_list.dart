@@ -113,20 +113,3 @@ class _NoteTitle extends StatelessWidget {
   }
 }
 
-class _NoteText extends StatelessWidget {
-  final String _text;
-
-  _NoteText(this._text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _text,
-      style: TextStyle(
-          color: Colors.grey.shade600
-      ),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-}
