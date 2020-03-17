@@ -2,6 +2,7 @@ import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/Value_proposition_elements/answers1_list.dart';
 import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'
     as subject;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/vp_summary.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -191,7 +192,7 @@ class CustomerElementsState extends State<CustomerElements>
             IconButton(
                 icon: Icon(Icons.input),
                 onPressed: () {
-                  //                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VPSummary(widget.modelId)));
                 }),
           ],
           bottom: TabBar(
