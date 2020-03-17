@@ -1,13 +1,13 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/Value_proposition_elements/answers1_list.dart';
-import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'
-    as subject;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'as subject;
 import 'package:copy_cat/ui/pages/Value_proposition_elements/vp_summary.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:copy_cat/models/db2.dart';
+import 'dart:convert';
 
 enum NoteMode { Editing, Adding }
 
@@ -187,12 +187,16 @@ class CustomerElementsState extends State<CustomerElements>
             IconButton(
                 icon: Icon(Icons.help),
                 onPressed: () {
-                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Questions()));
                 }),
             IconButton(
                 icon: Icon(Icons.input),
                 onPressed: () {
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => VPSummary(widget.modelId)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VPSummary(widget.modelId)));
                 }),
           ],
           bottom: TabBar(
@@ -276,11 +280,14 @@ class _CustomerCategoryState extends State<CustomerCategory> {
           child: ListView(
         children: <Widget>[
           cardView("What is the customer category?", items[0]),
-          cardView("What are the current negative/undesirable Experiences",items[1]),
-          cardView("What are the concerns about the current solutions", items[2]),
+          cardView("What are the current negative/undesirable Experiences",
+              items[1]),
+          cardView(
+              "What are the concerns about the current solutions", items[2]),
           cardView("Unmet needs", items[3]),
           cardView("What are the Competing products?", items[4]),
-          cardView("How does the competing product performance compare?", items[5]),
+          cardView(
+              "How does the competing product performance compare?", items[5]),
         ],
       ))
     ]));
@@ -375,11 +382,11 @@ class ProductCategoryState extends State<ProductCategory> {
   TextEditingController customController = new TextEditingController();
   String testAnswer;
 
-   @override
+  @override
   void initState() {
     super.initState();
     DBManagerAnswers.openDB();
-    
+
     customController.addListener(() {
       setState(() {
         testAnswer = customController.text;
@@ -411,11 +418,15 @@ class ProductCategoryState extends State<ProductCategory> {
           child: ListView(
             children: <Widget>[
               cardView("what is your product?", items[0]),
-              cardView("solutions to current negative/ undesirable experiences??", items[0]),
+              cardView(
+                  "solutions to current negative/ undesirable experiences??",
+                  items[0]),
               cardView("What are your solutions to unmet needs?", items[0]),
-              cardView("What are your responses to concerns about solutions", items[0]),
+              cardView("What are your responses to concerns about solutions",
+                  items[0]),
               cardView("What is your product differentiator?", items[0]),
-              cardView("What is the evidence of your product's performance?", items[0]),
+              cardView("What is the evidence of your product's performance?",
+                  items[0]),
             ],
           ),
         ),
@@ -449,27 +460,26 @@ class ProductCategoryState extends State<ProductCategory> {
                     ),
                     onPressed: () {
                       return Alert(
-                        context: context,
-                        title: 'Answer',
-                        content: TextField(
-                          controller: customController,
-                        ),
-                        buttons: [
-                          DialogButton(
-                            child: Text('Done'),
-                            onPressed: () {
-                              Navigator.pop(context);
-                              final answer = customController.text;
-                              print(answer);
-                              DBManagerQueAnswers.insertCustSegNote({
-                                'answer': answer.toString(),
-                                'modelID': widget.modelId
-                              }, answerName);
-                              customController.clear();
-                            },
-                          )
-                        ]).show();
-                  
+                          context: context,
+                          title: 'Answer',
+                          content: TextField(
+                            controller: customController,
+                          ),
+                          buttons: [
+                            DialogButton(
+                              child: Text('Done'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                final answer = customController.text;
+                                print(answer);
+                                DBManagerQueAnswers.insertCustSegNote({
+                                  'answer': answer.toString(),
+                                  'modelID': widget.modelId
+                                }, answerName);
+                                customController.clear();
+                              },
+                            )
+                          ]).show();
                     },
                   ),
                   FlatButton(
@@ -648,15 +658,9 @@ class Answers1State extends State<Answers1> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   final answer = _textController.text;
-
-                  if (widget?.noteMode == NoteMode.Adding) {
-                    DBManagerAnswers.insertCustSegNote(
-                        {'answer': answer}, widget.answerName);
-                  } else if (widget?.noteMode == NoteMode.Editing) {
                     DBManagerAnswers.updateCustSegNote(
                         {'id': widget.note['id'], 'answer': answer},
                         widget.answerName);
-                  }
                   Navigator.pop(context);
                 }),
                 Container(
@@ -665,18 +669,24 @@ class Answers1State extends State<Answers1> {
                 _NoteButton('Discard', Colors.grey, () {
                   Navigator.pop(context);
                 }),
-                widget.noteMode == NoteMode.Editing
-                    ? Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: _NoteButton('Delete', Colors.red, () async {
-                          await DBManagerAnswers.deleteNote(
-                              widget.note['id'], widget.answerName);
-                          Navigator.pop(context);
-                        }),
-                      )
-                    : Container()
               ],
-            )
+            ),
+            widget.noteMode == NoteMode.Editing
+                ? Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _NoteButton('Delete', Colors.red, () async {
+                            await DBManagerAnswers.deleteNote(
+                                widget.note['id'], widget.answerName);
+                            Navigator.pop(context);
+                          }),
+                        ),
+                      ),
+                    ],
+                  )
+                : Container()
           ],
         ),
       ),
@@ -706,7 +716,6 @@ class _NoteButton extends StatelessWidget {
   }
 }
 
-
 class QueAnswers1 extends StatefulWidget {
   final NoteMode noteMode;
   final Map<String, dynamic> note;
@@ -733,6 +742,7 @@ class QueAnswers1State extends State<Answers1> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.note['id']);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.noteMode == NoteMode.Adding
@@ -756,15 +766,10 @@ class QueAnswers1State extends State<Answers1> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   final answer = _textController.text;
-
-                  if (widget?.noteMode == NoteMode.Adding) {
-                    DBManagerQueAnswers.insertCustSegNote(
-                        {'answer': answer}, widget.answerName);
-                  } else if (widget?.noteMode == NoteMode.Editing) {
+                  print(widget.note['id']);
                     DBManagerQueAnswers.updateCustSegNote(
-                        {'id': widget.note['id'], 'answer': answer},
+                        {'id': widget.note['id'] , 'answer': answer},
                         widget.answerName);
-                  }
                   Navigator.pop(context);
                 }),
                 Container(
@@ -783,7 +788,7 @@ class QueAnswers1State extends State<Answers1> {
                         }),
                       )
                     : Container()
-              ],
+                ],
             )
           ],
         ),
@@ -791,4 +796,3 @@ class QueAnswers1State extends State<Answers1> {
     );
   }
 }
-

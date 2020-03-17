@@ -62,17 +62,13 @@ class NoteListState extends State<Answer1List> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        for (int i; i < list.length + 1; i++) {
-                          if (widget.question == list[i]) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Answers1(
                                         NoteMode.Editing,
                                         notes[index],
-                                        list[i])));
-                          }
-                        }
+                                        widget.question)));
                       },
                       child: Card(
                         child: Padding(
@@ -88,17 +84,13 @@ class NoteListState extends State<Answer1List> {
                               IconButton(
                                 icon: Icon(Icons.edit),
                                 onPressed: () {
-                                  for (int i; i < list.length + 1; i++) {
-                                    if (widget.question == list[i]) {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => Answers1(
                                                   NoteMode.Editing,
                                                   notes[index],
-                                                  list[i])));
-                                    }
-                                  }
+                                                  widget.question)));
                                 },
                               ),
                             ],
@@ -194,17 +186,13 @@ class QueNoteListState extends State<QueAnswer1List> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        for (int i; i < list.length + 1; i++) {
-                          if (widget.question == list[i]) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => QueAnswers1(
                                         NoteMode.Editing,
                                         notes[index],
-                                        list[i])));
-                          }
-                        }
+                                        widget.question)));
                       },
                       child: Card(
                         child: Padding(
@@ -220,17 +208,13 @@ class QueNoteListState extends State<QueAnswer1List> {
                               IconButton(
                                 icon: Icon(Icons.edit),
                                 onPressed: () {
-                                  for (int i; i < list.length + 1; i++) {
-                                    if (widget.question == list[i]) {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => QueAnswers1(
                                                   NoteMode.Editing,
                                                   notes[index],
-                                                  list[i])));
-                                    }
-                                  }
+                                                  widget.question)));
                                 },
                               ),
                             ],
