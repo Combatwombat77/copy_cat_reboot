@@ -158,6 +158,13 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
       ),
       appBar: AppBar(
         title: Text("IGC"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[Colors.black, Colors.blue])),
+        ),
         centerTitle: true,
         bottom: 
         TabBar(

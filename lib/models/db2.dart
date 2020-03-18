@@ -243,40 +243,40 @@ class DBManagerAnswers {
 
   static Future updateCustSegNote(
       Map<String, dynamic> note, String tableName) async {
-    if (tableName == "two") {
+    if (tableName == "one") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers1', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "two") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers2', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "three") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers3', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "four") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers4', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "five") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers5', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "six") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers6', note, where: 'id = ?', whereArgs: [note['id']]);
     }
   }
 
   static Future deleteNote(int id, String tableName) async {
-    if (tableName == "Customer Segments") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Value Propositions") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Channels") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Customer Relationships") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Revenue Streams") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Key Resources") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
+    if (tableName == "one") {
+      await db.delete('Answers1', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "two") {
+      await db.delete('Answers2', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "three") {
+      await db.delete('Answers3', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "four") {
+      await db.delete('Answers4', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "five") {
+      await db.delete('Answers5', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "six") {
+      await db.delete('Answers6', where: 'id = ?', whereArgs: [id]);
     }
   }
 }
@@ -415,40 +415,40 @@ class DBManagerQueAnswers {
 
   static Future updateCustSegNote(
       Map<String, dynamic> note, String tableName) async {
-    if (tableName == "two") {
+    if (tableName == "one") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers1', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "two") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers2', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "three") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers3', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "four") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers4', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "five") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers5', note, where: 'id = ?', whereArgs: [note['id']]);
     } else if (tableName == "six") {
       await db
-          .update('Answers', note, where: 'id = ?', whereArgs: [note['id']]);
+          .update('Answers6', note, where: 'id = ?', whereArgs: [note['id']]);
     }
   }
 
   static Future deleteNote(int id, String tableName) async {
-    if (tableName == "Customer Segments") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Value Propositions") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Channels") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Customer Relationships") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Revenue Streams") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
-    } else if (tableName == "Key Resources") {
-      await db.delete('Answers', where: 'id = ?', whereArgs: [id]);
+    if (tableName == "one") {
+      await db.delete('Answers1', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "two") {
+      await db.delete('Answers2', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "three") {
+      await db.delete('Answers3', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "four") {
+      await db.delete('Answers4', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "five") {
+      await db.delete('Answers5', where: 'id = ?', whereArgs: [id]);
+    } else if (tableName == "six") {
+      await db.delete('Answers6', where: 'id = ?', whereArgs: [id]);
     }
   }
 }

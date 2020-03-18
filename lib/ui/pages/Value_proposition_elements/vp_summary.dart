@@ -42,7 +42,7 @@ class VPSummaryState extends State<VPSummary> {
         // onWillPop: _onBackPressed,
         // child:
         Scaffold(
-            appBar: AppBar(title: Text("Preview"), actions: <Widget>[
+            appBar: AppBar(title: Text("Value Proposition Preview"), actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.save),
                 onPressed: TakeScreenShot,
@@ -54,17 +54,7 @@ class VPSummaryState extends State<VPSummary> {
                     color: Colors.white,
                     child: ListView(
                         // mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Card(
-                              child: Column(children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Text("Value Proposition For: "+ "",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline))
-                              ],
-                            ),
+                        children: <Widget>[                         
                             Card(
                                 child:
                                     Table(border: TableBorder.all(), children: [
@@ -81,7 +71,7 @@ class VPSummaryState extends State<VPSummary> {
                               TableRow(children: [
                                 Container(
                                   color: Colors.white,
-                                  height: 100,
+                                  height: 30,
                                   // width: ,
                                   child: FutureBuilder(
                                     future: DBManagerAnswers.getLists(
@@ -126,10 +116,66 @@ class VPSummaryState extends State<VPSummary> {
                                 Container(
                                   color: Colors.white,
 
+                                  height: 30,
+                                  // width: ,
+                                  child: FutureBuilder(
+                                    future: DBManagerQueAnswers.getLists(
+                                        "one", widget.modelID),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.lightBlueAccent,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['answer']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  ),
+                                ),
+                              ]),
+                              TableRow(children: [
+                                Text("Current Negative/ Undesirable Experiences",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline)),
+                                Text("Solutions to Current Negative/ Undesirable Experiences",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline)),
+                              ]),
+                              TableRow(children: [
+                                Container(
+                                  color: Colors.white,
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
+                                    future: DBManagerAnswers.getLists(
                                         "two", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
@@ -143,13 +189,57 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.red,
+                                                color: Colors.yellow,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  color: Colors.white,
+                                  height: 100,
+                                  // width: ,
+                                  child: FutureBuilder(
+                                    future: DBManagerQueAnswers.getLists(
+                                        "two", widget.modelID),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.yellow,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -174,109 +264,8 @@ class VPSummaryState extends State<VPSummary> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline)),
-                                Text("Solutions to unmet needs",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
-                              ]),
-                              TableRow(children: [
-                                Container(
-                                  color: Colors.white,
-                                  height: 1100,
-                                  // width: ,
-                                  child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Customer Relationships",
-                                        widget.modelID),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        final notes = snapshot.data;
-                                        return ListView.builder(
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                              },
-                                              child: Card(
-                                                elevation: 5.0,
-                                                color: Colors.pink,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    CanvasTitle(
-                                                        notes[index]['title']),
-                                                    Container(
-                                                      height: 4,
-                                                    ),
-                                                    // _NoteDescription(notes[index]['description'])
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          itemCount:
-                                              notes == null ? 0 : notes.length,
-                                        );
-                                      }
-                                      return Center(
-                                          child: CircularProgressIndicator());
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  color: Colors.white,
-                                  height: 100,
-                                  // width: ,
-                                  child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Key Resources", widget.modelID),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        final notes = snapshot.data;
-                                        return ListView.builder(
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                                              },
-                                              child: Card(
-                                                elevation: 5.0,
-                                                color: Colors.grey,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    CanvasTitle(
-                                                        notes[index]['title']),
-                                                    Container(
-                                                      height: 4,
-                                                    ),
-                                                    // _NoteDescription(notes[index]['description'])
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          itemCount:
-                                              notes == null ? 0 : notes.length,
-                                        );
-                                      }
-                                      return Center(
-                                          child: CircularProgressIndicator());
-                                    },
-                                  ),
-                                ),
-                              ]),
-                              TableRow(children: [
-                                Text("Concerns about current solutions",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
                                 Text(
-                                    "Response to concern about current solutions",
+                                    "Solutions To Unmet Needs",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline)),
@@ -287,9 +276,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Customer Relationships",
-                                        widget.modelID),
+                                    future: DBManagerAnswers.getLists(
+                                        "three", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -308,7 +296,7 @@ class VPSummaryState extends State<VPSummary> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -332,8 +320,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Key Resources", widget.modelID),
+                                    future: DBManagerQueAnswers.getLists(
+                                        "three", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -346,13 +334,13 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.grey,
+                                                color: Colors.pink,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -373,7 +361,107 @@ class VPSummaryState extends State<VPSummary> {
                                 ),
                               ]),
                               TableRow(children: [
-                                Text("Competing products",
+                                Text("Concerns About Current Solutions",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline)),
+                                Text("Response To Concerns About Current Solutions",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline)),
+                              ]),
+                              TableRow(children: [
+                                Container(
+                                  color: Colors.white,
+                                  height: 100,
+                                  // width: ,
+                                  child: FutureBuilder(
+                                    future: DBManagerAnswers.getLists(
+                                        "four", widget.modelID),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.grey,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['answer']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  color: Colors.white,
+                                  height: 100,
+                                  // width: ,
+                                  child: FutureBuilder(
+                                    future: DBManagerQueAnswers.getLists(
+                                        "four", widget.modelID),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.grey,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['answer']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  ),
+                                ),
+                              ]),
+                              TableRow(children: [
+                                Text("Competing Products",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline)),
@@ -388,9 +476,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Customer Relationships",
-                                        widget.modelID),
+                                    future: DBManagerAnswers.getLists(
+                                        "five", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -403,13 +490,13 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.pink,
+                                                color: Colors.green,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -433,8 +520,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Key Resources", widget.modelID),
+                                    future: DBManagerQueAnswers.getLists(
+                                        "five", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -447,13 +534,13 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.grey,
+                                                color: Colors.green,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -474,11 +561,11 @@ class VPSummaryState extends State<VPSummary> {
                                 ),
                               ]),
                               TableRow(children: [
-                                Text("Competing Product performance",
+                                Text("Competing Product Performance",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline)),
-                                Text("Evidence of product performance",
+                                Text("Evidence 0f Product/Service Performance",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline)),
@@ -489,9 +576,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Customer Relationships",
-                                        widget.modelID),
+                                    future: DBManagerAnswers.getLists(
+                                        "six", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -504,13 +590,13 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.pink,
+                                                color: Colors.purpleAccent,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -534,8 +620,8 @@ class VPSummaryState extends State<VPSummary> {
                                   height: 100,
                                   // width: ,
                                   child: FutureBuilder(
-                                    future: DBManagerViews.getLists(
-                                        "Key Resources", widget.modelID),
+                                    future: DBManagerQueAnswers.getLists(
+                                        "six", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -548,13 +634,13 @@ class VPSummaryState extends State<VPSummary> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.grey,
+                                                color: Colors.purpleAccent,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -577,7 +663,8 @@ class VPSummaryState extends State<VPSummary> {
                             ]))
                             //)
                           ]))
-                        ]))));
+                        )
+                        );
   }
 
   Future<Uint8List> TakeScreenShot() async {

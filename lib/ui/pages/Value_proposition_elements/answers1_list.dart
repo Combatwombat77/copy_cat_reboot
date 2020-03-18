@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class Answer1List extends StatefulWidget {
   final String question;
   final int modelId;
+  final String title;
 
-  Answer1List(this.question, this.modelId);
+  Answer1List(this.question, this.modelId, this.title);
   @override
   NoteListState createState() {
     return new NoteListState();
@@ -14,15 +15,6 @@ class Answer1List extends StatefulWidget {
 }
 
 class NoteListState extends State<Answer1List> {
-  var list = [
-    "What is the customer category?",
-    "What are the current negative/undesirable Experiences",
-    "What are the concerns about the current solutions",
-    "Unmet needs",
-    "What are the Competing products?",
-    "How does the competing product performance compare?"
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -33,7 +25,7 @@ class NoteListState extends State<Answer1List> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Category'),
+        title: Text(widget.title),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -61,43 +53,71 @@ class NoteListState extends State<Answer1List> {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Answers1(
-                                        NoteMode.Editing,
-                                        notes[index],
-                                        widget.question)));
-                      },
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30.0, bottom: 30, left: 13.0, right: 22.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              _NoteTitle(notes[index]['answer']),
-                              Container(
-                                height: 4,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Answers1(
+                                      NoteMode.Editing,
+                                      notes[index],
+                                      widget.question)));
+                        },
+                        child: Card(
+                          child: new Container(
+                              child: new Center(
+                                child: new Row(
+                                  children: <Widget>[
+                                    new Expanded(
+                                      child: new Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: new Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            _NoteTitle(
+                                              notes[index]['answer'],
+                                            ),
+
+                                            // set some style to text
+
+                                            // set some style to text
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    new Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        new IconButton(
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: const Color(0xFF167F67),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Answers1(
+                                                              NoteMode.Editing,
+                                                              notes[index],
+                                                              widget
+                                                                  .question)));
+                                            }),
+                                        new IconButton(
+                                            icon: const Icon(
+                                                Icons.delete_forever,
+                                                color: const Color(0xFF167F67)),
+                                            onPressed: () {}),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Answers1(
-                                                  NoteMode.Editing,
-                                                  notes[index],
-                                                  widget.question)));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                              padding: const EdgeInsets.fromLTRB(
+                                  10.0, 0.0, 0.0, 0.0)),
+                        ));
                   },
                   itemCount: notes == null ? 0 : notes.length,
                 );
@@ -125,12 +145,12 @@ class _NoteTitle extends StatelessWidget {
   }
 }
 
-
 class QueAnswer1List extends StatefulWidget {
   final String question;
   final int modelId;
+  final String title;
 
-  QueAnswer1List(this.question, this.modelId);
+  QueAnswer1List(this.question, this.modelId, this.title);
   @override
   QueNoteListState createState() {
     return new QueNoteListState();
@@ -138,14 +158,7 @@ class QueAnswer1List extends StatefulWidget {
 }
 
 class QueNoteListState extends State<QueAnswer1List> {
-  var list = [
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six"
-  ];
+  var list = ["one", "two", "three", "four", "five", "six"];
 
   @override
   void initState() {
@@ -157,7 +170,7 @@ class QueNoteListState extends State<QueAnswer1List> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Category'),
+        title: Text(widget.title),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -177,7 +190,8 @@ class QueNoteListState extends State<QueAnswer1List> {
                     colors: [Colors.blue, Colors.black])),
           ),
           FutureBuilder(
-            future: DBManagerQueAnswers.getLists(widget.question, widget.modelId),
+            future:
+                DBManagerQueAnswers.getLists(widget.question, widget.modelId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 final notes = snapshot.data;
@@ -185,43 +199,73 @@ class QueNoteListState extends State<QueAnswer1List> {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => QueAnswers1(
-                                        NoteMode.Editing,
-                                        notes[index],
-                                        widget.question)));
-                      },
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30.0, bottom: 30, left: 13.0, right: 22.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              _NoteTitle(notes[index]['answer']),
-                              Container(
-                                height: 4,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QueAnswers1(
+                                      NoteMode.Editing,
+                                      notes[index],
+                                      widget.question)));
+                        },
+                        child: Card(
+                          child: new Container(
+                              child: new Center(
+                                child: new Row(
+                                  children: <Widget>[
+                                    new Expanded(
+                                      child: new Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: new Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            _NoteTitle(
+                                              notes[index]['answer'],
+                                            ),
+
+                                            // set some style to text
+
+                                            // set some style to text
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    new Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        new IconButton(
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: const Color(0xFF167F67),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QueAnswers1(
+                                      NoteMode.Editing,
+                                      notes[index],
+                                      widget.question)));
+                                            }),
+                                        new IconButton(
+                                            icon: const Icon(
+                                                Icons.delete_forever,
+                                                color: const Color(0xFF167F67)),
+                                            onPressed: () {
+                                                DBManagerQueAnswers.deleteNote(
+                                            widget.notes['id'], widget.question);
+                                                 Navigator.pop(context);
+                                            }),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => QueAnswers1(
-                                                  NoteMode.Editing,
-                                                  notes[index],
-                                                  widget.question)));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                              padding: const EdgeInsets.fromLTRB(
+                                  10.0, 0.0, 0.0, 0.0)),
+                        ));
                   },
                   itemCount: notes == null ? 0 : notes.length,
                 );
