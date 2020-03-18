@@ -76,7 +76,7 @@ class _IGCTableState extends State<IGCTable> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Impact: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("Affectted Parties: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
                                       height: 22.0,
                                     ),
@@ -126,7 +126,7 @@ class _IGCTableState extends State<IGCTable> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Causes: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("Impact: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
                                       height: 52.0,
                                     ),
@@ -172,6 +172,7 @@ class _IGCTableState extends State<IGCTable> {
                             ]
                           ),
                           TableRow(
+                            
                             children: [
                               Container(
                                 height: 120.0,
@@ -179,7 +180,7 @@ class _IGCTableState extends State<IGCTable> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Trends: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("Causes: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
                                       height: 22.0,
                                     ),
@@ -228,19 +229,19 @@ class _IGCTableState extends State<IGCTable> {
                             children: [
                               Container(
                                 height: 120.0,
-                                color: Colors.red,
-                                // child: Column(
-                                //   mainAxisAlignment: MainAxisAlignment.start,
-                                //   children: <Widget>[
-                                //     Text("Causes: ", style: TextStyle(fontWeight: FontWeight.bold) ),
-                                //     SizedBox(
-                                //       height: 52.0,
-                                //     ),
-                                //     Card(
-                                //       child: Text("Testing Purposes"),
-                                //     )
-                                //   ],
-                                // ),
+                                // color: Colors.red,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Trends: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    SizedBox(
+                                      height: 52.0,
+                                    ),
+                                    Card(
+                                      child: Text("Testing Purposes"),
+                                    )
+                                  ],
+                                ),
                               ),
                               Container(
                                 height: 120.0,
