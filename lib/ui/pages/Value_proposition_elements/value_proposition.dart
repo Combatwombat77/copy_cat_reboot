@@ -632,7 +632,7 @@ class Answers1State extends State<Answers1> {
   @override
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
-      _textController.text = widget.note['text'];
+      _textController.text = widget.note['answer'];
     }
     super.didChangeDependencies();
   }
@@ -737,14 +737,13 @@ class QueAnswers1State extends State<QueAnswers1> {
   @override
   void didChangeDependencies() {
     if (widget.noteMode == NoteMode.Editing) {
-      _textController.text = widget.note['text'];
+      _textController.text = widget.note['answer'];
     }
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.note['id']);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.noteMode == NoteMode.Adding
