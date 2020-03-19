@@ -637,17 +637,16 @@ class Answers1State extends State<Answers1> {
     super.didChangeDependencies();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Delete"),
-      content: Text("Are you sure?")
-      actions: <Widget>[
-        FlatButton(onPressed: null, child: Text('yes')),
-        FlatButton(onPressed: null, child: Text('no'))
-      ],
-    );
-      
+    print(widget.note['id']);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.noteMode == NoteMode.Adding
+            ? 'Add Response'
+            : 'Edit Response'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Column(
@@ -665,6 +664,7 @@ class Answers1State extends State<Answers1> {
               children: <Widget>[
                 _NoteButton('Save', Colors.blue, () {
                   final answer = _textController.text;
+                  print(widget.note['id']);
                   DBManagerAnswers.updateCustSegNote(
                       {'id': widget.note['id'], 'answer': answer},
                       widget.answerName);
@@ -676,29 +676,25 @@ class Answers1State extends State<Answers1> {
                 _NoteButton('Discard', Colors.grey, () {
                   Navigator.pop(context);
                 }),
+                widget.noteMode == NoteMode.Editing
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: _NoteButton('Delete', Colors.red, () async {
+                          await DBManagerAnswers.deleteNote(
+                              widget.note['id'], widget.answerName);
+                          Navigator.pop(context);
+                        }),
+                      )
+                    : Container()
               ],
-            ),
-            widget.noteMode == NoteMode.Editing
-                ? Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: _NoteButton('Delete', Colors.red, () async {
-                            await DBManagerAnswers.deleteNote(
-                                widget.note['id'], widget.answerName);
-                            Navigator.pop(context);
-                          }),
-                        ),
-                      ),
-                    ],
-                  )
-                : Container()
+            )
           ],
         ),
+      ),
     );
   }
 }
+
 
 class _NoteButton extends StatelessWidget {
   final String _text;

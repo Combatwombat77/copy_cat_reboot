@@ -95,21 +95,14 @@ class NoteListState extends State<Answer1List> {
                                               color: const Color(0xFF167F67),
                                             ),
                                             onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Answers1(
-                                                              NoteMode.Editing,
-                                                              notes[index],
-                                                              widget
-                                                                  .question)));
                                             }),
                                         new IconButton(
                                             icon: const Icon(
-                                                Icons.delete_forever,
-                                                color: const Color(0xFF167F67)),
-                                            onPressed: () {}),
+                                                Icons.delete_forever),
+                                               onPressed: () {
+
+                                               }
+                                            ),
                                       ],
                                     ),
                                   ],
@@ -254,8 +247,8 @@ class QueNoteListState extends State<QueAnswer1List> {
                                                 Icons.delete_forever,
                                                 color: const Color(0xFF167F67)),
                                             onPressed: () {
-                                                DBManagerQueAnswers.deleteNote(
-                                            widget.notes['id'], widget.question);
+                                               // DBManagerQueAnswers.deleteNote(
+                                            //widget.notes['id'], widget.question);
                                                  Navigator.pop(context);
                                             }),
                                       ],
