@@ -69,9 +69,9 @@ class _ViewIGCState extends State<ViewIGC> {
       appBar: AppBar(
         title: Text(widget.postName),       
       ),
-      // body: futureTest(),
-      body: loaded == false? Center(child: CircularProgressIndicator(),)
-      : futureTest(),
+      body: futureTest(),
+      // body: loaded == false? Center(child: CircularProgressIndicator(),)
+      // : futureTest(),
     );
   }
 

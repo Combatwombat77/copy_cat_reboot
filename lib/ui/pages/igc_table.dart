@@ -4,8 +4,11 @@ import 'dart:ui' as ui;
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:copy_cat/models/db2.dart';
+
 
 class IGCTable extends StatefulWidget {
+
 
   @override
   _IGCTableState createState() => _IGCTableState();
@@ -18,6 +21,14 @@ class _IGCTableState extends State<IGCTable> {
 
   String questionString = "Hello World";
   double fontSizeR = 10.0;
+  List<Map<String, dynamic>> list = [];
+
+
+  @override
+  void initState(){
+    super.initState();
+
+  }
 
 
   @override
@@ -47,7 +58,29 @@ class _IGCTableState extends State<IGCTable> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Text("Challenge: " + " $questionString", style: TextStyle(fontWeight: FontWeight.bold),)
+                          child: Container(
+                            width: 300.0,
+                            child: Row(
+                              children: <Widget>[
+                                Text("Challenge: ", style: TextStyle(fontWeight: FontWeight.bold),),
+                                Container(
+                                  child: FutureBuilder(
+                                            future: DBManagerGuide.getListChall2(),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.done) {
+                                                final notes = snapshot.data;
+                                                return CanvasTitle(notes[0]['title']);
+                                              }
+                                              return Center(
+                                                  child:
+                                                      CircularProgressIndicator());
+                                            },
+                                          ),
+                                ),
+                              ],
+                            ),
+                          )
                         )
                       ]
                     )],
@@ -78,11 +111,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Affectted Parties: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 22.0,
+                                      height: 10.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -95,9 +167,48 @@ class _IGCTableState extends State<IGCTable> {
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -110,9 +221,48 @@ class _IGCTableState extends State<IGCTable> {
                                     SizedBox(
                                       height: 22.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -128,11 +278,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Impact: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 52.0,
+                                      height: 25.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -144,11 +333,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Gaps between challenges & solution: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 22.0,
+                                      height: 10.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 60.0,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -160,11 +388,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Global: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 52.0,
+                                      height: 25.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -184,9 +451,48 @@ class _IGCTableState extends State<IGCTable> {
                                     SizedBox(
                                       height: 22.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -198,11 +504,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Unaddressed Obstacles: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 22.0,
+                                      height: 10.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -214,11 +559,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("What works and what doesn't: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height:22.0,
+                                      height:10.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -235,11 +619,50 @@ class _IGCTableState extends State<IGCTable> {
                                   children: <Widget>[
                                     Text("Trends: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
-                                      height: 52.0,
+                                      height: 25.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes"),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -253,9 +676,48 @@ class _IGCTableState extends State<IGCTable> {
                                     SizedBox(
                                       height: 22.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -269,9 +731,48 @@ class _IGCTableState extends State<IGCTable> {
                                     SizedBox(
                                       height: 22.0,
                                     ),
-                                    Card(
-                                      child: Text("Testing Purposes", style: TextStyle( fontSize: fontSizeR),),
-                                    )
+                                    Container(
+                                  height: 75,
+                                  color: Colors.white,
+                                  child: FutureBuilder(
+                                    future: DBManagerGuide.getListChall2(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        final notes = snapshot.data;
+                                        return ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
+                                              },
+                                              child: Card(
+                                                elevation: 5.0,
+                                                color: Colors.green,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    CanvasTitle(
+                                                        notes[index]['title']),
+                                                    Container(
+                                                      height: 4,
+                                                    ),
+                                                    // _NoteDescription(notes[index]['description'])
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount:
+                                              notes == null ? 0 : notes.length,
+                                        );
+                                      }
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  )
+                                  ),
                                   ],
                                 ),
                               ),
@@ -314,5 +815,21 @@ class _IGCTableState extends State<IGCTable> {
     } catch (e) {
       print(e);
     }
+  }
+}
+
+class CanvasTitle extends StatelessWidget {
+  final String _title;
+
+  CanvasTitle(this._title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: TextStyle(
+        fontWeight: FontWeight.bold
+      ),
+    );
   }
 }
