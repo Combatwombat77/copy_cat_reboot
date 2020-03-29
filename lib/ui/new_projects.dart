@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db_manager.dart';
-// import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
+import 'utils/uidata.dart';
 
 enum NoteMode { 
   Editing,
@@ -9,69 +9,56 @@ enum NoteMode {
 }
 
 
+
 final formkey = new GlobalKey<FormState> ();
 
-class SolutionsDetails extends StatefulWidget {
+class NewProject extends StatefulWidget {
 
-  final NoteMode noteMode;
   final Map<String, dynamic> note;
-
-  SolutionsDetails(this.noteMode, this.note);
+  final NoteMode noteMode;
 
   // final cameras;
-  // Newswot(this.cameras);
+  NewProject(this.note, this.noteMode);
 
 
   @override
-  SolutionsDetailsState createState() => SolutionsDetailsState();
+  NewProjectState createState() => NewProjectState();
 }
 
-class SolutionsDetailsState extends State<SolutionsDetails> {
+class NewProjectState extends State<NewProject> {
 
-  String solutionsTitle;
-  String solutionsDescription;
-  String solutionsFor, solutionsBy;
+  String modelTitle;
+  String modelDescription;
+
+  final form = formkey.currentState;
 
 
-
-
-  TextEditingController _solutionsTitleController = new TextEditingController();
-  TextEditingController _solutionsDescriptionController = new TextEditingController();
-  TextEditingController _solutionsForController = new TextEditingController();
-  TextEditingController _solutionsByController = new TextEditingController();
+  TextEditingController _modelTitleController = new TextEditingController();
+  TextEditingController _modelDescriptionController = new TextEditingController();
 
   Color labelColor = Colors.grey;
+  
+  
+
 
   @override
   void initState(){
     super.initState();
-    _solutionsDescriptionController.addListener(
+    _modelDescriptionController.addListener(
       (){
         setState(() {
-          solutionsDescription = _solutionsDescriptionController.text;
+          modelDescription = _modelDescriptionController.text;
         });
       }
     );
-    _solutionsTitleController.addListener(
+    _modelTitleController.addListener(
       (){
         setState(() {
-          solutionsTitle = _solutionsTitleController.text;
+          modelTitle = _modelTitleController.text;
         });
       }
     );
 
-    _solutionsByController.addListener((){
-        setState(() {
-          solutionsBy = _solutionsByController.text;
-        });
-      }
-    );
-
-    _solutionsForController.addListener((){
-      setState(() {
-        solutionsFor = _solutionsForController.text;
-      });
-    });
   }
 
   bool validateForm() {
@@ -84,8 +71,6 @@ class SolutionsDetailsState extends State<SolutionsDetails> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,27 +79,39 @@ class SolutionsDetailsState extends State<SolutionsDetails> {
           icon: Icon(Icons.close),
           onPressed: (){
             Navigator.pop(context);
+            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingPage()));
           },
         ),
-        title: Text("New Solutions "),
+        title: Text("New Project"),
+         flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.black,
+              Colors.blue
+            ])
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.done),
             onPressed: () {
               if(validateForm()) {
                       if (widget.noteMode == NoteMode.Adding) {
-                        DBManagerSolutions.insertSolutions({
-                          'solutionsTitle': solutionsTitle,
-                          'solutionsDescription': solutionsDescription,
+                        DBManagerProjects.insertItem({
+                          'ModelTitle': modelTitle,
+                          'ModelDescription': modelDescription,
                         });
                       } else if (widget?.noteMode == NoteMode.Editing) {
-                        DBManagerSolutions.updateSolutions({
+                        DBManagerProjects.updateItem({
                           'id': widget.note['id'],
-                          'solutionsTitle': _solutionsTitleController.text,
-                          'solutionsDescription': _solutionsDescriptionController.text,
-                        });
+                          'ModelTitle': _modelTitleController.text,
+                          'ModelDescription': _modelDescriptionController.text,
+                       });
                     }
-                    print("$solutionsTitle $solutionsDescription");
+                    print("$modelTitle, $modelDescription,");
                   Navigator.pop(context);
                   }
             },
@@ -151,8 +148,8 @@ class SolutionsDetailsState extends State<SolutionsDetails> {
                         onTap: (){
 
                         },
-                        controller: _solutionsTitleController,
-                        onSaved: (value) => solutionsTitle = value,
+                        controller: _modelTitleController,
+                        onSaved: (value) => modelTitle = value,
                         validator: (val) =>  val.length == 0? "Please enter title" : null,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
@@ -170,9 +167,9 @@ class SolutionsDetailsState extends State<SolutionsDetails> {
                         primaryColorDark: Uidata.primaryColor,
                       ),
                       child: TextFormField(
-                        onSaved: (value) => solutionsDescription = value,
+                        controller: _modelDescriptionController,
+                        onSaved: (value) => modelDescription = value,
                         validator: (val) =>  val.length == 0? "Please enter description" : null,
-                        controller: _solutionsDescriptionController,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
                           labelText: "Description",
@@ -183,8 +180,12 @@ class SolutionsDetailsState extends State<SolutionsDetails> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    Theme(
+                      data: ThemeData(
+                        primaryColor: Colors.black,
+                        primaryColorDark: Uidata.primaryColor,
+                      ),
+                    
                       child: Row(
                         children: <Widget>[
                           Expanded(

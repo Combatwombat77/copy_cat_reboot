@@ -22,7 +22,7 @@ class _LandingPageState extends State<LandingPage>
     DBManagerSwot.openDB();
     DBManagerViews.openDB();
     DBManagerModel.openDB();
-    DBManagerGuide.openDB();
+    DBManagerGuide1.openDB();
     DBManagerCustomer.openDB();
     DBManagerAnswers.openDB();
 

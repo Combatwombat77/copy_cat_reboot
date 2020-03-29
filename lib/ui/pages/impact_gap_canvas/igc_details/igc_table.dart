@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:copy_cat/models/db2.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:copy_cat/models/db2.dart';
 
 
 class IGCTable extends StatefulWidget {
+    final int modelID;
+
+  IGCTable(this.modelID);
 
 
   @override
@@ -35,7 +38,7 @@ class _IGCTableState extends State<IGCTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Preview"),
+        title: Text("IGC Preview For:" +""),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
@@ -50,11 +53,19 @@ class _IGCTableState extends State<IGCTable> {
         child: Container(
           child: Column(
             children: <Widget>[
+              Card(
+                    child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[                           
+                              ],         
+                          ),
               Row(children: <Widget>[
                 Expanded(
                   child: Table(
                     border: TableBorder.all(),
-                    children: [TableRow(
+                    children: [
+                      TableRow(
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -65,12 +76,12 @@ class _IGCTableState extends State<IGCTable> {
                                 Text("Challenge: ", style: TextStyle(fontWeight: FontWeight.bold),),
                                 Container(
                                   child: FutureBuilder(
-                                            future: DBManagerGuide.getListChall2(),
+                                            future: DBManagerGuide1.getLists("one", widget.modelID),
                                             builder: (context, snapshot) {
                                               if (snapshot.connectionState ==
                                                   ConnectionState.done) {
                                                 final notes = snapshot.data;
-                                                return CanvasTitle(notes[0]['title']);
+                                                return CanvasTitle(notes[0]['answer']);
                                               }
                                               return Center(
                                                   child:
@@ -117,7 +128,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("two", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -130,13 +141,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.orange,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -171,7 +182,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists( "ten", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -184,13 +195,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.yellow,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -225,7 +236,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                   future: DBManagerGuide1.getLists("six", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -244,7 +255,7 @@ class _IGCTableState extends State<IGCTable> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -284,7 +295,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("three", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -297,13 +308,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.orange,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -339,7 +350,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 60.0,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                  future: DBManagerGuide1.getLists("eleven", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -352,13 +363,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.yellow,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -394,7 +405,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("seven", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -413,7 +424,7 @@ class _IGCTableState extends State<IGCTable> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -455,7 +466,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                   future: DBManagerGuide1.getLists("four", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -468,13 +479,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.orange,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -510,7 +521,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("eight", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -523,13 +534,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.yellow,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['tewlve']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -565,7 +576,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                   future: DBManagerGuide1.getLists("eight", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -584,7 +595,7 @@ class _IGCTableState extends State<IGCTable> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -625,7 +636,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                   future: DBManagerGuide1.getLists("five", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -638,13 +649,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.orange,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -680,7 +691,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("thirteen", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -693,13 +704,13 @@ class _IGCTableState extends State<IGCTable> {
                                               },
                                               child: Card(
                                                 elevation: 5.0,
-                                                color: Colors.green,
+                                                color: Colors.yellow,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -735,7 +746,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide.getListChall2(),
+                                    future: DBManagerGuide1.getLists("nine", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -754,7 +765,7 @@ class _IGCTableState extends State<IGCTable> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['title']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -779,8 +790,6 @@ class _IGCTableState extends State<IGCTable> {
                               
                             ]
                           ),
-
-
                         ],
                       )
                     )
@@ -790,7 +799,9 @@ class _IGCTableState extends State<IGCTable> {
             ],
           )
         ),
-      ),
+            ]),
+        ),
+        ),
     ),
   );
   }
@@ -827,9 +838,9 @@ class CanvasTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _title,
-      style: TextStyle(
-        fontWeight: FontWeight.bold
-      ),
+    //  style: TextStyle(
+       // fontWeight: FontWeight.bold
+     // ),
     );
   }
 }

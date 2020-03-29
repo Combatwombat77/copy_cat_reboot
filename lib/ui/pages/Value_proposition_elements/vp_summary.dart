@@ -676,8 +676,6 @@ class VPSummaryState extends State<VPSummary> {
       ByteData byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
-      var bs64 = base64Encode(pngBytes);
-
       var filePath = await ImagePickerSaver.saveFile(
         fileData: byteData.buffer.asUint8List(),
       );
@@ -704,56 +702,6 @@ class CanvasTitle extends StatelessWidget {
       // style: TextStyle(
       //   fontWeight: FontWeight.bold
       // ),
-    );
-  }
-}
-
-class CanvasModelP extends StatefulWidget {
-  final int modelID;
-
-  CanvasModelP(this.modelID);
-  @override
-  _CanvasModelPState createState() => _CanvasModelPState();
-}
-
-class _CanvasModelPState extends State<CanvasModelP> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Preview"),
-      ),
-      body: FutureBuilder(
-        future: DBManagerViews.getLists("Customer Segments", widget.modelID),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final notes = snapshot.data;
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasNote(NoteMode.Editing, notes[index], widget.postName, widget.modelId)));
-                  },
-                  child: Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        CanvasTitle(notes[index]['title']),
-                        Container(
-                          height: 4,
-                        ),
-                        // _NoteDescription(notes[index]['description'])
-                      ],
-                    ),
-                  ),
-                );
-              },
-              itemCount: notes == null ? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),
     );
   }
 }

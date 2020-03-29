@@ -18,27 +18,11 @@ class CanvasModelR extends StatefulWidget {
 class _CanvasModelRState extends State<CanvasModelR> {
   static GlobalKey previewContainer = new GlobalKey();
 
-  Future rotatePage() async {
-    await SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft]);
-  }
-
-  Future<bool> _onBackPressed() async {
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return true;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    rotatePage();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onBackPressed,
-      child: Scaffold(
+    return Scaffold(
           appBar: AppBar(title: Text("Preview"), actions: <Widget>[
             IconButton(
               icon: Icon(Icons.save),
@@ -558,7 +542,9 @@ class _CanvasModelRState extends State<CanvasModelR> {
                         ),
                       )
                     ],
-                  )))),
+                  )
+                )
+              )
     );
   }
 

@@ -1,7 +1,6 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/Value_proposition_elements/answers1_list.dart';
-import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'
-    as subject;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'as subject;
 import 'package:copy_cat/ui/pages/Value_proposition_elements/vp_summary.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,8 @@ import 'package:copy_cat/models/db2.dart';
 enum NoteMode { Editing, Adding }
 
 class ValueDashboard extends StatefulWidget {
+  final String title;
+  ValueDashboard(this.title);
   @override
   ValueDashboardState createState() => ValueDashboardState();
 }
@@ -24,7 +25,7 @@ class ValueDashboardState extends State<ValueDashboard> {
 
       // // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text("Value Proposition canvas"),
+        title: Text("Value Propositions for: " + widget.title),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -84,13 +85,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                                 color: Uidata.primaryColor),
                                           ),
                                           onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CustomerElements(
-                                                            notes[index]
-                                                                ['id'])));
+                                            Navigator.push(context,MaterialPageRoute(builder: (context) =>CustomerElements(notes[index]['SubjectTitle'],notes[index]['id'])));
                                           },
                                         ),
                                         FlatButton(
@@ -149,7 +144,8 @@ class CustomerElements extends StatefulWidget {
   // Dashboard(this.cameras);
 
   final int modelId;
-  CustomerElements(this.modelId);
+  final String title;
+  CustomerElements(this.title,this.modelId);
   @override
   CustomerElementsState createState() => CustomerElementsState();
 }
@@ -175,7 +171,7 @@ class CustomerElementsState extends State<CustomerElements>
     return Scaffold(
 //      drawer: SideDrawer(),
         appBar: AppBar(
-          title: Text("Customer Details"),
+          title: Text(widget.title),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(

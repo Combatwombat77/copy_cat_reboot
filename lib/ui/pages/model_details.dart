@@ -4,8 +4,6 @@ import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db2.dart';
-import 'igc.dart';
-import 'igc_table.dart';
 
 
   
@@ -31,7 +29,7 @@ class _ModelDetailsState extends State<ModelDetails> {
 void initState(){
   super.initState();
   DBManagerViews.openDB();
-  DBManagerGuide.openDB();
+  DBManagerGuide1.openDB();
 }
 
 var items = [
@@ -50,7 +48,7 @@ var items = [
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.modelTitle),
+        title: Text("Business model for: " + widget.modelTitle),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Uidata.btnColor,
@@ -122,40 +120,20 @@ Widget cardView(String cardName, Icon icon){
 
 
 
-class Pages extends StatefulWidget {
-  
+enum NoteMode { Editing, Adding }
 
+class IGC extends StatefulWidget {
   @override
-  _PagesState createState() => _PagesState();
+  IGCState createState() => IGCState();
 }
 
-class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
-
-  TabController inAppTabController;
-
-
-   @override
-  void initState(){
-    super.initState();
-    inAppTabController = new TabController(length: 3, vsync: this);
-  }
-
-  @override
-  void dispose(){
-    inAppTabController.dispose();
-    super.dispose();
-  }
-
+class IGCState extends State<IGC> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => IGCTableFinal()));
-          Navigator.push(context, MaterialPageRoute(builder: (context) => IGCTable()));
-        },
-        child: Icon(Icons.arrow_forward)
-      ),
+//      drawer: SideDrawer(),
+
+      //  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text("IGC"),
         flexibleSpace: Container(
@@ -165,35 +143,114 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
                   end: Alignment.bottomRight,
                   colors: <Color>[Colors.black, Colors.blue])),
         ),
-        centerTitle: true,
-        bottom: 
-        TabBar(
-          controller: inAppTabController,
-          tabs: <Widget>[
-            Tab(
-//              icon: Icon(Icons.pages),
-              child: Text("Challenge Mapping"),
-            ),
-            Tab(
-//              icon: Icon(Icons.business),
-              child: Text("solutions mapping"),
-            ),
-            Tab(
-//              icon: Icon(Icons.business),
-              child: Text("impact gaps"),
-            ),
-          ],
-        ),
       ),
-      body: TabBarView(
-        controller: inAppTabController,
-        children: <Widget>[
-          Challenges(),
-         Solutions() ,
-         ImpactGap()
-          
-        ],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Uidata.btnColor,
+        onPressed: () {
+         // Navigator.push(
+              //context,
+            //  MaterialPageRoute(
+             //     builder: (context) =>
+                     // subject.CustomerDetails(subject.NoteMode.Adding, null)));
+        },
+        child: Icon(Icons.add),
       ),
+      body: FutureBuilder(
+        future: DBManagerCustomer.getSubjectList(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            final notes = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Card(
+                    color: Colors.grey.shade200,
+                    child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Card(
+                            elevation: 5.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5.0, left: 15.0),
+                                          child: CustomerTitle(
+                                              notes[index]['SubjectTitle']),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        FlatButton(
+                                          color: Colors.white,
+                                          child: Text(
+                                            "Customer details",
+                                            style: TextStyle(
+                                                color: Uidata.primaryColor),
+                                          ),
+                                          onPressed: () {
+                                        //    Navigator.push(
+                                          //      context,
+                                         //       MaterialPageRoute(
+                                          //          builder: (context) =>
+                                                      //  CustomerElements(
+                                            //                notes[index]
+                                            //                    ['id'])));
+                                          },
+                                        ),
+                                        FlatButton(
+                                          color: Colors.white,
+                                          child: Text(
+                                            "EDIT Customer",
+                                            style: TextStyle(
+                                                color: Uidata.primaryColor),
+                                          ),
+                                          onPressed: () {
+                                            //Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
+                                          },
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.delete),
+                                          onPressed: () {
+                                            DBManagerCustomer.deleteSubject(
+                                                notes[index]['id']);
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ))),
+                  ),
+                );
+              },
+              itemCount: notes == null ? 0 : notes.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
+}
+
+class CustomerTitle extends StatelessWidget {
+  final String _title;
+
+  CustomerTitle(this._title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -204,17 +261,6 @@ class _PagesState extends State<Pages> with SingleTickerProviderStateMixin {
 
 
 
-
-
-
-  Future<Widget> listMethod(int i, BuildContext context) async {
-    String test = await DBManagerGuide.getListChall(i).toString();
-    return ListView.builder(
-      itemBuilder: (context, i){
-        return Text(test);
-      },
-    );
-  }
              
 
 
@@ -268,13 +314,6 @@ class ModelDescription extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-final formkey = new GlobalKey<FormState> ();
 
 
 

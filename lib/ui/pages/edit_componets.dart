@@ -2,8 +2,6 @@ import 'package:copy_cat/ui/pages/user_opportunities.dart';
 import 'package:copy_cat/ui/pages/user_strengths.dart';
 import 'package:copy_cat/ui/pages/user_threats.dart';
 import 'package:copy_cat/ui/pages/user_weaknesses.dart';
-import 'package:copy_cat/ui/swot_home.dart';
-import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

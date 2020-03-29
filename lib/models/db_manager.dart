@@ -334,111 +334,7 @@ class DBManagerSwot {
   }
 }
 
-class DBManagerChallenge {
-  static Database db;
-  static Future openDB() async {
-    db = await openDatabase(join(await getDatabasesPath(), 'challenges.db'),
-        version: 1, onCreate: (Database db, int version) async {
-      await db.execute('''
-          create table Challenge(
-            id integer primary key autoincrement,
-            challengeTitle text not null,
-            challengeDescription text not null
-          );''');
-    });
-  }
 
-  static Future insertChallenge(Map<String, dynamic> note) async {
-    await db.insert('Challenge', note);
-  }
-
-  static Future deleteChallenge(int id) async {
-    await db.delete('Challenge', where: 'id = ?', whereArgs: [id]);
-  }
-
-  static Future updateChallenge(Map<String, dynamic> note) async {
-    await db
-        .update('Challenge', note, where: 'id = ?', whereArgs: [note['id']]);
-  }
-
-  static Future<List<Map<String, dynamic>>> getList() async {
-    if (db == null) {
-      await openDB();
-    } else {
-      return await db.query('Challenge');
-    }
-  }
-}
-
-class DBManagerImpact {
-  static Database db;
-  static Future openDB() async {
-    db = await openDatabase(join(await getDatabasesPath(), 'Impact.db'),
-        version: 1, onCreate: (Database db, int version) async {
-      await db.execute('''
-          create table Impact(
-            id integer primary key autoincrement,
-            ImpactTitle text not null,
-            ImpactDescription text not null
-          );''');
-    });
-  }
-
-  static Future insertImpact(Map<String, dynamic> note) async {
-    await db.insert('Impact', note);
-  }
-
-  static Future deleteImpact(int id) async {
-    await db.delete('Impact', where: 'id = ?', whereArgs: [id]);
-  }
-
-  static Future updateImpact(Map<String, dynamic> note) async {
-    await db.update('Impact', note, where: 'id = ?', whereArgs: [note['id']]);
-  }
-
-  static Future<List<Map<String, dynamic>>> getList() async {
-    if (db == null) {
-      await openDB();
-    } else {
-      return await db.query('Impact');
-    }
-  }
-}
-
-class DBManagerSolutions {
-  static Database db;
-  static Future openDB() async {
-    db = await openDatabase(join(await getDatabasesPath(), 'solutions.db'),
-        version: 1, onCreate: (Database db, int version) async {
-      await db.execute('''
-          create table Solutions(
-            id integer primary key autoincrement,
-            solutionsTitle text not null,
-          );''');
-    });
-  }
-
-  static Future insertSolutions(Map<String, dynamic> note) async {
-    await db.insert('Solutions', note);
-  }
-
-  static Future deleteSolutions(int id) async {
-    await db.delete('Solutions', where: 'id = ?', whereArgs: [id]);
-  }
-
-  static Future updateSolutions(Map<String, dynamic> note) async {
-    await db
-        .update('Solutions', note, where: 'id = ?', whereArgs: [note['id']]);
-  }
-
-  static Future<List<Map<String, dynamic>>> getList() async {
-    if (db == null) {
-      await openDB();
-    } else {
-      return await db.query('Solutions');
-    }
-  }
-}
 
 class Note {
   int id;
@@ -498,6 +394,77 @@ class DBManagerCustomer {
       await openDB();
     } else {
       return await db.query('Subject');
+    }
+  }
+}
+
+
+class DBManagerIGC {
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(join(await getDatabasesPath(), 'IgcDb.db'),
+        version: 1, onCreate: (Database db, int version) async {
+      await db.execute('''
+          create table igc (
+            id integer primary key autoincrement,
+            SubjectTitle text not null
+          );''');
+    });
+  }
+
+  static Future insertSubject(Map<String, dynamic> note) async {
+    await db.insert('igc', note);
+  }
+
+  static Future deleteSubject(int id) async {
+    await db.delete('igc', where: 'id = ?', whereArgs: [id]);
+  }
+
+  static Future updateSubject(Map<String, dynamic> note) async {
+    await db.update('igc', note, where: 'id = ?', whereArgs: [note['id']]);
+  }
+
+  static Future<List<Map<String, dynamic>>> getSubjectList() async {
+    if (db == null) {
+      await openDB();
+    } else {
+      return await db.query('igc');
+    }
+  }
+}
+
+
+class DBManagerProjects {
+  static Database db;
+  static Future openDB() async {
+    db = await openDatabase(join(await getDatabasesPath(), 'projects.db'),
+        version: 1, onCreate: (Database db, int version) async {
+      await db.execute('''
+          create table projects(
+            id integer primary key autoincrement,
+            ModelTitle text not null,
+            ModelDescription text not null
+          );''');
+    });
+  }
+
+  static Future insertItem(Map<String, dynamic> note) async {
+    await db.insert('projects', note);
+  }
+
+  static Future deleteItem(int id) async {
+    await db.delete('projects', where: 'id = ?', whereArgs: [id]);
+  }
+
+  static Future updateItem(Map<String, dynamic> note) async {
+    await db.update('projects', note, where: 'id = ?', whereArgs: [note['id']]);
+  }
+
+  static Future<List<Map<String, dynamic>>> getItemList() async {
+    if (db == null) {
+      await openDB();
+    } else {
+      return await db.query('projects');
     }
   }
 }
