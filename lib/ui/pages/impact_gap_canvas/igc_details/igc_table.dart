@@ -38,7 +38,7 @@ class _IGCTableState extends State<IGCTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("IGC Preview For:" +""),
+        title: Text("IGC Preview"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
@@ -49,7 +49,7 @@ class _IGCTableState extends State<IGCTable> {
       body: RepaintBoundary(
         key: previewContainer,
         child:SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(1.0),
         child: Container(
           child: Column(
             children: <Widget>[
@@ -174,7 +174,7 @@ class _IGCTableState extends State<IGCTable> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Gaps within the Solutions: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                    Text("Gaps between solutions\challenges: ", style: TextStyle(fontWeight: FontWeight.bold)),
                                     SizedBox(
                                       height: 5.0,
                                     ),
@@ -342,7 +342,7 @@ class _IGCTableState extends State<IGCTable> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Gaps between challenges & solution: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("Gaps within the solution: ", style: TextStyle(fontWeight: FontWeight.bold) ),
                                     SizedBox(
                                       height: 10.0,
                                     ),
@@ -445,12 +445,10 @@ class _IGCTableState extends State<IGCTable> {
                                   ),
                                   ],
                                 ),
-                              ),
-                              
+                              ),  
                             ]
                           ),
                           TableRow(
-                            
                             children: [
                               Container(
                                 height: 120.0,
@@ -521,7 +519,7 @@ class _IGCTableState extends State<IGCTable> {
                                   height: 75,
                                   color: Colors.white,
                                   child: FutureBuilder(
-                                    future: DBManagerGuide1.getLists("eight", widget.modelID),
+                                    future: DBManagerGuide1.getLists("twelve", widget.modelID),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -540,7 +538,7 @@ class _IGCTableState extends State<IGCTable> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     CanvasTitle(
-                                                        notes[index]['tewlve']),
+                                                        notes[index]['answer']),
                                                     Container(
                                                       height: 4,
                                                     ),
@@ -844,3 +842,4 @@ class CanvasTitle extends StatelessWidget {
     );
   }
 }
+

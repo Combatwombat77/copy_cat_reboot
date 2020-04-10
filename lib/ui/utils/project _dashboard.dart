@@ -1,3 +1,4 @@
+import 'package:copy_cat/ui/utils/pdf_generator.dart';
 import 'package:copy_cat/ui/utils/plan_tools.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,14 @@ class _ProjectDashState extends State<ProjectDash> {
                   end: Alignment.bottomRight,
                   colors: <Color>[Colors.black, Colors.blue])),
         ),
+        actions: [
+          IconButton(icon: Icon(Icons.picture_as_pdf,
+          color: Colors.white),
+           onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyPdfHomePage())); 
+           }
+       )
+        ]
       ),
         body: Stack(fit: StackFit.expand, children: <Widget>[
       Container(
@@ -67,7 +76,7 @@ class _ProjectDashState extends State<ProjectDash> {
                   //                splashColor: Colors.grey,
                   color: Colors.white,
                   child: Text(
-                    "View",
+                    "Open",
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
@@ -118,7 +127,7 @@ class _ProjectDashState extends State<ProjectDash> {
                   //                splashColor: Colors.grey,
                   color: Colors.white,
                   child: Text(
-                    "View",
+                    "Open",
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
@@ -168,7 +177,7 @@ class _ProjectDashState extends State<ProjectDash> {
                   //                splashColor: Colors.grey,
                   color: Colors.white,
                   child: Text(
-                    "View",
+                    "Open",
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
@@ -218,7 +227,7 @@ class _ProjectDashState extends State<ProjectDash> {
                   //                splashColor: Colors.grey,
                   color: Colors.white,
                   child: Text(
-                    "View",
+                    "Open",
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {

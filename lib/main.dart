@@ -84,8 +84,8 @@ class MyHomePageState extends State<MyHomePage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Results-Oriented Planning Adaptation',
-        style: TextStyle(fontSize: 19.0),),
+        title: Text('Results-Oriented Planning & Adaptation',
+        style: TextStyle(fontSize: 17.0),),
          flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -123,6 +123,7 @@ ListView(
                     TextNew(),
                   ],
                 ),
+                          ImageAsset(),
                 new ListTile(
             leading: new Icon(Icons.photo_album),
             title: new Text('                New Project',
@@ -274,3 +275,15 @@ ListView(
   }
 }
 
+class ImageAsset extends StatelessWidget{
+  @override 
+  Widget build (BuildContext context){
+    AssetImage assetImage = AssetImage('assets/images/Results-skeleton-logo.png');
+    Image image = Image(image: assetImage,);
+    return  Padding(
+      padding: const EdgeInsets.only(top: 20, left: 10,bottom: 50),
+      child: Container(
+      child: image),
+      );
+  }
+}

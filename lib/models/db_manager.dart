@@ -10,64 +10,55 @@ class DBManagerViews {
       await db.execute('''
           create table customer_segments(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,         
             modelID text not null
           );''');
       await db.execute('''
           create table value_propositions(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,           
             modelID integer not null
           );''');
       await db.execute('''
           create table channels(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,         
             modelID text not null
           );''');
       await db.execute('''
           create table revenue_stream(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,       
             modelID text not null
           );''');
       await db.execute('''
           create table customer_relationships(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,       
             modelID text not null
           );''');
       await db.execute('''
           create table key_resources(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,       
             modelID text not null
           );''');
       await db.execute('''
           create table key_activities(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,         
             modelID text not null
           );''');
       await db.execute('''
           create table key_partners(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,    
             modelID text not null
           );''');
       await db.execute('''
           create table cost_structure(
             id integer primary key autoincrement,
-            title text not null,
-            description text not null,
+            title text not null,          
             modelID text not null
           );''');
     });
@@ -79,7 +70,7 @@ class DBManagerViews {
     } else {
       if (tableName == "Customer Segments") {
         List<Map> results = await db.query("customer_segments",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title","modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -89,7 +80,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Value Propositions") {
         List<Map> results = await db.query("value_propositions",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title","modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -99,7 +90,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Channels") {
         List<Map> results = await db.query("channels",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -109,7 +100,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Customer Relationships") {
         List<Map> results = await db.query("customer_relationships",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -119,7 +110,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Revenue Streams") {
         List<Map> results = await db.query("revenue_stream",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -129,7 +120,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Key Resources") {
         List<Map> results = await db.query("key_resources",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -139,7 +130,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Key Activities") {
         List<Map> results = await db.query("key_activities",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -149,7 +140,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Key Partners") {
         List<Map> results = await db.query("key_partners",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 
@@ -159,7 +150,7 @@ class DBManagerViews {
         return null;
       } else if (tableName == "Cost Structure") {
         List<Map> results = await db.query("cost_structure",
-            columns: ["id", "title", "description", "modelID"],
+            columns: ["id", "title", "modelID"],
             where: 'modelID = ?',
             whereArgs: [modelID]);
 

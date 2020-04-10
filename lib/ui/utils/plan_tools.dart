@@ -20,7 +20,7 @@ class _PlanDashState extends State<PlanDash> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-        title: Text("planning for: " + widget.title),
+        title: Text("Planning for: " + widget.title),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -222,7 +222,7 @@ class _PlanDashState extends State<PlanDash> {
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid(widget.modelId)));
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => SwotGrid(widget.title,widget.modelId)));
                     
                   },
                 ),

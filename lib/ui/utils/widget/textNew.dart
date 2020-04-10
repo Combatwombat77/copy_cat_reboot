@@ -9,7 +9,7 @@ class _TextNewState extends State<TextNew> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 1.0, left: 10.0),
+      padding: const EdgeInsets.only(top: 10.0, left: 10.0,bottom: 20.0),
       child: Container(
         //color: Colors.green,
         height: 200,

@@ -45,12 +45,11 @@ class ChallengesState extends State<Challenges> {
   ];
 
   var list = [
-    "What is the customer category?",
-    "What are the current negative/undesirable Experiences",
-    "What are the concerns about the current solutions",
-    "What are the unmet needs",
-    "What are the competing products?",
-    "How does the competing product performance compare?"
+    "How do you describe the challenge?",
+    "Who are the affected parties",
+    "What is the impact of the challenge?",
+    "What is the cause of the challenge?",
+    "What is the history and future of the challenge?",
   ];
 
   @override
@@ -71,7 +70,7 @@ class ChallengesState extends State<Challenges> {
           cardView("Who are the affected parties?",items[1], list[1]),
           cardView("What is the impact of the challenge?",items[2], list[2]),
           cardView("What is the cause of the challenge?", items[3], list[3]),
-          cardView("What is the history and future of the challenge??", items[4], list[4]),
+          cardView("What is the history and future of the challenge?", items[4], list[4]),
         ],
       ))
     ]));
@@ -105,7 +104,8 @@ class ChallengesState extends State<Challenges> {
                   onPressed: () {
                     return Alert(
                         context: context,
-                        title: 'Answer',
+                        title: cardName,
+                        desc: 'Answer',
                         content: TextField(
                           controller: customController,
                         ),
@@ -179,12 +179,11 @@ class SolutionsState extends State<Solutions> {
   ];
 
   var list = [
-    "What is the customer category?",
-    "What are the current negative/undesirable Experiences",
-    "What are the concerns about the current solutions",
-    "What are the unmet needs",
-    "What are the competing products?",
-    "How does the competing product performance compare?"
+    "What is happening locally?",
+    "What is happening globally?",
+    "What is working and what isn't?",
+    "Where is the focus and the future?",
+
   ];
 
   @override
@@ -238,7 +237,8 @@ class SolutionsState extends State<Solutions> {
                   onPressed: () {
                     return Alert(
                         context: context,
-                        title: 'Answer',
+                        title: cardName ,
+                        desc: 'Answer',
                         content: TextField(
                           controller: customController,
                         ),
@@ -312,12 +312,10 @@ class ImpactGapsState extends State<ImpactGaps> {
   ];
 
   var list = [
-    "What is the customer category?",
-    "What are the current negative/undesirable Experiences",
-    "What are the concerns about the current solutions",
-    "What are the unmet needs",
-    "What are the competing products?",
-    "How does the competing product performance compare?"
+    "Where are the gaps between the challenges and solutions?",
+    "what are the gaps within the solutions?",
+    "What are the unaddressed obstacles?",
+    "What are the key lessons learned?",
   ];
 
   @override
@@ -371,7 +369,8 @@ class ImpactGapsState extends State<ImpactGaps> {
                   onPressed: () {
                     return Alert(
                         context: context,
-                        title: 'Answer',
+                        title: cardName,
+                        desc: 'Answer',
                         content: TextField(
                           controller: customController,
                         ),

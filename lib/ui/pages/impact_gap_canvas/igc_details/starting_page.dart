@@ -16,7 +16,7 @@ class IGCDashboard extends StatefulWidget {
 
   final String title;
   IGCDashboard(this.title);
-  
+
   @override
   IGCDashboardState createState() => IGCDashboardState();
 }
@@ -199,7 +199,7 @@ class IGCElementsState extends State<IGCElements>
             tabs: <Widget>[
               Tab(
 //              icon: Icon(Icons.pages),
-                child: Text("CHallenges "),
+                child: Text("Challenges "),
               ),
               Tab(
 //              icon: Icon(Icons.business),

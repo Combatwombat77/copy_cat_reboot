@@ -7,8 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="copy_cat_reboot"
-        android:icon="@mipmap/ic_launcher">
+        android:label="R.O.P.A">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
