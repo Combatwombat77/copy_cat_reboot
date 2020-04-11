@@ -1,3 +1,4 @@
+import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/new_projects.dart' as newProject;
 import 'package:copy_cat/ui/profile.dart';
 import 'package:copy_cat/ui/utils/current_projects.dart' as currentProjects;
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget{
 }
 
 class MyHomePageState extends State<MyHomePage>{
+
 
   Material myItems(IconData icon, String heading, int color){
      return Material(
@@ -79,6 +81,13 @@ class MyHomePageState extends State<MyHomePage>{
        ),
      );
   }
+
+    @override
+  void initState() {
+    super.initState();
+    DBManagerProjects.openDB();
+  }
+
   @override
 
   Widget build(BuildContext context){
