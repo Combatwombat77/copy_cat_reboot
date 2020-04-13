@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:copy_cat/models/db2.dart';
 import 'package:copy_cat/providers/swot_provider.dart';
+import 'package:copy_cat/ui/utils/pdf_utils.dart/img_bd.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'dart:ui' as ui;
@@ -39,15 +40,20 @@ class SWOTSummaryState extends State<SWOTSummary> {
           icon: Icon(Icons.save),
           onPressed: TakeScreenShot,
         ),
+        IconButton(
+          icon: Icon(Icons.query_builder),
+          onPressed: ()=> swotPicsList(),
+        ),
       ]),
       body: RepaintBoundary(
           key: previewContainer,
-          child: Container(
-              color: Colors.white,
+            child: Container(
+            color: Colors.blue,        
               child: ListView(
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Card(
+                    Card(           
+                    child:  Padding(padding: const EdgeInsets.all( 20.0),
                       child: Table(border: TableBorder.all(), children: [
                          TableRow(children: [
                           Text("Strengths",
@@ -62,7 +68,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                         TableRow(children: [
                           Container(
                             color: Colors.white,
-                            height: 30,
+                            height: 300,
                             // width: ,
                             child: FutureBuilder(
                               future: DBManagerSWOT.getLists(
@@ -105,7 +111,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                           ),
                           Container(
                             color: Colors.white,
-                            height: 150,
+                            height: 300,
                             // width: ,
                             child: FutureBuilder(
                               future: DBManagerSWOT.getLists(
@@ -160,7 +166,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                         TableRow(children: [
                           Container(
                             color: Colors.white,
-                            height: 150,
+                            height: 300,
                             // width: ,
                             child: FutureBuilder(
                               future: DBManagerSWOT.getLists(
@@ -203,7 +209,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                           ),
                           Container(
                             color: Colors.white,
-                            height: 150,
+                            height: 500,
                             // width: ,
                             child: FutureBuilder(
                               future: DBManagerSWOT.getLists(
@@ -247,8 +253,8 @@ class SWOTSummaryState extends State<SWOTSummary> {
                         ]),
                       ]),
                     )
+                    )
                   ]))
-          //)
           ),
     );
   }
@@ -262,6 +268,8 @@ class SWOTSummaryState extends State<SWOTSummary> {
       ByteData byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
+      DBManagerSwotPics.insertModel({
+        'imageName': pngBytes});
       var filePath = await ImagePickerSaver.saveFile(
         fileData: byteData.buffer.asUint8List(),
       );
@@ -273,6 +281,11 @@ class SWOTSummaryState extends State<SWOTSummary> {
     } catch (e) {
       print(e);
     }
+  }
+  Future swotPicsList()  {
+    return DBManagerSwotPics.getList();
+    
+    
   }
 }
 

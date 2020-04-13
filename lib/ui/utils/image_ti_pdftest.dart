@@ -22,11 +22,11 @@ class PdfPreviewScreen extends StatelessWidget {
   }
 }
 
-class MyPdfHomePage extends StatelessWidget {
+class MyPdfHomePage1 extends StatelessWidget {
 
-    Future<PdfImage> pdfImageFromImage(
+  Future<PdfImage> pdfImageFromImage(
     {@required PdfDocument pdf, @required ui.Image image}) async {
-    final ByteData bytes =
+  final ByteData bytes =
       await image.toByteData(format: ui.ImageByteFormat.rawRgba);
 
   return PdfImage(pdf,
@@ -58,7 +58,7 @@ class MyPdfHomePage extends StatelessWidget {
     }
     if (onError != null) {
       onError(exception, stackTrace);
-      print('this is the error youre looking for.');
+      print('this is the error you are looking for.');
     } else {
       // https://groups.google.com/forum/#!topic/flutter-announce/hp1RNIgej38
       assert(false, 'image failed to load');
@@ -73,56 +73,18 @@ class MyPdfHomePage extends StatelessWidget {
 
   writeOnPdf() async {
 
-    const imageProvider = const AssetImage('assets/images/Results-skeleton-logo.png');
-    
-  
-    final PdfImage image = await pdfImageFromImageProvider(
+    final PdfImage assetImage = await pdfImageFromImageProvider(
     pdf: pdf.document, 
-    image: imageProvider
+    image: const AssetImage('assets/icon/icon.jpg'),
     );
 
     pdf.addPage(
-      pw.MultiPage(
-        pageFormat: PdfPageFormat.a5,
-        margin: pw.EdgeInsets.all(32),
-
+      pw.Page(
         build: (pw.Context context){
-          return <pw.Widget>  [
-            pw.Header(
-              level: 0,
-              child: pw.Text("This is the first test to generating ResultsPro PDFs for futher use")
-            ),
-
-            pw.Paragraph(
-              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
-            ),
-
-            pw.Paragraph(
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
-            ),
-
-            pw.Header(
-              level: 1,
-              child: pw.Text("Second Heading")
-            ),
-
-            pw.Paragraph(
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
-            ),
-
-            pw.Paragraph(
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
-            ),
-
-            pw.Paragraph(
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
-            ),
-            pw.Image(image),
-             
-          ];
-        },
-      )
-    );
+          return pw.Center(
+              child:pw.Image(assetImage),
+          );
+        }));
   }
 
   Future savePdf() async{
