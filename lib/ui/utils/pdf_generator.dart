@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 
@@ -22,7 +23,34 @@ class PdfPreviewScreen extends StatelessWidget {
   }
 }
 
-class MyPdfHomePage extends StatelessWidget {
+class MyPdfHomePage extends StatefulWidget {
+  @override
+  _MyPdfHomePageState createState() => _MyPdfHomePageState();
+}
+
+class _MyPdfHomePageState extends State<MyPdfHomePage> {
+  final _formkey = GlobalKey<FormState>();
+  
+    File imageFile;
+
+  _openGallery(BuildContext context) async {
+   var picture = imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    this.setState((){
+      imageFile = picture;
+      print('image path $imageFile');
+
+    });
+    Navigator.of(context).pop();
+
+  }
+
+  Widget _decideImageView(){
+  if (imageFile== null){
+    return Text('Please add an image');
+  }else{
+    return Image.file(imageFile,width:200,height:200);
+  }
+}
 
     Future<PdfImage> pdfImageFromImage(
     {@required PdfDocument pdf, @required ui.Image image}) async {
@@ -75,12 +103,14 @@ class MyPdfHomePage extends StatelessWidget {
 
     const imageProvider = const AssetImage('assets/images/Results-skeleton-logo.png');
     
+
   
     final PdfImage image = await pdfImageFromImageProvider(
     pdf: pdf.document, 
     image: imageProvider
     );
 
+  
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a5,
@@ -118,6 +148,7 @@ class MyPdfHomePage extends StatelessWidget {
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
             ),
             pw.Image(image),
+            pw.Image(image),
              
           ];
         },
@@ -137,22 +168,31 @@ class MyPdfHomePage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: Text("PDF Test"),
       ),
-
       body: Container(
         width: double.infinity,
         height: double.infinity,
-
-        child: Column(
-
+        child: Form(         
+          key: _formkey,
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("PDF TUTORIAL", style: TextStyle(fontSize: 34),)
+            Text("PDF TUTORIAL", style: TextStyle(fontSize: 34),),
+             SizedBox(height:20.0),
+                 _decideImageView(),
+                   SizedBox(height:20.0),
+             RaisedButton(color: Colors.black,
+                  child: Text('Add image',
+                  style: TextStyle(
+                    color: Colors.white
+                  ),),
+                  onPressed: () => _openGallery( context),
+             ),
           ],
         ),
+      ),
       ),
 
       floatingActionButton: FloatingActionButton(

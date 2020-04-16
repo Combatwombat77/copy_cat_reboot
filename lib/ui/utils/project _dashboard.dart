@@ -1,3 +1,4 @@
+import 'package:copy_cat/ui/utils/image_getter_test.dart';
 import 'package:copy_cat/ui/utils/image_ti_pdftest.dart';
 import 'package:copy_cat/ui/utils/pdf_generator.dart';
 import 'package:copy_cat/ui/utils/pdf_utils.dart/final_file.dart';
@@ -139,7 +140,8 @@ class _ProjectDashState extends State<ProjectDash> {
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
-                    
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => AddPrescription()));
+
                   },
                 ),
                 FlatButton(
