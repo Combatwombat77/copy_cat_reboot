@@ -1,4 +1,3 @@
-import 'package:copy_cat/ui/pages/model_details.dart';
 import 'package:copy_cat/ui/utils/project%20_dashboard.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +62,6 @@ class ProjectsHomeState extends State<ProjectsHome> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return ListView.builder(
                       itemBuilder: (context, index) {
-                        String modelTitle = notes[index]['ModelTitle'];
                         return Padding(
                           padding: const EdgeInsets.all(10),
                           child: Card(
@@ -159,7 +157,7 @@ class ModelTitle extends StatelessWidget {
 }
 
 class ModelDescription extends StatelessWidget {
-  String description;
+  final String description;
 
   ModelDescription(this.description);
 

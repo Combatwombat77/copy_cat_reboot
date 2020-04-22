@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -31,24 +32,25 @@ class MyPdfHomePage extends StatefulWidget {
 class _MyPdfHomePageState extends State<MyPdfHomePage> {
   final _formkey = GlobalKey<FormState>();
   
-    File imageFile;
+    File imageFile1;
 
   _openGallery(BuildContext context) async {
-   var picture = imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+   var picture = imageFile1 = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState((){
-      imageFile = picture;
-      print('image path $imageFile');
+      List<int> imageBytes = imageFile1.readAsBytesSync();
+      String imageB64 = base64Encode(imageBytes);
+      Uint8List decoded = base64Decode(imageB64);
+      final image11 = decoded;
 
     });
-    Navigator.of(context).pop();
 
   }
 
   Widget _decideImageView(){
-  if (imageFile== null){
+  if (imageFile1== null){
     return Text('Please add an image');
   }else{
-    return Image.file(imageFile,width:200,height:200);
+    return Image.file(imageFile1,width:200,height:200);
   }
 }
 
@@ -109,6 +111,8 @@ class _MyPdfHomePageState extends State<MyPdfHomePage> {
     pdf: pdf.document, 
     image: imageProvider
     );
+
+
 
   
     pdf.addPage(

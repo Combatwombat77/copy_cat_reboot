@@ -20,6 +20,7 @@ class _AddPrescriptionState extends State<AddPrescription> {
     this.setState((){
       imageFile = picture;
       print('image path $imageFile');
+       FileImage(imageFile);
 
     });
     Navigator.of(context).pop();
@@ -168,6 +169,8 @@ Widget _decideImageView3(){
                  
                  SizedBox(height:10.0),
                  _decideImageView3(),
+
+                
 
             ],
           ),

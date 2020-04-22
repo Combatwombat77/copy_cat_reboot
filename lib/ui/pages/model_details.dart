@@ -1,5 +1,4 @@
 import 'package:copy_cat/models/db_manager.dart';
-import 'package:copy_cat/providers/swot_provider.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
 import 'package:copy_cat/ui/pages/view_post.dart';
 import 'package:flutter/material.dart';
@@ -312,19 +311,6 @@ class CustomerTitle extends StatelessWidget {
   }
 }
 
-class _NoteTitle extends StatelessWidget {
-  final String _title;
-
-  _NoteTitle(this._title);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _title,
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-    );
-  }
-}
 
 class ModelTitle extends StatelessWidget {
   final String _title;
@@ -341,7 +327,7 @@ class ModelTitle extends StatelessWidget {
 }
 
 class ModelDescription extends StatelessWidget {
-  String description;
+ final String description;
 
   ModelDescription(this.description);
 

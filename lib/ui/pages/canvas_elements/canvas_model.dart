@@ -1,11 +1,11 @@
-import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'dart:ui' as ui;
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CanvasModelR extends StatefulWidget {
   final int modelID;
@@ -554,20 +554,15 @@ class _CanvasModelRState extends State<CanvasModelR> {
       RenderRepaintBoundary boundary =
           previewContainer.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
-      var bs64 = base64Encode(pngBytes);
-
-      var filePath = await ImagePickerSaver.saveFile(
-        fileData: byteData.buffer.asUint8List(),
-      );
-      print(filePath);
-      // print(pngBytes);
-      // print(bs64);
-      setState(() {});
-      return pngBytes;
-    } catch (e) {
+      String dir = (await getApplicationDocumentsDirectory()).path;
+      File file = File(
+        "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".png");
+    await file.writeAsBytes(pngBytes);
+    print(file.path);
+    return pngBytes; 
+   } catch (e) {
       print(e);
     }
   }

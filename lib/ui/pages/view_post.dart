@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db_manager.dart';
 
 final formkey = new GlobalKey<FormState>();
@@ -112,7 +111,7 @@ class CanvasNote extends StatefulWidget {
   final NoteMode noteMode;
   final Map<String, dynamic> note;
   final String parentPageName;
-  int modelId;
+  final int modelId;
 
   CanvasNote(this.noteMode, this.note, this.parentPageName, this.modelId);
 

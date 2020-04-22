@@ -115,7 +115,7 @@ class ModelTitle extends StatelessWidget {
 }
 
 class ModelDescription extends StatelessWidget {
-  String description;
+ final String description;
 
   ModelDescription(this.description);
 

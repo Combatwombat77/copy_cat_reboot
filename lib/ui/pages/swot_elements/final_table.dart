@@ -1,13 +1,11 @@
-import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
-import 'package:copy_cat/models/db2.dart';
 import 'package:copy_cat/providers/swot_provider.dart';
-import 'package:copy_cat/ui/utils/pdf_utils.dart/img_bd.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SWOTSummary extends StatefulWidget {
   final int modelID;
@@ -38,11 +36,11 @@ class SWOTSummaryState extends State<SWOTSummary> {
          actions: <Widget>[
         IconButton(
           icon: Icon(Icons.save),
-          onPressed: TakeScreenShot,
+          onPressed: ()=>_takeScreenShot(),
         ),
         IconButton(
           icon: Icon(Icons.query_builder),
-          onPressed: ()=> swotPicsList(),
+          onPressed: (){},
         ),
       ]),
       body: RepaintBoundary(
@@ -259,35 +257,30 @@ class SWOTSummaryState extends State<SWOTSummary> {
     );
   }
 
-  Future<Uint8List> TakeScreenShot() async {
+  Future<void> _takeScreenShot() async {
     try {
       print('inside');
       RenderRepaintBoundary boundary =
           previewContainer.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
-      DBManagerSwotPics.insertModel({
-        'imageName': pngBytes});
-      var filePath = await ImagePickerSaver.saveFile(
-        fileData: byteData.buffer.asUint8List(),
-      );
-      print(filePath);
-      // print(pngBytes);
-      // print(bs64);
-      setState(() {});
-      return pngBytes;
-    } catch (e) {
+      String dir = (await getApplicationDocumentsDirectory()).path;
+      File file = File(
+        "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".png");
+    await file.writeAsBytes(pngBytes);
+    print(file.path);
+    return pngBytes; 
+   } catch (e) {
       print(e);
     }
   }
-  Future swotPicsList()  {
-    return DBManagerSwotPics.getList();
+
+
     
     
   }
-}
+
 
 class CanvasTitle extends StatelessWidget {
   final String _title;

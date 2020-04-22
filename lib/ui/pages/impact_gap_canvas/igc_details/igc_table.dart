@@ -1,10 +1,10 @@
-import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:copy_cat/models/db2.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 class IGCTable extends StatefulWidget {
@@ -42,7 +42,7 @@ class _IGCTableState extends State<IGCTable> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: TakeScreenShot,
+            onPressed: ()=>_takeScreenShot(),
           ),
         ],
       ),
@@ -803,25 +803,21 @@ class _IGCTableState extends State<IGCTable> {
     ),
   );
   }
-  Future<Uint8List> TakeScreenShot() async{
-      try {
-    print('inside');
+  Future<void> _takeScreenShot() async{
+    try {
+      print('inside');
       RenderRepaintBoundary boundary =
           previewContainer.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
-      var bs64 = base64Encode(pngBytes);
-
-      var filePath = await ImagePickerSaver.saveFile(
-        fileData: byteData.buffer.asUint8List(),
-      );
-      print(filePath);
-      // print(pngBytes);
-      // print(bs64);
-      setState(() {});
-      return pngBytes;
-    } catch (e) {
+      String dir = (await getApplicationDocumentsDirectory()).path;
+      File file = File(
+        "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".png");
+    await file.writeAsBytes(pngBytes);
+    print(file.path);
+    return pngBytes; 
+   } catch (e) {
       print(e);
     }
   }
