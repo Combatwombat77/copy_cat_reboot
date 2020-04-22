@@ -32,27 +32,9 @@ class MyPdfHomePage extends StatefulWidget {
 class _MyPdfHomePageState extends State<MyPdfHomePage> {
   final _formkey = GlobalKey<FormState>();
   
-    File imageFile1;
+   
 
-  _openGallery(BuildContext context) async {
-   var picture = imageFile1 = await ImagePicker.pickImage(source: ImageSource.gallery);
-    this.setState((){
-      List<int> imageBytes = imageFile1.readAsBytesSync();
-      String imageB64 = base64Encode(imageBytes);
-      Uint8List decoded = base64Decode(imageB64);
-      final image11 = decoded;
 
-    });
-
-  }
-
-  Widget _decideImageView(){
-  if (imageFile1== null){
-    return Text('Please add an image');
-  }else{
-    return Image.file(imageFile1,width:200,height:200);
-  }
-}
 
     Future<PdfImage> pdfImageFromImage(
     {@required PdfDocument pdf, @required ui.Image image}) async {
@@ -104,9 +86,7 @@ class _MyPdfHomePageState extends State<MyPdfHomePage> {
   writeOnPdf() async {
 
     const imageProvider = const AssetImage('assets/images/Results-skeleton-logo.png');
-    
-
-  
+     
     final PdfImage image = await pdfImageFromImageProvider(
     pdf: pdf.document, 
     image: imageProvider
@@ -152,7 +132,6 @@ class _MyPdfHomePageState extends State<MyPdfHomePage> {
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
             ),
             pw.Image(image),
-            pw.Image(image),
              
           ];
         },
@@ -184,16 +163,7 @@ class _MyPdfHomePageState extends State<MyPdfHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("PDF TUTORIAL", style: TextStyle(fontSize: 34),),
-             SizedBox(height:20.0),
-                 _decideImageView(),
-                   SizedBox(height:20.0),
-             RaisedButton(color: Colors.black,
-                  child: Text('Add image',
-                  style: TextStyle(
-                    color: Colors.white
-                  ),),
-                  onPressed: () => _openGallery( context),
-             ),
+             SizedBox(height:20.0),          
           ],
         ),
       ),

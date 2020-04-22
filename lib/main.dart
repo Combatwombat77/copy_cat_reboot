@@ -1,11 +1,11 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/new_projects.dart' as newProject;
 import 'package:copy_cat/ui/profile.dart';
+import 'package:copy_cat/ui/utils/app_title.dart';
+import 'package:copy_cat/ui/utils/cover_text.dart';
 import 'package:copy_cat/ui/utils/current_projects.dart' as currentProjects;
-import 'package:copy_cat/ui/utils/widget/singup.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'ui/utils/widget/textNew.dart';
 
 
 

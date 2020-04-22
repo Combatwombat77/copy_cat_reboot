@@ -1,5 +1,6 @@
-import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/igc.dart';
-import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/igc_table.dart';
+
+import 'package:copy_cat/ui/pages/impact_gap_canvas/igc.dart';
+import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_table.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db_manager.dart';

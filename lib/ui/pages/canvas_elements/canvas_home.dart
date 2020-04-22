@@ -1,9 +1,8 @@
 //import 'package:copy_cat/ui/pages/model_details.dart';
-import 'package:copy_cat/ui/pages/model_details.dart';
+import 'package:copy_cat/ui/pages/canvas_elements/model_details.dart';
+import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/models/db_manager.dart';
-import 'utils/uidata.dart';
-
 
 class CanvasHome extends StatefulWidget {
   @override

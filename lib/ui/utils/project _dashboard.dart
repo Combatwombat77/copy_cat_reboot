@@ -1,6 +1,4 @@
-import 'package:copy_cat/ui/utils/image_getter_test.dart';
 import 'package:copy_cat/ui/utils/pdf_generator.dart';
-import 'package:copy_cat/ui/utils/pdf_utils.dart/final_file.dart';
 import 'package:copy_cat/ui/utils/plan_tools.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +40,6 @@ class _ProjectDashState extends State<ProjectDash> {
        IconButton(icon: Icon(Icons.picture_as_pdf,
           color: Colors.black),
            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SaveImageDemoSQLite())); 
            }
        )
         ]
@@ -139,7 +136,6 @@ class _ProjectDashState extends State<ProjectDash> {
                     style: TextStyle(color: Uidata.primaryColor),
                   ),
                   onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => AddPrescription()));
 
                   },
                 ),

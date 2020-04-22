@@ -1,6 +1,6 @@
 import 'package:copy_cat/ui/pages/Value_proposition_elements/value_proposition.dart';
-import 'package:copy_cat/ui/pages/impact_gap_canvas/igc_details/starting_page.dart';
-import 'package:copy_cat/ui/pages/model_details.dart';
+import 'package:copy_cat/ui/pages/canvas_elements/model_details.dart';
+import 'package:copy_cat/ui/pages/impact_gap_canvas/starting_page.dart';
 import 'package:copy_cat/ui/pages/swot_elements/edit_componets.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';

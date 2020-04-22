@@ -1,6 +1,6 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/canvas_elements/canvas_model.dart';
-import 'package:copy_cat/ui/pages/view_post.dart';
+import 'package:copy_cat/ui/pages/canvas_elements/view_post.dart';
 import 'package:flutter/material.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:copy_cat/models/db2.dart';
