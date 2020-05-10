@@ -12,8 +12,9 @@ import 'dart:convert';
 
 class SWOTSummary extends StatefulWidget {
   final int modelID;
+  final String title;
 
-  SWOTSummary(this.modelID);
+  SWOTSummary(this.title,this.modelID);
   @override
   SWOTSummaryState createState() => SWOTSummaryState();
 }
@@ -48,16 +49,22 @@ class SWOTSummaryState extends State<SWOTSummary> {
           ]),
       body: RepaintBoundary(
           key: previewContainer,
-          child: Container(
-              color: Colors.blue,
               child: ListView(
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Card(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                    Card(
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Text( widget.title + " SWOT Analysis",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline))
+                            ],
+                          ),
+
+                       Card(
                         child: Table(border: TableBorder.all(), children: [
                           TableRow(children: [
                             Text("Strengths",
@@ -260,10 +267,14 @@ class SWOTSummaryState extends State<SWOTSummary> {
                             ),
                           ]),
                         ]),
-                      )),
-                    )
-                  ]))),
-    );
+                      ),
+                  ]
+                  )
+                  )
+                   ]
+                   )
+                   )
+                   );
   }
 
   Future<void> _takeScreenShot() async {

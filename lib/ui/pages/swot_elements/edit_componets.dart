@@ -73,7 +73,7 @@ class SwotGridState extends State<SwotGrid> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SWOTSummary(widget.modelId)));
+                          builder: (context) => SWOTSummary(widget.title, widget.modelId)));
                 }),
           ], 
           ),

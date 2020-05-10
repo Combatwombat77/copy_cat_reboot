@@ -1,15 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 import 'package:copy_cat/ui/utils/pick_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 
 class PdfPreviewScreen extends StatelessWidget {
@@ -32,110 +26,82 @@ class MyPdfHomePage extends StatefulWidget {
 
 class _MyPdfHomePageState extends State<MyPdfHomePage> {
   final _formkey = GlobalKey<FormState>();
+   File _image;
+   List images = [];
+   Future<File> imgFile;
+   Image image;
 
-  final pdf = pw.Document();
+   Future getImage() async {
+    var image = await ImagePickerSaver.pickImage(source: ImageSource.gallery);
 
-  writeOnPdf() async {
-    pdf.addPage(pw.MultiPage(
-      pageFormat: PdfPageFormat.a4,
-      margin: pw.EdgeInsets.all(32),
-      build: (pw.Context context) {
-        return <pw.Widget>[
-          pw.Header(
-              level: 0,
-              child: pw.Text(
-                  "This is the first test to generating ResultsPro PDFs for futher use")),
-          pw.Paragraph(
-              text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          pw.Paragraph(
-              text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          pw.Header(level: 1, child: pw.Text("Second Heading")),
-          pw.Paragraph(
-              text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          pw.Paragraph(
-              text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          pw.Paragraph(
-              text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-        ];
-      },
-    ));
+    setState(() {
+      _image = image;
+      images.add(image);
+    });
+    print(images.toString());
   }
 
-  Future savePdf() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    
 
-    String documentPath = documentDirectory.path;
-
-    File file = File("$documentPath/example.pdf");
-
-    file.writeAsBytesSync(pdf.save());
-    // file.writeAsBytes(pdf.save());
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PDF Test"),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Form(
-          key: _formkey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "PDF TUTORIAL",
-                style: TextStyle(fontSize: 34),
-              ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                child: Text("Test"),
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PickImages()));
-                },
-              )
-            ],
+        title: Text("PDF Generator"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.black,
+              Colors.blue
+            ])
           ),
         ),
+        actions: <Widget>[
+          IconButton(icon:Icon( Icons.save),
+          onPressed:  (){Navigator.push(context, MaterialPageRoute(builder: (context)=> Image2PDF(images: images,)));
+          }
+      )
+      ],
       ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [Colors.blue, Colors.black])),
+          ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-
-          // final String dir = (await getApplicationDocumentsDirectory()).path;
-          // final String path = '$dir/report.pdf';
-          // final File file = File(path);
-          // await file.writeAsBytes(pdf.save());
-          // Navigator.of(context).push( MaterialPageRoute(
-          //     builder: (_) => PdfPreviewScreen(path: path),
-          //   ),
-          // );
-          writeOnPdf();
-          await savePdf();
-
-          Directory documentDirectory =
-              await getApplicationDocumentsDirectory();
-
-          String documentPath = documentDirectory.path;
-
-          String fullPath = "$documentPath/example.pdf";
-
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PdfPreviewScreen(
-                        path: fullPath,
-                      )));
-        },
-        child: Icon(Icons.save),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          Container(
+       
+        child: _image == null
+            ? new Text('No images selected.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),)
+            : ListView.builder(
+              itemCount: images.length,
+              itemBuilder: (context, index){
+                // Image.file(_image)
+                return Image.file(images[index]);
+              },
+            )
+      ),         
+          ],
+        ),
+      floatingActionButton: new FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: getImage,
+        tooltip: 'Pick Image',
+        child: new Icon(Icons.add_a_photo,
+        color: Colors.black,),
+      ),
     );
   }
 }

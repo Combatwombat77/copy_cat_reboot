@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'dart:convert';
+import 'package:open_file/open_file.dart';
+import 'package:copy_cat/ui/utils/pdf_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
@@ -43,7 +44,7 @@ class _PickImagesState extends State<PickImages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton:  FloatingActionButton(
         onPressed: getImage,
         tooltip: 'Pick Image',
         child: new Icon(Icons.add_a_photo),
@@ -183,9 +184,31 @@ class _Image2PDFState extends State<Image2PDF> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(_status),
+          title: Text(  '                '+_status),
+           flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.black,
+              Colors.blue
+            ])
+          ),
         ),
-        body: Column(
+        ),
+        body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [Colors.blue, Colors.black])),
+          ),
+          Center(
+          child: Column(
           children: <Widget>[
             if (isLoading) CircularProgressIndicator(),
             if (!isLoading) ...[
@@ -201,12 +224,17 @@ class _Image2PDFState extends State<Image2PDF> {
               if (_pdfFile != null)
                 RaisedButton(
                   child: Text("Open PDF"),
-                  onPressed: _openPdf,
+                  onPressed:(){
+                      OpenFile.open(_pdfFile.path);
+                  }
                 ),
             ]
           ],
         ),
-    );
+        ),
+        ]
+        )
+        );
   }
 }
 

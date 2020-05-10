@@ -96,7 +96,7 @@ class ValueDashboardState extends State<ValueDashboard> {
                                                 color: Uidata.primaryColor),
                                           ),
                                           onPressed: () {
-                                            //Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements(notes[index]['SubjectTitle'], notes[index]['id'])));
                                           },
                                         ),
                                         IconButton(
