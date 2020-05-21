@@ -56,6 +56,7 @@ class CustomerDetailsState extends State<CustomerDetails> {
           },
         ),
         title: Text("New Customer "),
+      
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.done),
@@ -102,7 +103,7 @@ class CustomerDetailsState extends State<CustomerDetails> {
                             val.length == 0 ? "Please enter title" : null,
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: labelColor),
-                          labelText: "Title",
+                          labelText: "Customer",
                         ),
                         keyboardType: TextInputType.text,
                       ),
@@ -114,36 +115,7 @@ class CustomerDetailsState extends State<CustomerDetails> {
                       padding: const EdgeInsets.all(5.0),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: FlatButton(
-                              splashColor: Color.fromRGBO(211, 211, 211, 0.8),
-                              onPressed: () {},
-                              child: Icon(
-                                Icons.folder_open,
-                                color: Colors.grey,
-                                size: 50.0,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                              color: Colors.white,
-                              splashColor: Color.fromRGBO(211, 211, 211, 0.8),
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.grey,
-                                size: 50.0,
-                              ),
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => CameraScreen()));
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      padding: const EdgeInsets.all(20.0),                  
                     ),
                   ],
                 ),

@@ -43,7 +43,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
               onPressed: () => TakeScreenShot2(),
             ),
             IconButton(
-              icon: Icon(Icons.query_builder),
+              icon: Icon(Icons.home),
               onPressed: () {},
             ),
           ]),
@@ -123,7 +123,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                             ),
                             Container(
                               color: Colors.white,
-                              height: 200,
+                              height: 250,
                               // width: ,
                               child: FutureBuilder(
                                 future: DBManagerSWOT.getLists(
@@ -223,7 +223,7 @@ class SWOTSummaryState extends State<SWOTSummary> {
                             ),
                             Container(
                               color: Colors.white,
-                              height: 200,
+                              height: 250,
                               // width: ,
                               child: FutureBuilder(
                                 future: DBManagerSWOT.getLists(

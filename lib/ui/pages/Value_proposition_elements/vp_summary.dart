@@ -48,7 +48,11 @@ class VPSummaryState extends State<VPSummary> {
               IconButton(
                 icon: Icon(Icons.save),
                 onPressed: ()=>TakeScreenShot2()
-                )
+                ),
+                            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
             ]),
             body: RepaintBoundary(
                 key: previewContainer,
@@ -64,11 +68,13 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Customer Category",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 12.0)),
                                 Text("Product",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 12.0)),
                               ]),
                               TableRow(children: [
                                 Container(
@@ -165,11 +171,13 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Current Negative/ Undesirable Experiences",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 12.0)),
                                 Text("Solutions to Current Negative/ Undesirable Experiences",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 12.0)),
                               ]),
                               TableRow(children: [
                                 Container(
@@ -265,12 +273,14 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Unmet Needs",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                                 Text(
                                     "Solutions To Unmet Needs",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                               ]),
                               TableRow(children: [
                                 Container(
@@ -366,11 +376,13 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Concerns About Current Solutions",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                                 Text("Response To Concerns About Current Solutions",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                               ]),
                               TableRow(children: [
                                 Container(
@@ -466,11 +478,13 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Competing Products",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                                 Text("Product Differentiator",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                               ]),
                               TableRow(children: [
                                 Container(
@@ -566,11 +580,13 @@ class VPSummaryState extends State<VPSummary> {
                                 Text("Competing Product Performance",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0)),
                                 Text("Evidence 0f Product/Service Performance",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline)),
+                                        decoration: TextDecoration.underline,
+                                         fontSize: 12.0 )),
                               ]),
                               TableRow(children: [
                                 Container(

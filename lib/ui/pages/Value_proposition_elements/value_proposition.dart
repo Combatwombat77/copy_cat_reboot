@@ -1,6 +1,7 @@
 import 'package:copy_cat/models/db_manager.dart';
 import 'package:copy_cat/ui/pages/Value_proposition_elements/answers1_list.dart';
-import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'as subject;
+import 'package:copy_cat/ui/pages/Value_proposition_elements/value_prop_elements.dart'
+    as subject;
 import 'package:copy_cat/ui/pages/Value_proposition_elements/vp_summary.dart';
 import 'package:copy_cat/ui/utils/uidata.dart';
 import 'package:flutter/material.dart';
@@ -45,81 +46,96 @@ class ValueDashboardState extends State<ValueDashboard> {
         },
         child: Icon(Icons.add),
       ),
-      body: FutureBuilder(
-        future: DBManagerCustomer.getSubjectList(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final notes = snapshot.data;
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Card(
-                    color: Colors.grey.shade200,
-                    child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Card(
-                            elevation: 5.0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5.0, left: 15.0),
-                                          child: CustomerTitle(
-                                              notes[index]['SubjectTitle']),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [Colors.blue, Colors.black])),
+          ),
+          SafeArea(
+            child: Container(
+              child: FutureBuilder(
+                future: DBManagerCustomer.getSubjectList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final notes = snapshot.data;
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Card(
+                                elevation: 5.0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0, left: 15.0),
+                                                  child: CustomerTitle(
+                                                      notes[index]
+                                                          ['SubjectTitle']),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                FlatButton(
+                                                  color: Colors.white,
+                                                  child: Text(
+                                                    "EDIT Customer",
+                                                    style: TextStyle(
+                                                        color: Uidata
+                                                            .primaryColor),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CustomerElements(
+                                                                    notes[index]
+                                                                        [
+                                                                        'SubjectTitle'],
+                                                                    notes[index]
+                                                                        [
+                                                                        'id'])));
+                                                  },
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(Icons.delete),
+                                                  onPressed: () {
+                                                    DBManagerCustomer
+                                                        .deleteSubject(
+                                                            notes[index]['id']);
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        FlatButton(
-                                          color: Colors.white,
-                                          child: Text(
-                                            "Customer details",
-                                            style: TextStyle(
-                                                color: Uidata.primaryColor),
-                                          ),
-                                          onPressed: () {
-                                            //Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(modelTitle, notes[index]['id'])));
-                                        },
-                                        ),
-                                        FlatButton(
-                                          color: Colors.white,
-                                          child: Text(
-                                            "EDIT Customer",
-                                            style: TextStyle(
-                                                color: Uidata.primaryColor),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerElements(notes[index]['SubjectTitle'], notes[index]['id'])));
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () {
-                                            DBManagerCustomer.deleteSubject(
-                                                notes[index]['id']);
-                                          },
-                                        ),
-                                      ],
+                                      ),
                                     )
-                                  ],
-                                ),
-                              ),
-                            ))),
-                  ),
-                );
-              },
-              itemCount: notes == null ? 0 : notes.length,
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
+                          ),
+                        );
+                      },
+                      itemCount: notes == null ? 0 : notes.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -145,7 +161,7 @@ class CustomerElements extends StatefulWidget {
 
   final int modelId;
   final String title;
-  CustomerElements(this.title,this.modelId);
+  CustomerElements(this.title, this.modelId);
   @override
   CustomerElementsState createState() => CustomerElementsState();
 }
@@ -285,8 +301,10 @@ class _CustomerCategoryState extends State<CustomerCategory> {
           child: ListView(
         children: <Widget>[
           cardView("What is the customer category?", items[0], list[0]),
-          cardView("What are the current negative/undesirable Experiences",items[1], list[1]),
-          cardView("What are the concerns about the current solutions",items[2], list[2]),
+          cardView("What are the current negative/undesirable Experiences",
+              items[1], list[1]),
+          cardView("What are the concerns about the current solutions",
+              items[2], list[2]),
           cardView("Unmet needs", items[3], list[3]),
           cardView("What are the Competing products?", items[4], list[4]),
           cardView("How does the competing product performance compare?",
@@ -355,8 +373,8 @@ class _CustomerCategoryState extends State<CustomerCategory> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                Answer1List(answerName, widget.modelId,title)));
+                            builder: (context) => Answer1List(
+                                answerName, widget.modelId, title)));
                   },
                 )
               ],
@@ -402,7 +420,7 @@ class ProductCategoryState extends State<ProductCategory> {
     "six",
   ];
 
-    var list = [
+  var list = [
     "What is the product?",
     "What solutions to current negative/undesirable Experiences",
     "What is the respons concerns about the current solutions",
@@ -426,11 +444,18 @@ class ProductCategoryState extends State<ProductCategory> {
           child: ListView(
             children: <Widget>[
               cardView("what is your product?", items[0], list[0]),
-              cardView("solutions to current negative/ undesirable experiences??",items[1], list[1]),
-              cardView("What are your solutions to unmet needs?", items[2], list[2]),
-              cardView("What are your responses to concerns about solutions",items[3], list[3]),
-              cardView("What is your product differentiator?", items[4], list[4]),
-              cardView("What is the evidence of your product's performance?",items[5],list[5]),
+              cardView(
+                  "solutions to current negative/ undesirable experiences??",
+                  items[1],
+                  list[1]),
+              cardView(
+                  "What are your solutions to unmet needs?", items[2], list[2]),
+              cardView("What are your responses to concerns about solutions",
+                  items[3], list[3]),
+              cardView(
+                  "What is your product differentiator?", items[4], list[4]),
+              cardView("What is the evidence of your product's performance?",
+                  items[5], list[5]),
             ],
           ),
         ),
@@ -496,8 +521,8 @@ class ProductCategoryState extends State<ProductCategory> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  QueAnswer1List(answerName, widget.modelId,title)));
+                              builder: (context) => QueAnswer1List(
+                                  answerName, widget.modelId, title)));
                     },
                   )
                 ],
@@ -633,7 +658,6 @@ class Answers1State extends State<Answers1> {
     super.didChangeDependencies();
   }
 
-
   @override
   Widget build(BuildContext context) {
     print(widget.note['id']);
@@ -690,7 +714,6 @@ class Answers1State extends State<Answers1> {
     );
   }
 }
-
 
 class _NoteButton extends StatelessWidget {
   final String _text;

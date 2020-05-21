@@ -37,11 +37,6 @@ class _ProjectDashState extends State<ProjectDash> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => MyPdfHomePage())); 
            }
        ),
-       IconButton(icon: Icon(Icons.picture_as_pdf,
-          color: Colors.black),
-           onPressed: () {
-           }
-       )
         ]
       ),
         body: Stack(fit: StackFit.expand, children: <Widget>[

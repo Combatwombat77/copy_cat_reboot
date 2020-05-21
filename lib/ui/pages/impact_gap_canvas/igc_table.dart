@@ -12,8 +12,9 @@ import 'package:image_picker_saver/image_picker_saver.dart';
 
 class IGCTable extends StatefulWidget {
     final int modelID;
+    final String title;
 
-  IGCTable(this.modelID);
+  IGCTable(this.modelID,this.title);
 
 
   @override
@@ -41,18 +42,22 @@ class _IGCTableState extends State<IGCTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("IGC Preview"),
+        title: Text(widget.title +" IGC"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
             onPressed: ()=> TakeScreenShot2(),
           ),
+                      IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
         ],
       ),
       body: RepaintBoundary(
         key: previewContainer,
         child:SingleChildScrollView(
-        padding: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(5.0),
         child: Container(
           child: Column(
             children: <Widget>[
@@ -71,9 +76,9 @@ class _IGCTableState extends State<IGCTable> {
                       TableRow(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Container(
-                            width: 300.0,
+                            width: 280.0,
                             child: Row(
                               children: <Widget>[
                                 Text("Challenge: ", style: TextStyle(fontWeight: FontWeight.bold),),
@@ -110,20 +115,20 @@ class _IGCTableState extends State<IGCTable> {
                         children: [
                           TableRow(
                             children: [
-                              Text("Challenge Mapping", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, )),
-                              Text("Impact Gap", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, )),
-                              Text("Solutions Mapping", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, )),
+                              Text("  Challenge Mapping", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0, )),
+                              Text("  Impact Gap", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0, )),
+                              Text("  Solutions Mapping", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0, )),
                             ]
                           ),
                           TableRow(
                             children: [
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Affectted Parties: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("  Affectted Parties: ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,) ),
                                     SizedBox(
                                       height: 10.0,
                                     ),
@@ -173,7 +178,7 @@ class _IGCTableState extends State<IGCTable> {
                                 ),
                               ),
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
@@ -227,7 +232,7 @@ class _IGCTableState extends State<IGCTable> {
                                 ),
                               ),
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
@@ -285,7 +290,7 @@ class _IGCTableState extends State<IGCTable> {
                           TableRow(
                             children: [
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -679,12 +684,13 @@ class _IGCTableState extends State<IGCTable> {
                                 ),
                               ),
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Key Lessons: ", style: TextStyle(fontWeight: FontWeight.bold) ),
+                                    Text("Key Lessons: ", style: TextStyle(
+                                      fontWeight: FontWeight.bold) ),
                                     SizedBox(
                                       height: 22.0,
                                     ),
@@ -734,7 +740,7 @@ class _IGCTableState extends State<IGCTable> {
                                 ),
                               ),
                               Container(
-                                height: 120.0,
+                                height: 125.0,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -144,7 +144,7 @@ class _Image2PDFState extends State<Image2PDF> {
             .map(
               (file) => PdfPage(
                 imageFile: file,
-                size: Size(1920, 1080),
+                size: Size(420, 595),
                 compressionQuality: 0.5,
               ),
             )

@@ -192,7 +192,7 @@ class IGCElementsState extends State<IGCElements>
             IconButton(
                 icon: Icon(Icons.input),
                 onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => IGCTable(widget.modelId)));
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => IGCTable(widget.modelId,widget.title)));
                 }),
           ],
           bottom: TabBar(

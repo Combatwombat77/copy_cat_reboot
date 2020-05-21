@@ -180,36 +180,6 @@ class NewProjectState extends State<NewProject> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                     ),
-                    Theme(
-                      data: ThemeData(
-                        primaryColor: Colors.black,
-                        primaryColorDark: Uidata.primaryColor,
-                      ),
-                    
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: FlatButton(
-                              splashColor: Color.fromRGBO(211, 211, 211, 0.8),
-                              onPressed: (){
-                              },
-                              child: Icon(Icons.folder_open, color: Colors.grey, size: 50.0,),
-                            ),
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                                color: Colors.white,
-                              splashColor: Color.fromRGBO(211, 211, 211, 0.8),
-                                child: Icon(Icons.camera_alt, color: Colors.grey, size: 50.0,),
-                                onPressed: (){
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CameraScreen()));
-                                },
-                              ),
-                          ),
-
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),
