@@ -103,15 +103,6 @@ class ProjectsHomeState extends State<ProjectsHome> {
                                                                 ['id'])));
                                           },
                                         ),
-                                        FlatButton(
-                                          color: Colors.white,
-                                          child: Text(
-                                            "",
-                                            style: TextStyle(
-                                                color: Uidata.primaryColor),
-                                          ),
-                                          onPressed: () {},
-                                        ),
                                         IconButton(
                                           icon: Icon(Icons.delete),
                                           onPressed: () {

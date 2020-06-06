@@ -42,7 +42,14 @@ class _IGCTableState extends State<IGCTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title +" IGC"),
+        title: Text("IGC Preview"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[Colors.black, Colors.blue])),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),

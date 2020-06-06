@@ -26,7 +26,15 @@ class _CanvasModelRState extends State<CanvasModelR> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Preview"), actions: <Widget>[
+        appBar: AppBar(title: Text("BMC Preview"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[Colors.black, Colors.blue])),
+        ),
+         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
             onPressed: TakeScreenShot2,
